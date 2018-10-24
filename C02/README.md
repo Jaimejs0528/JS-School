@@ -18,7 +18,7 @@ Get a Character information
 
 I applied the limit to 1 beacause the response brought 4 characters and I only wanted one.
 
-![Result]("screenshots/get_deadpool_character.png")
+![Result](screenshots/get_deadpool_character.png)
 
 To see the complete Json file [clic here]("DeadpoolCharacter.json")
 
@@ -29,7 +29,7 @@ Get Characters of the comic
 
  > https://gateway.marvel.com:443/v1/public/comics?titleStartsWith=Cable&startYear=2004&issueNumber=46&ts=1&apikey=8c444bdbf2dac07b154fc45aeee8b8e4&hash=50e8cc35453254dfe7fa1f16bb5b2046 
 
- ![Results]("screenshots/get_ID_comic.png")
+ ![Results](screenshots/get_ID_comic.png)
 
  As result the request brought 2 comics with the filters applied, and the second is which I search  **ID=21845**
 
@@ -37,7 +37,7 @@ Get Characters of the comic
 
 > http://gateway.marvel.com:80/v1/public/comics/21845/characters?ts=1&apikey=8c444bdbf2dac07b154fc45aeee8b8e4&hash=50e8cc35453254dfe7fa1f16bb5b2046
 
-![Result]("screenshots/get_characters.png")
+![Result](screenshots/get_characters.png)
 
 To see the complete Json file [clic here](characters.json)
 
@@ -48,7 +48,7 @@ Get stories of Agent X
 
  > https://gateway.marvel.com:443/v1/public/characters/1011031/stories?limit=23&ts=1&apikey=8c444bdbf2dac07b154fc45aeee8b8e4&hash=50e8cc35453254dfe7fa1f16bb5b2046
 
- ![Result]("screenshots/get_stories_Agent_X.png")
+ ![Result](screenshots/get_stories_Agent_X.png)
  
  To see the complente Json file [clic here](stories_Nijo.json)
  
