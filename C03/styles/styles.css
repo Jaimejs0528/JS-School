@@ -8,83 +8,84 @@
     src: url(../fonts/HVD\ Fonts\ -\ PlutoSansMedium.otf) format('opentype')
 }
 
+@font-face{
+    font-family: 'PlutoSansCondRegular';
+    src: url(../fonts/HVD\ Fonts\ -\ PlutoSansCondRegular.otf) format('opentype')
+}
+
+@font-face{
+    font-family: 'PlutoSansCondBold';
+    src: url(../fonts/HVD\ Fonts\ -\ PlutoSansCondBold.otf) format('opentype')
+}
+
 *{
     margin: 0;
     box-sizing: border-box;
 }
 body{
-    max-width: 100vw;
-    overflow: hidden;
-    height: 150vh;
-    display: list-item;
+    display: flex;
+    flex-direction: column;
 }
 header{
-    top: 0;
-    min-height: 45px;
+    min-height: 47px;
+    max-height: 80px;
     background: #fcf8f3;
-    position: sticky;
     display: flex;
-    height: 7.4%;
-}
-a{
-    display: list-item;
+    height: 10vh;
+    border-bottom: 2px solid #6EC1E4;
 }
 h1{
-    flex-basis: auto;
     align-self:center;
-    font-size: 1.22rem;
-    display: block;
+    font-size: 1.5rem;
     line-height: normal;
-    letter-spacing: 0.25px;
-    font-weight: 100;
     width: fit-content;
     font-family: 'PlutoSansMedium';
-    /* position: relative;
-    top:1.35rem;
-    left: 1.22rem; */
 }
 .main{
     display: flex;
+    height: 90vh;
 }
+
+.sidebar{
+    flex-basis: 15%;
+}
+
 .nav-logo{
-    height: 100%;
-    width: 15%;
+    min-width: 147px;
+    display: flex;
     background: #fff;
+}
+.nav-logo>img{
+    margin: auto;
 }
 .nav-search{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    align-items: baseline;
-    height: 100%;
-    width: 72%;
-    padding: 0 1.15rem 0 1.25rem;
+    flex-basis: 72%;
+    padding: 0.2rem 1.4rem 0 1.4rem;
     background: #fcf8f3;
-    box-shadow: #979797 2px 0px 1px 1px ;
 }
-.input-search{    
-    flex-basis: auto;
+.input-search{
+    min-width: 299px;
+    max-height: 36px;
     align-self:center;
     font-family: 'PlutoSansRegular';
     border: #6EC1E4 solid 1px;
-    /* background: #fcf8f3 url('../images/search.png') no-repeat 0.3rem 0.15rem; */
     background: #fcf8f3;
     border-radius: 1rem;
-    font-size: 0.7rem;
-    /* position: relative;
-    bottom: 0.38rem;
-    left: 43.5rem; */
-    width: 27%;
-    padding: 0.45rem 0.6rem;
+    font-size: 0.85rem;
+    width: 26.5%;
+    height: 2.25rem;
+    padding: 0.6rem 0.6rem;
     color: #000;
     line-height: normal;
 }
 
 input[type=text]{
-    padding: 0rem 0.2rem;
-    font-weight: 550;
-    font-size: 0.78rem;
+    margin: 0 0.5rem;
+    font-size: 0.9rem;
     outline: none;
     width: 85%;
     background: transparent;
@@ -93,11 +94,7 @@ input[type=text]{
     color:#000;
 }
 .nav-profile{
-    display: inline-block;
-    height: 100%;
-    width: 15%;
     background: #fcf8f3;
-    
 }
 .vertical-line{
     border-left: 1px solid #979797;
@@ -108,29 +105,90 @@ input[type=text]{
 .left-side{
     background: #231F20;
     color: #6EC1E4;
-    display: inline-block;
-    height: inherit;
-    width: 15%;
 }
 .right-side{
     background: #231F20;
     color: #FCF8F3;
-    display: inline-block;
-    height: inherit;
-    width: 15%;
+    display: flex;
+    flex-direction: column;
 }
-.list-nav-menu{
+
+.aside-title{
+    text-transform: uppercase;
+    font-size: 0.813rem;
+    font-family: 'PlutoSansCondBold';
+    mix-blend-mode: normal;
+    opacity: 0.7;
+    padding: 2.25rem 0 2.6rem 2.2rem;
 }
-.list-nav-books{
+.aside.list{
+    display: flex;
+    flex-flow: column;
+}
+.aside.list > a{
+    font-family: 'PlutoSansCondRegular';
+    /* margin: auto 0; */
+}
+
+.nav-title{
+    color: #FFF;
+    text-transform: uppercase;
+    padding: 2.25rem 0 0.5rem 2.5rem;
+    font-size: 0.8rem;
+}
+
+.nav-menu{
+    display: flex;
+    font-family: 'PlutoSansCondBold';
+    flex-flow: column;
+}
+.list-nav{
+    display: flex;
+    flex-flow: column;
+    padding: 0 0 1rem 2.5rem;
+}
+.menu-item{
+    margin: 5% 0;
+    display: flex;
+    flex-flow: row;
+}
+
+.menu-item > i{
+    width: 20%;
+}
+
+.menu-item > a{
+    width: 70%;
+    font-size: 0.8rem;
+    font-family: 'PlutoSansCondRegular'
 }
 
 .books-container{
+    display: flex;
+    flex-direction: column;
     background: #F5F6F8;
-    /* display: inline-block; */
     width: 72%;
-    overflow-y: scroll !important;
-    height: 2000px;
+    overflow: scroll;
 }
-.books-container::-webkit-scrollbar-track{
-    background-color: aqua;
+.books-header{
+    height: 4%;
+    padding: 1.5rem 4.1rem;
+    display: flex;
+    flex-flow: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    position: sticky;
+    top: 100;
+    color: #858585;
+    font-family: 'PlutoSansCondRegular'
+}
+.view-books{
+    color:#6EC1E4 !important;  
+}
+.order-options{
+    padding: 0 6.2em 4em 0;  
+}
+
+.books-container::-webkit-scrollbar{
+    display: none;
 }

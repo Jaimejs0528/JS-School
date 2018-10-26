@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Jobsity Bookshelt</title>
+    <link rel="icon" href="images/favicon.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/solid.css" integrity="sha384-osqezT+30O6N/vsMqwW8Ch6wKlMofqueuia2H7fePy42uC05rm1G+BUPSd2iBSJL"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/fontawesome.css" integrity="sha384-BzCy2fixOYd0HObpx3GMefNqdbA7Qjcc91RgYeDjrHTIEXqiF00jKvgQG0+zY/7I"
@@ -13,7 +14,8 @@
 
 <body>
     <header>
-        <div class="nav-logo">
+        <div class="sidebar nav-logo">
+            <img src="images/logo.png" alt="Jobsity-icon">
         </div>
         <div class="nav-search">
             <h1 class="title">Bookshelf</h1>
@@ -24,49 +26,64 @@
                 </div>
             </form>
         </div>
-        <div class="nav-profile">
+        <div class="sidebar nav-profile">
             <div class="vertical-line"></div>
+            <div></div>
         </div>
     </header>
-    <main class="main">
-        <nav class="left-side">
-            <div class="nav-main">
-                <h4>MAIN</h4>
-                <div class="list-nav-menu">
-                    <a>Quito</a>
-                    <a>Cartagena</a>
-                    <a>Medelan</a>
-                    <a>Digital</a>
-                    <a>Peronal Loans</a>
-                    <a>New</a>
+    <div class="main">
+        <nav class="sidebar left-side">
+            <div class="nav-menu">
+                <h4 class="nav-title">MAIN</h4>
+                <div class="list-nav">
+                    <div class="menu-item"><i class="fas fa-globe"></i><a>Quito</a></div>
+                    <div class="menu-item"><i class="fas fa-globe"></i><a>Cartagena</a></div>
+                    <div class="menu-item"><i class="fas fa-globe"></i><a>Medelan</a></div>
+                    <div class="menu-item"><i class="fas fa-tablet-alt"></i><a>Digital</a></div>
+                    <div class="menu-item"><i class="fas fa-user-tag"></i><a>Personal Loans</a></div>
+                    <div class="menu-item"><i class="fas fa-tags"></i><a>New</a></div>
                 </div>
             </div>
-            <div class="nav-u-books">
-                <h4>Your Books</h4>
-                <div class="list-nav-books">
-                    <a>Readings</a>
-                    <a>History</a>
-                    <a>Read later</a>
-                    <a>Favorites</a>
+            <div class="nav-menu">
+                <h4 class="nav-title">Your Books</h4>
+                <div class="list-nav">
+                    <div class="menu-item"><i class="fas fa-book-open"></i><a>Readings</a></div>
+                    <div class="menu-item"><i class="fas fa-history"></i><a>History</a></div>
+                    <div class="menu-item"><i class="fas fa-bookmark"></i><a>Read later</a></div>
+                    <div class="menu-item"><i class="fas fa-heart"></i><a>Favorites</a></div>
                 </div>
             </div>
         </nav>
         <!--Book's Main container-->
-        <div class="books-container">
-            
-        </div>
+        <main class="books-container">
+            <div class="books-header">
+                <h3>New Releases</h3>
+                <div class="order-options">
+                    <h6 style="display: inline;">Release Date</h6>
+                    <div style="display: inline;" class="vertical-line"></div>
+                    <h6 style="display: inline;">Popularity</h6>
+                </div>
+                <div class="view-books">
+                    <i class="fas fa-th-large"></i>
+                    <i class="fas fa-th-list"></i>
+                </div>
+            </div>
+            <div class="bookshelf">
+
+            </div>
+        </main>
         <!--Right sidebar-->
-        <aside class="right-side">
-            <h4>Most Read Books</h4>
-            <ol>
-                <li>Hooked to How Build habits</li>
-                <li>The inevitable: Understanding</li>
-                <li>Lean in Women, Work, and t</li>
-                <li>Building a Bussiness When The</li>
-                <li>How Google Works</li>
-            </ol>
+        <aside class="sidebar right-side">
+            <h4 class="aside-title">Most Read Books</h4>
+            <div class="aside-list">
+                <a>Hooked to How Build habits</a>
+                <a>The inevitable: Understanding</a>
+                <a>Lean in Women, Work, and t</a>
+                <a>Building a Bussiness When The</a>
+                <a>How Google Works</a>
+            </div>
         </aside>
-    </main>
+    </div>
 </body>
 
 </html>
