@@ -5,37 +5,39 @@
     <meta charset="utf-8">
     <title>Jobsity Bookshelt</title>
     <link rel="icon" href="images/favicon.png">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/solid.css" integrity="sha384-osqezT+30O6N/vsMqwW8Ch6wKlMofqueuia2H7fePy42uC05rm1G+BUPSd2iBSJL"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/fontawesome.css" integrity="sha384-BzCy2fixOYd0HObpx3GMefNqdbA7Qjcc91RgYeDjrHTIEXqiF00jKvgQG0+zY/7I"
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
         crossorigin="anonymous">
     <link href="./styles/styles.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-    <header>
-        <div class="sidebar nav-logo">
+    <header class="header-body">
+        <div class="sidebar header-logo">
             <img src="images/logo.png" alt="Jobsity-icon">
         </div>
-        <div class="nav-search">
+        <div class="header-search">
             <h1 class="title">Bookshelf</h1>
             <form class="input-search">
                 <div>
                     <i class="fas fa-search fa-lg"></i>
-                    <input type="text" placeholder="Search...">
+                    <input type="search" placeholder="Search...">
                 </div>
             </form>
         </div>
-        <div class="sidebar nav-profile">
+        <div class="sidebar header-profile">
             <div class="vertical-line"></div>
-            <div></div>
+            <div class="profile">
+                <span>Jakob Treml</span>
+                <i class="fas fa-angle-down"></i>
+                <img src="images/jakob.png" class="circle-img" alt="user-image">
+            </div>
         </div>
     </header>
     <div class="main">
         <nav class="sidebar left-side">
-            <div class="nav-menu">
-                <h4 class="nav-title">MAIN</h4>
-                <div class="list-nav">
+            <div class="header-menu">
+                <h4 class="header-title">MAIN</h4>
+                <div class="list-header">
                     <div class="menu-item"><i class="fas fa-globe"></i><a>Quito</a></div>
                     <div class="menu-item"><i class="fas fa-globe"></i><a>Cartagena</a></div>
                     <div class="menu-item"><i class="fas fa-globe"></i><a>Medelan</a></div>
@@ -44,9 +46,9 @@
                     <div class="menu-item"><i class="fas fa-tags"></i><a>New</a></div>
                 </div>
             </div>
-            <div class="nav-menu">
-                <h4 class="nav-title">Your Books</h4>
-                <div class="list-nav">
+            <div class="header-menu">
+                <h4 class="header-title">Your Books</h4>
+                <div class="list-header">
                     <div class="menu-item"><i class="fas fa-book-open"></i><a>Readings</a></div>
                     <div class="menu-item"><i class="fas fa-history"></i><a>History</a></div>
                     <div class="menu-item"><i class="fas fa-bookmark"></i><a>Read later</a></div>
@@ -69,19 +71,82 @@
                 </div>
             </div>
             <div class="bookshelf">
+                <div class="overlay-container">
+                    <div class="book">
+                        <div class="overlay-container img-container">
+                            <img src="images/books/book-1.png" alt="book-1" width="176" height="250">
+                            <div class="overlay-img">
+                                <div class="book-options">
+                                    <div class="child left circle-img"><i class="far fa-heart"></i></div>
+                                    <div class="mid-child circle-img"><i class="fas fa-book-open"></i></div>
+                                    <div class="child right circle-img"><i class="far fa-bookmark"></i></div>
+                                </div>
+                                <span>RATE THIS BOOK</span>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="book-title hidde-overflow-text">Everything I never Told You</span>
+                        <span class="author hidde-overflow-text">Celeste Ng</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="overlay-summary">
+                        <div class="arrow"></div>
+                        <article class="summary-container">
+                            <header class="header-summary">
+                                <h1>ALL THE LIGHT WE CANNOT SEE</h1>
+                                <h2>Novel by <span>Anthony Doerr</span></h2>
+                                <span>2014</span>
+                                <p>544 Pages</p>
+                            </header>
+                            <span>summary</span>
+                            <p>From the highly acclaimed, multiple award-winning
+                                Anthony Doerr, the beautiful, stunningly ambitious
+                                instant New York Times bestseller about a blind French
+                                girl and German boy whose paths collide in occupied
+                                France as both try to survive devastation of Word War II.</p>
+                            <span>RATING</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span>RECOMENDED BY</span>
+                            <div class="user-icons">
+                                <div><img src="images/user-icon-1.png"></div>
+                                <div><img src="images/user-icon-2.png"></div>
+                                <div><img src="images/user-icon-3.png"></div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
 
             </div>
         </main>
         <!--Right sidebar-->
         <aside class="sidebar right-side">
             <h4 class="aside-title">Most Read Books</h4>
-            <div class="aside-list">
-                <a>Hooked to How Build habits</a>
-                <a>The inevitable: Understanding</a>
-                <a>Lean in Women, Work, and t</a>
-                <a>Building a Bussiness When The</a>
-                <a>How Google Works</a>
-            </div>
+            <ol class="aside-list">
+                <li class="hidde-overflow-text">Hooked: How to Build Habit-Forming Products</li>
+                <li class="hidde-overflow-text">The Inevitable: Understanding the 12 Technological Forces That Will
+                    Shape Our Future</li>
+                <li class="hidde-overflow-text">Lean In: Women, Work, and the Will to Lead</li>
+                <li class="hidde-overflow-text">Building a Business When There Are No Easy Answers</li>
+                <li class="hidde-overflow-text">How Google Works</li>
+            </ol>
         </aside>
     </div>
 </body>

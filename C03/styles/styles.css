@@ -1,32 +1,45 @@
-@font-face{
+@font-face {
     font-family: 'PlutoSansRegular';
     src: url(../fonts/HVD\ Fonts\ -\ PlutoSansRegular.otf) format('opentype')
 }
 
-@font-face{
+@font-face {
     font-family: 'PlutoSansMedium';
     src: url(../fonts/HVD\ Fonts\ -\ PlutoSansMedium.otf) format('opentype')
 }
 
-@font-face{
+@font-face {
     font-family: 'PlutoSansCondRegular';
     src: url(../fonts/HVD\ Fonts\ -\ PlutoSansCondRegular.otf) format('opentype')
 }
 
-@font-face{
+@font-face {
     font-family: 'PlutoSansCondBold';
     src: url(../fonts/HVD\ Fonts\ -\ PlutoSansCondBold.otf) format('opentype')
 }
 
-*{
+@font-face {
+    font-family: 'PlutoSansCondLight';
+    src: url(../fonts/HVD\ Fonts\ -\ PlutoSansCondLight.otf) format('opentype')
+}
+
+@font-face {
+    font-family: 'PlutoSansCondMedium';
+    src: url(../fonts/HVD\ Fonts\ -\ PlutoSansCondMedium.otf) format('opentype')
+}
+
+* {
     margin: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     display: flex;
+    overflow: hidden;
     flex-direction: column;
 }
-header{
+
+.header-body {
     min-height: 47px;
     max-height: 80px;
     background: #fcf8f3;
@@ -34,31 +47,38 @@ header{
     height: 10vh;
     border-bottom: 2px solid #6EC1E4;
 }
-h1{
-    align-self:center;
-    font-size: 1.5rem;
-    line-height: normal;
-    width: fit-content;
-    font-family: 'PlutoSansMedium';
-}
-.main{
+
+.main {
     display: flex;
-    height: 90vh;
+    height: 92vh;
 }
 
-.sidebar{
+.sidebar {
     flex-basis: 15%;
 }
 
-.nav-logo{
-    min-width: 147px;
+.hidde-overflow-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.circle-img {
+    background: #fcf8f3;
+    border-radius: 100%;
+}
+
+.header-logo {
+    min-width: 178px;
     display: flex;
     background: #fff;
 }
-.nav-logo>img{
+
+.header-logo>img {
     margin: auto;
 }
-.nav-search{
+
+.header-search {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -67,10 +87,18 @@ h1{
     padding: 0.2rem 1.4rem 0 1.4rem;
     background: #fcf8f3;
 }
-.input-search{
+
+.title{
+    align-self: center;
+    font-size: 1.5rem;
+    line-height: normal;
+    width: fit-content;
+    font-family: 'PlutoSansMedium';
+}
+
+.input-search {
     min-width: 299px;
-    max-height: 36px;
-    align-self:center;
+    align-self: center;
     font-family: 'PlutoSansRegular';
     border: #6EC1E4 solid 1px;
     background: #fcf8f3;
@@ -83,94 +111,146 @@ h1{
     line-height: normal;
 }
 
-input[type=text]{
+input[type=search] {
     margin: 0 0.5rem;
     font-size: 0.9rem;
     outline: none;
-    width: 85%;
+    width: 75%;
     background: transparent;
     border: none;
-}::placeholder{
-    color:#000;
 }
-.nav-profile{
+
+::placeholder {
+    color: #000;
+}
+
+.header-profile {
+    display: flex;
     background: #fcf8f3;
 }
-.vertical-line{
+
+.profile {
+    padding: 0 0 0 4.125rem;
+    display: flex;
+    width: 100%;
+}
+
+.profile>span {
+    font-family: 'PlutoSansCondRegular';
+    font-size: 0.9rem;
+    margin: auto 0;
+    width: 55%;
+}
+
+.profile>i {
+    margin: auto 0;
+    width: 15%;
+}
+
+.profile>img {
+    max-width: 40px;
+    max-height: 40px;
+    margin: auto 0;
+    border: #6EC1E4 solid 2px;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.vertical-line {
     border-left: 1px solid #979797;
-    width: 0px; 
+    width: 0px;
     height: 65%;
     margin: 0.75rem 0.05rem;
 }
-.left-side{
+
+.left-side {
+    min-width: 178px;
     background: #231F20;
     color: #6EC1E4;
 }
-.right-side{
+
+.right-side {
     background: #231F20;
     color: #FCF8F3;
     display: flex;
     flex-direction: column;
 }
 
-.aside-title{
+.aside-title {
     text-transform: uppercase;
     font-size: 0.813rem;
     font-family: 'PlutoSansCondBold';
     mix-blend-mode: normal;
     opacity: 0.7;
-    padding: 2.25rem 0 2.6rem 2.2rem;
-}
-.aside.list{
-    display: flex;
-    flex-flow: column;
-}
-.aside.list > a{
-    font-family: 'PlutoSansCondRegular';
-    /* margin: auto 0; */
+    padding: 2.25rem 0 1.63rem 2.2rem;
 }
 
-.nav-title{
+.aside-list {
+    display: flex;
+    flex-flow: column;
+    padding: 0 0 0 2.13rem;
+}
+
+.aside-list>li {
+    max-width: 177px;
+    font-family: 'PlutoSansCondLight';
+    font-size: 0.8rem;
+    margin: 0 0 1.63rem 0;
+    list-style-position: inside;
+}
+
+.header-title {
     color: #FFF;
     text-transform: uppercase;
     padding: 2.25rem 0 0.5rem 2.5rem;
     font-size: 0.8rem;
 }
 
-.nav-menu{
+.header-menu {
     display: flex;
     font-family: 'PlutoSansCondBold';
     flex-flow: column;
 }
-.list-nav{
+
+.list-header {
     display: flex;
     flex-flow: column;
     padding: 0 0 1rem 2.5rem;
 }
-.menu-item{
+
+.menu-item {
     margin: 5% 0;
     display: flex;
     flex-flow: row;
 }
 
-.menu-item > i{
+.menu-item>i {
     width: 20%;
 }
 
-.menu-item > a{
+.menu-item>a {
     width: 70%;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: 400;
+    line-height: 19px;
+    text-align: left;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0px;
     font-family: 'PlutoSansCondRegular'
 }
 
-.books-container{
+.books-container {
     display: flex;
     flex-direction: column;
     background: #F5F6F8;
     width: 72%;
     overflow: scroll;
 }
-.books-header{
+
+.books-header {
     height: 4%;
     padding: 1.5rem 4.1rem;
     display: flex;
@@ -182,13 +262,206 @@ input[type=text]{
     color: #858585;
     font-family: 'PlutoSansCondRegular'
 }
-.view-books{
-    color:#6EC1E4 !important;  
-}
-.order-options{
-    padding: 0 6.2em 4em 0;  
+
+.view-books {
+    color: #6EC1E4 !important;
 }
 
-.books-container::-webkit-scrollbar{
+.bookshelf {
+    display: flex;
+    flex: 1;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    border: #000 solid 2px;
+}
+
+.book {
+    display: flex;
+    width: 176px;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.book-options {
+    color: #9e9e9e;
+}
+
+.child {
+    display: flex;
+    font-size: 0.5rem;
+    height: 12%;
+    width: 17%;
+    position: absolute;
+    top: 6%;
+}
+
+.left {
+    left: 8.5%;
+}
+
+.right {
+    right: 8.5%;
+}
+
+.mid-child {
+    position: absolute;
+    display: flex;
+    color: #6EC1E4;
+    margin: auto;
+    height: 19.2%;
+    width: 27.3%;
+    bottom: 41.6%;
+    right: 36%;
+}
+
+.book-options>div>i {
+    margin: auto;
+}
+
+.overlay-container {
+    position: relative;
+    border: #000 solid 1px;
+    color: #fcf8f3;
+    border-radius: 5px;
+  
+}
+
+.user-icons{
+    display: flex;
+} 
+
+.user-icons > div {
+    margin: 0 1rem 0 0;
+}
+
+.img-container{
+    width: 176px;
+    height: 250px;
+}
+
+.overlay-container:hover .overlay-img,.overlay-container:hover .overlay-summary{
+    opacity: 0.75;
+}
+
+
+.overlay-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 176px;
+    height: 250px;
+    opacity: 0;
+    transition: 0.2s;
+    background-color: #000;
+    border: #000 solid 1px;
+    border-radius: 5px;
+}
+
+.overlay-summary {
+    position: absolute;
+    top: 0;
+    left: 190px;
+    width: 24.562rem;
+    height: 22.375rem;
+    opacity: 0;
+    transition: 0.2s;
+    background-color: #000;
+    border: #000 solid 1px;
+    border-radius: 5px;
+}
+
+.summary-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-container span{
+    color:#858585;
+    font-family: 'PlutoSansCondBold';
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.header-summary{
+
+}
+
+.header-summary span{
+    font-size: 0.8125rem;
+    text-transform: capitalize;
+}
+
+.arrow{
+    position: relative;
+    background: #000;
+    margin: 3rem 0 0 0 ;
+    width: 4rem;
+    height: 4rem;
+    transform: rotate(45deg);
+    z-index:-3;
+}
+
+
+.book-title {
+    font-family: 'PlutoSansCondMedium';
+    color: #383838;
+    font-size: 0.9rem;
+}
+
+.author {
+    color: #9e9e9e;
+    font-family: 'PlutoSansCondLight';
+    font-size: 0.813rem;
+}
+
+.rating {
+    display: flex;
+    color: #6EC1E4;
+}
+
+.rating>i {
+    width: 20px;
+    height: 17px;
+}
+
+.overlay-img .rating {
+    color: #e9bd49 !important;
+    width: 76px;
+    height: 13px;
+    position: absolute;
+    bottom: 5.6%;
+    right: 28%;
+    margin: 0 auto;
+}
+
+.overlay-img>span {
+    position: absolute;
+    font-size: 0.6rem;
+    font-family: 'PlutoSansCondMedium';
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: 400;
+    line-height: 15px;
+    text-decoration: none;
+    letter-spacing: 0px;
+    bottom: 12.8%;
+    left: 26.7%;
+    right: 26.7%;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.order-options {
+    padding: 0 6.2em 4em 0;
+}
+
+.books-container::-webkit-scrollbar {
     display: none;
 }
