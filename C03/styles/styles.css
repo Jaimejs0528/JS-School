@@ -1,0 +1,194 @@
+@font-face{
+    font-family: 'PlutoSansRegular';
+    src: url(../fonts/HVD\ Fonts\ -\ PlutoSansRegular.otf) format('opentype')
+}
+
+@font-face{
+    font-family: 'PlutoSansMedium';
+    src: url(../fonts/HVD\ Fonts\ -\ PlutoSansMedium.otf) format('opentype')
+}
+
+@font-face{
+    font-family: 'PlutoSansCondRegular';
+    src: url(../fonts/HVD\ Fonts\ -\ PlutoSansCondRegular.otf) format('opentype')
+}
+
+@font-face{
+    font-family: 'PlutoSansCondBold';
+    src: url(../fonts/HVD\ Fonts\ -\ PlutoSansCondBold.otf) format('opentype')
+}
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    flex-direction: column;
+}
+header{
+    min-height: 47px;
+    max-height: 80px;
+    background: #fcf8f3;
+    display: flex;
+    height: 10vh;
+    border-bottom: 2px solid #6EC1E4;
+}
+h1{
+    align-self:center;
+    font-size: 1.5rem;
+    line-height: normal;
+    width: fit-content;
+    font-family: 'PlutoSansMedium';
+}
+.main{
+    display: flex;
+    height: 90vh;
+}
+
+.sidebar{
+    flex-basis: 15%;
+}
+
+.nav-logo{
+    min-width: 147px;
+    display: flex;
+    background: #fff;
+}
+.nav-logo>img{
+    margin: auto;
+}
+.nav-search{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    flex-basis: 72%;
+    padding: 0.2rem 1.4rem 0 1.4rem;
+    background: #fcf8f3;
+}
+.input-search{
+    min-width: 299px;
+    max-height: 36px;
+    align-self:center;
+    font-family: 'PlutoSansRegular';
+    border: #6EC1E4 solid 1px;
+    background: #fcf8f3;
+    border-radius: 1rem;
+    font-size: 0.85rem;
+    width: 26.5%;
+    height: 2.25rem;
+    padding: 0.6rem 0.6rem;
+    color: #000;
+    line-height: normal;
+}
+
+input[type=text]{
+    margin: 0 0.5rem;
+    font-size: 0.9rem;
+    outline: none;
+    width: 85%;
+    background: transparent;
+    border: none;
+}::placeholder{
+    color:#000;
+}
+.nav-profile{
+    background: #fcf8f3;
+}
+.vertical-line{
+    border-left: 1px solid #979797;
+    width: 0px; 
+    height: 65%;
+    margin: 0.75rem 0.05rem;
+}
+.left-side{
+    background: #231F20;
+    color: #6EC1E4;
+}
+.right-side{
+    background: #231F20;
+    color: #FCF8F3;
+    display: flex;
+    flex-direction: column;
+}
+
+.aside-title{
+    text-transform: uppercase;
+    font-size: 0.813rem;
+    font-family: 'PlutoSansCondBold';
+    mix-blend-mode: normal;
+    opacity: 0.7;
+    padding: 2.25rem 0 2.6rem 2.2rem;
+}
+.aside.list{
+    display: flex;
+    flex-flow: column;
+}
+.aside.list > a{
+    font-family: 'PlutoSansCondRegular';
+    /* margin: auto 0; */
+}
+
+.nav-title{
+    color: #FFF;
+    text-transform: uppercase;
+    padding: 2.25rem 0 0.5rem 2.5rem;
+    font-size: 0.8rem;
+}
+
+.nav-menu{
+    display: flex;
+    font-family: 'PlutoSansCondBold';
+    flex-flow: column;
+}
+.list-nav{
+    display: flex;
+    flex-flow: column;
+    padding: 0 0 1rem 2.5rem;
+}
+.menu-item{
+    margin: 5% 0;
+    display: flex;
+    flex-flow: row;
+}
+
+.menu-item > i{
+    width: 20%;
+}
+
+.menu-item > a{
+    width: 70%;
+    font-size: 0.8rem;
+    font-family: 'PlutoSansCondRegular'
+}
+
+.books-container{
+    display: flex;
+    flex-direction: column;
+    background: #F5F6F8;
+    width: 72%;
+    overflow: scroll;
+}
+.books-header{
+    height: 4%;
+    padding: 1.5rem 4.1rem;
+    display: flex;
+    flex-flow: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    position: sticky;
+    top: 100;
+    color: #858585;
+    font-family: 'PlutoSansCondRegular'
+}
+.view-books{
+    color:#6EC1E4 !important;  
+}
+.order-options{
+    padding: 0 6.2em 4em 0;  
+}
+
+.books-container::-webkit-scrollbar{
+    display: none;
+}
