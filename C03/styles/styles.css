@@ -54,7 +54,7 @@ body {
 }
 
 .sidebar {
-    flex-basis: 15%;
+    flex-basis: 15vw;
 }
 
 .hidde-overflow-text {
@@ -69,7 +69,7 @@ body {
 }
 
 .header-logo {
-    min-width: 178px;
+    min-width: 190px;
     display: flex;
     background: #fff;
 }
@@ -130,21 +130,23 @@ input[type=search] {
 }
 
 .profile {
-    padding: 0 0 0 4.125rem;
+    padding: 2% 2.7% 0  23.25%;
     display: flex;
+    justify-content: space-evenly;
     width: 100%;
+    height: fit-content;
+    margin: auto 0;
 }
 
 .profile>span {
     font-family: 'PlutoSansCondRegular';
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     margin: auto 0;
-    width: 55%;
 }
 
 .profile>i {
     margin: auto 0;
-    width: 15%;
+    font-size: 0.75rem;
 }
 
 .profile>img {
@@ -159,19 +161,19 @@ input[type=search] {
 .vertical-line {
     border-left: 1px solid #979797;
     width: 0px;
-    height: 65%;
-    margin: 0.75rem 0.05rem;
+    height: 66%;;
+    margin: 0.875rem 0.05rem;
 }
 
 .left-side {
-    min-width: 178px;
+    min-width: 190px;;
     background: #231F20;
     color: #6EC1E4;
 }
 
 .right-side {
     background: #231F20;
-    color: #FCF8F3;
+    color: #848383;
     display: flex;
     flex-direction: column;
 }
@@ -182,13 +184,13 @@ input[type=search] {
     font-family: 'PlutoSansCondBold';
     mix-blend-mode: normal;
     opacity: 0.7;
-    padding: 2.25rem 0 1.63rem 2.2rem;
+    padding: 2.315rem 0 1.63rem 2.25rem;
 }
 
 .aside-list {
     display: flex;
     flex-flow: column;
-    padding: 0 0 0 2.13rem;
+    padding: 0 0 0 2.125rem;
 }
 
 .aside-list>li {
@@ -215,13 +217,18 @@ input[type=search] {
 .list-header {
     display: flex;
     flex-flow: column;
-    padding: 0 0 1rem 2.5rem;
+    justify-content: space-between;
+    padding: 0.75rem 2.5625rem 0 2.5625rem
 }
 
 .menu-item {
-    margin: 5% 0;
+    margin: 0 0 1.25rem 0;
     display: flex;
     flex-flow: row;
+}
+
+.selected{
+    color:#fcf8f3;
 }
 
 .menu-item>i {
@@ -246,9 +253,9 @@ input[type=search] {
     display: flex;
     flex-direction: column;
     background: #F5F6F8;
-    width: 72%;
+    width: 72vw;
     overflow-y: scroll;
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
 
 .books-header {
@@ -259,13 +266,30 @@ input[type=search] {
     justify-content: space-between;
     align-content: center;
     position: sticky;
-    top: 100;
+    z-index: 3;
+    background: #F5F6F8;
+    top: 0;
     color: #858585;
     font-family: 'PlutoSansCondRegular'
 }
 
+.books-header>h3 {
+    color: #231f20;
+    font-size: 1.25rem;
+    font-family: 'PlutoSansCondLight';
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: 400;
+    line-height: 27px;
+    text-align: left;
+}
+
 .view-books {
-    color: #6EC1E4 !important;
+    display: flex;
+    justify-content: space-between;
+    width: 2.8rem;
+    font-size: 1.2rem;
+    color: #6EC1E4 !important
 }
 
 .bookshelf {
@@ -279,8 +303,11 @@ input[type=search] {
 .book {
     display: flex;
     width: 176px;
+    justify-content: space-between;
     flex-direction: column;
     cursor: pointer;
+    height: 20rem;
+    margin-bottom: 27%
 }
 
 .book-options {
@@ -289,7 +316,7 @@ input[type=search] {
 
 .child {
     display: flex;
-    font-size: 0.5rem;
+    font-size: 0.875rem;
     height: 12%;
     width: 17%;
     position: absolute;
@@ -308,6 +335,7 @@ input[type=search] {
     position: absolute;
     display: flex;
     color: #6EC1E4;
+    font-size: 1.5rem;
     margin: auto;
     height: 19.2%;
     width: 27.3%;
@@ -323,7 +351,6 @@ input[type=search] {
     position: relative;
     color: #fcf8f3;
     border-radius: 5px;
-
 }
 
 .user-icons {
@@ -331,20 +358,19 @@ input[type=search] {
 }
 
 .user-icons>div {
-    margin: 0 1rem 0 0;
+    margin: 0 0.7rem 0 0;
 }
 
 .img-container {
     width: 176px;
     height: 250px;
+    margin-bottom: 0.5rem;
 }
 
-.overlay-container:hover .overlay-img,
-.overlay-container:hover .overlay-summary {
+.overlay-container:hover .overlay-img, .overlay-container:hover .overlay-summary {
     opacity: 0.75;
     z-index: 3;
 }
-
 
 .overlay-img {
     position: absolute;
@@ -364,20 +390,20 @@ input[type=search] {
 .overlay-summary {
     position: absolute;
     top: 0;
-    left: 190px;
-    width: 24.562rem;
+    left: 205px;
+    width: 23.8rem;
     height: 22.375rem;
     opacity: 0;
     transition: 0.2s;
     background-color: #000;
     border: #000 solid 1px;
-    border-radius: 5px;
+    border-radius: 3px;
     color: #FFF;
 }
 
 .summary-container {
     position: absolute;
-    margin: auto;
+    margin: 1.8rem;
     top: 0;
     left: 0;
     right: 0;
@@ -391,7 +417,26 @@ input[type=search] {
     color: #858585;
     font-family: 'PlutoSansCondBold';
     font-size: 0.75rem;
+    padding:0 0 0 0.15rem;
+    height: 1.5rem;
     text-transform: uppercase;
+}
+
+.book-paragraph{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.book-summary-rating{
+    display: flex;
+    flex-direction: column;
+    margin-bottom:1.3125rem
+}
+
+.recommended-by{
+    display: flex;
+    flex-direction: column;
 }
 
 .summary-paragraph {
@@ -401,34 +446,46 @@ input[type=search] {
     font-weight: 400;
     line-height: 19px;
     text-align: left;
-    text-transform: none;
-    text-decoration: none;
-    letter-spacing: 0px;
+    padding: 0 1rem 0 0;
 }
 
 .header-summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 0 1rem 0;
     font-size: 0.5417rem !important;
 }
 
-.header-summary>h1 {
+.header-summary>div {
     color: #6EC1E4;
+    display: flex;
+    justify-content: space-between;
     font-family: 'PlutoSansCondBold';
+    margin-bottom: -0.125rem;
+}
+.header-summary > h2 {
+    margin: 0 0 0.25rem 0;
+}
+.header-summary span {
+    font-size: 0.8125rem;
+    text-transform: capitalize;
+    margin: 0 0 0.5rem 0;
 }
 
-.header-summary span {
-    text-transform: capitalize;
+.header-summary > p{
+    font-size:0.8125rem;
 }
 
 .arrow {
     position: relative;
     background: #000;
-    margin: 3rem 0 0 0;
+    margin: 5.8rem 0 0 0;
     width: 4rem;
     height: 4rem;
     transform: rotate(45deg);
     z-index: -3;
 }
-
 
 .book-title {
     font-family: 'PlutoSansCondMedium';
@@ -444,6 +501,8 @@ input[type=search] {
 
 .rating {
     display: flex;
+    font-size: 12.5px;
+    width: 76px;
     color: #6EC1E4;
 }
 
@@ -454,7 +513,6 @@ input[type=search] {
 
 .overlay-img .rating {
     color: #e9bd49 !important;
-    width: 76px;
     height: 13px;
     position: absolute;
     bottom: 5.6%;
@@ -464,7 +522,7 @@ input[type=search] {
 
 .overlay-img>span {
     position: absolute;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     font-family: 'PlutoSansCondMedium';
     font-style: normal;
     font-stretch: normal;
@@ -473,16 +531,50 @@ input[type=search] {
     text-decoration: none;
     letter-spacing: 0px;
     bottom: 12.8%;
-    left: 26.7%;
     right: 26.7%;
     text-align: center;
     text-transform: uppercase;
 }
 
 .order-options {
-    padding: 0 6.2em 4em 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    width: 10.6rem;
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: 400;
+    line-height: 19px;
+    text-align: left;
+    margin-left: -5rem;
+    color: #979797;
+}
+
+.order-options .vertical-line{
+    height: 1rem;
+    margin: 0
 }
 
 .books-container::-webkit-scrollbar {
     display: none;
+}
+
+@media screen and (max-width:1000px){
+    .right-side{
+        display: none;
+    }
+    .left-side{
+        width: 22.5%;
+        min-width: 190px;
+    }
+    .header-body .header-logo{
+        width: 22.5%;
+        min-width: 190px;
+    }
+    .books-container{
+        width: calc(100% - 190px)
+    }
+    .profile > span{
+        display: none;
+    }
 }
