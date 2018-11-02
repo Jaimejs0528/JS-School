@@ -1,0 +1,19 @@
+{
+  "name": "week-3",
+  "version": "1.0.0",
+  "description": "All exercises of week 3",
+  "main": "storage-01.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jaimejs0528/JS-School/tree/master/exercises"
+  },
+  "keywords": [
+    "exercises",
+    "week-3"
+  ],
+  "author": "Jaime Jiménez Serrano",
+  "license": "ISC"
+}
