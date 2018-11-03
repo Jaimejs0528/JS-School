@@ -1,14 +1,6 @@
 {
   "name": "week-3",
   "version": "1.0.0",
-  "eslintConfig": {
-    "env":{
-      "browser":true
-    },
-    "globals": {
-      "window": true
-    }
-  },
   "description": "All exercises of week 3",
   "main": "storage-01.js",
   "scripts": {
