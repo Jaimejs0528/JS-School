@@ -1,0 +1,27 @@
+{
+  "name": "c04",
+  "version": "1.0.0",
+  "description": "Building a Piano",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaimejs0528/JS-School.git"
+  },
+  "keywords": [
+    "Challenge-4",
+    "C04",
+    "Piano",
+    "Javascript",
+    "Html",
+    "CSS"
+  ],
+  "author": "Jaime Jimenez Serrano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jaimejs0528/JS-School/issues"
+  },
+  "homepage": "https://github.com/Jaimejs0528/JS-School#readme"
+}

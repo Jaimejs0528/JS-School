@@ -1,0 +1,121 @@
+.functions-container {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 10vh;
+    position: absolute;
+    z-index: -1;
+    background-color: #5A2E2E;
+    box-shadow: #DFBA69 0 0 3px 5px;
+    width: 100vw;
+    top: -250px;
+    left: 0;
+    transition: top 0.6s;
+}
+
+.icon-function {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 10px;
+}
+
+.icon-function:hover {
+    border-radius: 100%;
+    box-shadow: #979797 0 0 10px 2px;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.25, 1.25);
+}
+
+.function {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.dropdown > div {
+    padding: 0.1rem 0.6rem;
+    border-radius: 4px;
+}
+
+.dropdown > div:last-child {
+    margin-bottom: 0.4rem;
+}
+
+.dropdown > div:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}
+
+.control {
+    display: flex;
+    justify-content: center;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.function:hover > .hidden {
+    visibility: visible;
+}
+
+a {
+    font-size: 1rem;
+}
+
+.options-button {
+    position: fixed;
+    z-index: 6;
+    top: 0;
+}
+
+.options-button:hover > .functions-container {
+    top: -20px;
+}
+
+.button-more {
+    border: #000 solid 2px;
+    border-radius: 4px;
+    margin: 2vw;
+    display: flex;
+}
+
+.options-button:hover > .button-more {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+@media screen
+and (max-width: 800px) {
+}
+
+@media screen
+and (orientation: portrait) {
+    .functions-container {
+        flex-direction: column;
+        justify-content: flex-start;
+        position: absolute;
+        height: 100vh;
+        max-width: 250px;
+        top: -20px;
+        left: -300px;
+        transition: left 0.6s;
+        box-shadow: #DFBA69 0 0 3px 5px;
+    }
+
+    .button-more:hover {
+
+    }
+
+    .options-button:hover > .functions-container {
+        left: 0;
+    }
+
+    .function {
+        margin: auto 0;
+    }
+}

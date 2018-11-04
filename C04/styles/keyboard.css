@@ -1,0 +1,101 @@
+.keyboard-container {
+    display: flex;
+    position: relative;
+    margin: 1rem auto 1rem;
+    width: 85vw;
+    height: 85vh;
+    min-height: 300px;
+    min-width: 500px;
+}
+
+.key {
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.white-key {
+    order: 1;
+    width: 100%;
+    height: 100%;
+    background: #FFF;
+    box-shadow: #2A2C31 inset 8px 8px 6px, #DFBA69 inset -6px -6px 6px, #FFFEDF 0 0 2px;
+    color: #2A2C31;
+}
+
+.white-key:hover {
+    box-shadow: #2A2C31 inset 10px 10px 7px, #DFBA69 inset -8px -8px 7px, #FFFEDF 0 0 2px;
+}
+
+.black-key {
+    order: 2;
+    width: 10%;
+    height: 75%;
+    background: #2A2C31;
+    box-shadow: #DFBA69 inset 6px 6px 4px, #FFFEDF inset -4px -4px 4px, #2A2C31 0 0 3px;
+    color: #FFFEDF;
+    position: absolute;
+}
+
+.black-key:hover {
+    box-shadow: #DFBA69 inset 8px 8px 6px, #FFFEDF inset -6px -6px 6px, #2A2C31 0 0 3px;
+}
+
+.key-name {
+    font-size: 4rem;
+    margin: 90% auto 10%;
+    text-transform: uppercase;
+}
+
+.key:hover > .key-name {
+    transform: scale(0.95, 0.95);
+}
+
+@media screen
+and (max-width: 800px) {
+    .key-name {
+        font-size: 2.5rem;
+    }
+}
+
+@media screen
+and (orientation: portrait) {
+    .key {
+        justify-content: center;
+    }
+
+    .keyboard-container {
+        flex-direction: column;
+        width: 65vw;
+        height: 95vh;
+        min-width: 300px;
+        min-height: 500px;
+    }
+
+    .white-key {
+        width: 100%;
+        height: 20%;
+    }
+
+    .black-key {
+        width: 65%;
+        height: 10%;
+        right: 0;
+    }
+
+    .key-name {
+        font-size: 2rem;
+        margin: 10%;
+        width: fit-content;
+        transform: rotate(90deg);
+    }
+
+    .key:hover > .key-name {
+        transform: rotate(90deg) scale(0.95, 0.95);
+    }
+}
+
+/*.rotate-key{*/
+/*transform: rotate3d(-1, 1, 1, 85deg) translate(300%, -80%);*/
+/*}*/
