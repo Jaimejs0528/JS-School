@@ -2,6 +2,20 @@
 // import getPath from './Tool.js';
 
 const appBuildPiano = function main() {
+  const typeKeys = {
+    white: 'white-key',
+    black: 'black-key',
+  };
+  const audioCtx = new AudioContext();
+  const volumeControl = audioCtx.createGain();
+
+  function calcPositions() {
+    const arrayAux = [0, 1, 3, 4, 5];
+    const base = 9;
+    const increase = 14.3;
+    return arrayAux.map(value => `${base + (value * increase)}%`);
+  }
+
   const first = {
     numberWhite: 7,
     numBlack: 5,
@@ -11,28 +25,17 @@ const appBuildPiano = function main() {
       'audios/SolSost.mp3', 'audios/LaSost.mp3'],
     keysCodes: [65, 83, 68, 70, 74, 75, 76, 87, 69, 85, 73, 79],
     keyChars: ['a', 's', 'd', 'f', 'j', 'k', 'l', 'w', 'e', 'u', 'i', 'o'],
-    positions: ['9%', '24%', '52%', '66%', '81%'],
+    positions: calcPositions(),
   };
   const selected = first;
-  const typeKeys = {
-    white: 'white-key',
-    black: 'black-key',
-  };
-  const audioCtx = new AudioContext();
-  const volumeControl = audioCtx.createGain();
-
-  function calcPositions() {
-    const arrayAux = [1, 2, 4, 5, 6];
-    const base = 13;
-    return arrayAux.map(value => `${base * value}%`);
-  }
 
   function playAudio(sound) {
+    const soundLocal = sound;
     return () => {
-      if (sound.paused) {
-        sound.play();
+      if (soundLocal.paused) {
+        soundLocal.play();
       } else {
-        sound.currentTime = 0;
+        soundLocal.currentTime = 0;
       }
     };
   }
@@ -114,22 +117,36 @@ const appBuildPiano = function main() {
     });
   }
 
-  function addPositionCSS(key, positionX) {
-    key.style.left = positionX;
-  }
-
-  function addKey(typeKey, sound) {
+  function addKey(typeKey, sound, index) {
     const key = document.createElement('div');
     const soundElement = document.createElement('audio');
+    const keyName = document.createElement('span');
     soundElement.setAttribute('type', 'audio/mpeg');
     soundElement.preload = 'auto';
     soundElement.src = sound;
     soundElement.crossOrigin = 'anonymous';
-    key.setAttribute('class', `${typeKey}`);
+    keyName.textContent = selected.keyChars[index];
+    keyName.setAttribute('class', 'key-name');
+    key.setAttribute('class', `key ${typeKey}`);
+    key.appendChild(keyName);
     key.appendChild(soundElement);
     return key;
   }
 
+  function addDynamicStyles(className, attribute, key) {
+    const keyLocal = key;
+    const styleLandscape = document.styleSheets[1];
+    const stylePortrait = document.styleSheets[2];
+    let classStyle = `.${className}{
+                       left: ${attribute};
+                     }`;
+    styleLandscape.insertRule(classStyle, 0);
+    classStyle = `.${className}{
+                       top: ${attribute};
+                     }`;
+    stylePortrait.insertRule(classStyle, 0);
+    keyLocal.className += ` ${className}`;
+  }
   // Function that creates all the piano's Keyboard, its html code, apply
   // CSS and event listeners
   function buildKeyboard() {
@@ -139,13 +156,14 @@ const appBuildPiano = function main() {
     selected.sounds.map((soundToKey, index) => {
       let key;
       if (index < selected.numberWhite) {
-        key = addKey(typeKeys.white, soundToKey);
+        key = addKey(typeKeys.white, soundToKey, index);
       } else {
-        key = addKey(typeKeys.black, soundToKey);
+        key = addKey(typeKeys.black, soundToKey, index);
         key.id = selected.notes[index];
         const offIndex = index - selected.numberWhite;
-        const attributeClass = selected.positions[offIndex];
-        addPositionCSS(key, attributeClass);
+        const attribute = selected.positions[offIndex];
+        const className = selected.keyChars[index];
+        addDynamicStyles(className, attribute, key);
       }
       const audioElement = key.querySelector('audio');
       const track = audioCtx.createMediaElementSource(audioElement);
@@ -163,5 +181,6 @@ const appBuildPiano = function main() {
   }
 
   buildKeyboard();
+  window.addEventListener('orientationChange', addDynamicStyles);
 };
 window.addEventListener('load', appBuildPiano);

@@ -2,42 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=3.0">
     <link rel="icon" type="image/png" href="images/fav-icon.png">
-    <link rel="stylesheet" type="text/css" href="styles/main.css" id="mainStyle">
+    <link rel="stylesheet" type="text/css" href="styles/main.css" >
+    <!--Here add properties dynamic-->
+    <style id="dynamic-style-L" type="text/css" media="screen and (orientation: landscape)"></style>
+    <style id="dynamic-style-P" type="text/css" media="screen and (orientation: portrait)"></style>
     <title>My Piano</title>
 </head>
 <body>
+<div class=".options-button">
+    <div><img src></div>
+    <div class="functions-container">
+        <div id="volume" class="function">
+            <img class="icon-function" src="images/volume-high.svg" alt="volume-active">
+            <div id="volume-control" class="control hidden">
+                <img src="images/volume-minus.svg" alt="volume-down">
+                <input type="range" min="0" max="2" value="1" step="0.02">
+                <img src="images/volume-plus.svg" alt="volume-up">
+            </div>
+        </div>
+        <div id="metronome" class="function">
+            <img class="icon-function" src="images/metronome.svg" alt="metronome-off">
+            <div id="metronome-control" class="control hidden">
+                <img src="images/minus.svg" alt="metronome-down">
+                <input type="range" min="40" max="200" value="60" step="1">
+                <img src="images/plus.svg" alt="metronome-up">
+            </div>
+            <span class="hidden">60 bpm</span>
+            <audio src="audios/metronome.mp3"></audio>
+        </div>
+        <div id="piano-options" class="function">
+            <img class="icon-function" src="images/list.svg">
+            <div id="dropdown" class="dropdown hidden">
+                <div><img src="images/check.svg" class="selected"><a id="first">First</a></div>
+                <div><img src="images/check.svg"><a id="second">Second</a></div>
+            </div>
+        </div>
+
+    </div>
+</div>
 <div class="keyboard-container">
 </div>
-<div class="functions-container">
-    <div id="volume" class="function">
-        <img class="icon-function" src="images/volume-high.svg" alt="volume-active">
-        <div id="volume-control" class="control hidden">
-            <img src="images/volume-minus.svg" alt="volume-down">
-            <input type="range" min="0" max="2" value="1" step="0.02">
-            <img src="images/volume-plus.svg" alt="volume-up">
-        </div>
-    </div>
-    <div id="metronome" class="function">
-        <img class="icon-function" src="images/metronome.svg" alt="metronome-off">
-        <div id="metronome-control" class="control hidden">
-            <img src="images/minus.svg" alt="metronome-down">
-            <input type="range" min="40" max="200" value="60" step="1">
-            <img src="images/plus.svg" alt="metronome-up">
-        </div>
-        <span class="hidden">60 bpm</span>
-        <audio src="audios/metronome.mp3"></audio>
-    </div>
-    <div id="piano-options" class="function">
-        <img class="icon-function" src="images/list.svg">
-        <div id="dropdown" class="control dropdown hidden">
-            <div><img src="images/check.svg" class="selected"><a id="first">First</a></div>
-            <div><img src="images/check.svg"><a id="second">Second</a></div>
-        </div>
-    </div>
 
-</div>
-<script src="scripts/Tool.js" type="module"></script>
 <script src="scripts/pianoBuilder.js"></script>
 </body>
 </html>

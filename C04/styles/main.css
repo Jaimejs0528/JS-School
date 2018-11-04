@@ -1,5 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500');
+@import url('https://fonts.googleapis.com/css?family=KoHo:400,500');
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+
+
 @import "keyboard.css";
 @import "functions-keyboard.css";
+
+:root{
+    font-family: 'Quicksand', 'KoHo', 'Varela Round', sans-serif;
+}
 body {
     background: #5A2E2E;
+    overflow: hidden;
 }
