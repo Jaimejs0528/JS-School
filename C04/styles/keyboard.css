@@ -1,44 +1,42 @@
-.container {
+.keyboard-container {
     display: flex;
     position: relative;
-    align-content: space-between;
-    width: 75vw;
-    height: 80vh;
+    margin: 0 auto 1rem;
+    width: 85vw;
+    height: 65vh;
 }
 
 .white-key {
     order: 1;
     width: 20%;
-    height: 90%;
+    height: 100%;
     background: #FFF;
     transform-origin: 0 0 0;
-    box-shadow: #000 50px 20px 1px 1px, #FFF 55px 22px 1px 1px;
-    border: #000 solid 2px;
-    border-radius: 5px;
+    box-shadow: #2A2C31 inset 10px 10px 6px, #DFBA69 inset -8px -8px 6px, #FFFEDF 0 0 2px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
 .white-key:hover {
-    box-shadow: #000 50px 20px 1px 1px, #FFF 55px 22px 1px 1px;
+    box-shadow:  #2A2C31 inset 15px 15px 7px, #DFBA69 inset -12px -12px 7px, #FFFEDF 0 0 2px;
 }
 
 .black-key {
     position: absolute;
     order: 2;
     width: 10%;
-    height: 70%;
+    height: 75%;
     background: #000;
-    box-shadow: #FFF 50px 20px 1px 1px, #000 55px 22px 1px 1px;
-    border: #FFF solid 2px;
+    /*box-shadow: #FFFEDF inset 20px 1px 1px, #000 inset 22px 1px 1px;*/
+    border: #FFFEDF solid 2px;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .black-key:hover {
-    box-shadow: #FFF 50px 20px 1px 1px, #000 55px 22px 1px 1px;
+    /*box-shadow: #FFF inset 20px 1px 1px, #000 inset 22px 1px 1px;*/
 }
 
-
 /*.rotate-key{*/
-    /*transform: rotate3d(-1, 1, 1, 85deg) translate(300%, -80%);*/
+/*transform: rotate3d(-1, 1, 1, 85deg) translate(300%, -80%);*/
 /*}*/

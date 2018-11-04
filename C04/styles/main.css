@@ -1,5 +1,5 @@
-@import "./keyboard.css";
-
+@import "keyboard.css";
+@import "functions-keyboard.css";
 body {
-    background: #000;
+    background: #5A2E2E;
 }
