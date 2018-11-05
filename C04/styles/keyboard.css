@@ -28,6 +28,10 @@
     box-shadow: #2A2C31 inset 10px 10px 7px, #DFBA69 inset -8px -8px 7px, #FFFEDF 0 0 2px;
 }
 
+.white-key-press{
+    box-shadow: #202227 inset 12px 12px 8px, #D5B073 inset -10px -10px 8px, #E1E0C1 0 0 4px;
+}
+
 .black-key {
     order: 2;
     width: 10%;
@@ -40,6 +44,10 @@
 
 .black-key:hover {
     box-shadow: #DFBA69 inset 8px 8px 6px, #FFFEDF inset -6px -6px 6px, #2A2C31 0 0 3px;
+}
+
+.black-key-press{
+    box-shadow: #d5b06a inset 10px 10px 7px, #f5f4d5 inset -8px -8px 7px, #202227 0 0 4px;
 }
 
 .key-name {
