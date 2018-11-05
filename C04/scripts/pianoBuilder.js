@@ -1,20 +1,23 @@
-// Imports
-// import getPath from './Tool.js';
 
 const appBuildPiano = function main() {
+  // Use for key class
   const typeKeys = {
     white: 'white-key',
     black: 'black-key',
   };
-  const audioCtx = new AudioContext();
-  const volumeControl = audioCtx.createGain();
+  const audioCtx = new AudioContext(); // Audio context, allows use controls over the audio
+  const volumeControl = audioCtx.createGain(); // add volume control to context
 
+  // calcula absolute positions for black keys
   function calcPositions() {
     const arrayAux = [0, 1, 3, 4, 5];
     const base = 9;
     const increase = 14.3;
     return arrayAux.map(value => `${base + (value * increase)}%`);
   }
+
+  // The next are se correct way to add other configurations
+  // First configuration of keyboard
   const first = {
     numberWhite: 7,
     numBlack: 5,
@@ -26,6 +29,7 @@ const appBuildPiano = function main() {
     keyChars: ['a', 's', 'd', 'f', 'j', 'k', 'l', 'w', 'e', 'u', 'i', 'o'],
     positions: calcPositions(),
   };
+  // Second configuration of keyboard
   const second = {
     numberWhite: 7,
     numBlack: 5,
@@ -37,8 +41,10 @@ const appBuildPiano = function main() {
     keyChars: ['a', 's', 'd', 'f', 'j', 'k', 'l', 'w', 'e', 'u', 'i', 'o'],
     positions: calcPositions(),
   };
-  let selected = first;
-  const windowKeyEvents = [];
+  let selected = first; // which is the configuration selected
+  const windowKeyEvents = []; // storage the window events to remove later
+
+  // Play a key sound
   function playAudio(sound) {
     const soundLocal = sound;
     return () => {
@@ -50,11 +56,10 @@ const appBuildPiano = function main() {
     };
   }
 
+  // Play a key sound from keyboard
   function playAudioKeyboard(sound, key, keyElement, type) {
     return (event) => {
       if (!event.repeat) {
-        // eslint-disable-next-line no-console
-        console.log(event.code);
         if (event.which === key) {
           keyElement.classList.add(`${type}-press`);
           playAudio(sound)(); // play the sound using the function playAudio
@@ -63,6 +68,7 @@ const appBuildPiano = function main() {
     };
   }
 
+  // remove a clss from black or white key
   function removeClass(keyElement, key, type) {
     return (event) => {
       if (event.which === key) {
@@ -71,8 +77,9 @@ const appBuildPiano = function main() {
     };
   }
 
+  // add control over the metronome function
   function addMetronomeControl() {
-    const bpmToSecond = bpm => Math.floor(60000 / bpm);
+    const bpmToSecond = bpm => Math.floor(60000 / bpm); // bpm to milliseconds
     const metronomeContainer = document.querySelector('#metronome');
     const imgMetronome = metronomeContainer.querySelector('img');
     const audioMetronome = metronomeContainer.querySelector('audio');
@@ -104,6 +111,7 @@ const appBuildPiano = function main() {
     });
   }
 
+  // add controll over the volumen, up, down and mute
   function addVolumeControl() {
     const volumeContainer = document.querySelector('#volume-control');
     const volumeInput = volumeContainer.querySelector('input');
@@ -135,6 +143,8 @@ const appBuildPiano = function main() {
     });
   }
 
+  // create element key that is insert into the offDOM and
+  // later into the DOM
   function addKey(typeKey, sound, index) {
     const key = document.createElement('div');
     const soundElement = document.createElement('audio');
@@ -151,6 +161,7 @@ const appBuildPiano = function main() {
     return key;
   }
 
+  // add dynamics css class for black keys
   function addDynamicStyles(className, attribute, key) {
     const keyLocal = key;
     const styleLandscape = document.styleSheets[1];
@@ -165,6 +176,7 @@ const appBuildPiano = function main() {
     stylePortrait.insertRule(classStyle, 0);
     keyLocal.className += ` ${className}`;
   }
+
   // Function that creates all the piano's Keyboard, its html code, apply
   // CSS and event listeners
   function buildKeyboard() {
@@ -206,6 +218,8 @@ const appBuildPiano = function main() {
     addMetronomeControl();
   }
 
+  // add control over the sounds configurations
+  // allowing change between them
   function addSoundsControl() {
     const classSelected = 'selected';
     const dropDown = document.querySelector('.drop-down');
@@ -236,8 +250,10 @@ const appBuildPiano = function main() {
     firstElement.addEventListener('click', firstEvent);
     secondElement.addEventListener('click', secondEvent);
   }
-  buildKeyboard();
+  buildKeyboard();// creation of Keyboard
   addSoundsControl();
+  // add event to interchange style portrait and landscape
   window.addEventListener('orientationChange', addDynamicStyles);
 };
+// first call after the web page has loaded
 window.addEventListener('load', appBuildPiano);
