@@ -1,0 +1,52 @@
+.books-header {
+  align-content: center;
+  background: $white-bg-bookshelf;
+  color: $gray-third;
+  display: flex;
+  flex-flow: nowrap;
+  font-family: 'PlutoSansCondRegular';
+  height: 5.066rem;
+  justify-content: space-between;
+  padding: 1.875rem 4.938rem 1.69rem 5.063rem;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+
+  h3 {
+    color: $aside-bg;
+    font-family: 'PlutoSansCondLight';
+    font-size: 1.25rem;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 27px;
+    text-align: left;
+  }
+}
+
+.view-books {
+  color: $soft-blue;
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: space-between;
+  width: 2.8rem;
+}
+
+.order-options {
+  color: $gray-primary;
+  display: flex;
+  font-size: .875rem;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 400;
+  justify-content: space-between;
+  line-height: 19px;
+  margin-left: -5rem;
+  text-align: left;
+  width: 10.6rem;
+
+  .vertical-line {
+    height: 1rem;
+    margin: 0;
+  }
+}

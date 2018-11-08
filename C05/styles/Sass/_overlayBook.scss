@@ -1,0 +1,154 @@
+.overlay-container {
+  border-radius: 5px;
+  color: $white-primary;
+  position: relative;
+
+  &:hover {
+
+    .overlay-img {
+      @extend %overlay-visible;
+    }
+
+    .overlay-summary {
+      @extend %overlay-visible;
+    }
+  }
+}
+
+.overlay-img {
+  @extend %border-overlay;
+  bottom: 0;
+  height: 250px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .2s;
+  width: 176px;
+
+  .rating {
+    bottom: 5.6%;
+    color: $yellow-stars;
+    height: 13px;
+    margin: 0 auto;
+    position: absolute;
+    right: 28%;
+  }
+
+  > span {
+    bottom: 12.8%;
+    font-family: 'PlutoSansCondMedium';
+    font-size: .7rem;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 15px;
+    position: absolute;
+    right: 26.7%;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+}
+
+.overlay-summary {
+  @extend %border-overlay;
+  color: $white-secondary;
+  height: 22.375rem;
+  left: 205px;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition: .2s;
+  width: 23.8rem;
+}
+
+.summary-container {
+  @extend %flex-column;
+  bottom: 0;
+  font-family: 'PlutoSansCondRegular', sans-serif;
+  left: 0;
+  margin: 1.8rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  span {
+    color: $gray-third;
+    font-family: 'PlutoSansCondBold';
+    font-size: .75rem;
+    height: 1.5rem;
+    padding: 0 0 0 .15rem;
+    text-transform: uppercase;
+  }
+}
+
+.book-paragraph {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.book-summary-rating {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.3125rem;
+}
+
+.recommended-by {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-paragraph {
+  font-size: .75rem;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  padding: 0 1rem 0 0;
+  text-align: left;
+}
+
+
+
+.header-summary {
+  @extend %flex-column;
+  font-size: .5417rem;
+  justify-content: space-between;
+  margin: 0 0 1rem;
+
+  >div {
+    color: $soft-blue;
+    display: flex;
+    font-family: 'PlutoSansCondBold';
+    justify-content: space-between;
+    margin-bottom: -.125rem;
+  }
+
+  > h2 {
+    margin: 0 0 .25rem;
+  }
+
+  > p {
+    font-size: .8125rem;
+  }
+
+  span {
+    font-size: .8125rem;
+    margin: 0 0 .5rem;
+    text-transform: capitalize;
+  }
+}
+
+.arrow {
+  background: $black;
+  height: 4rem;
+  margin: 5.8rem 0 0;
+  position: relative;
+  transform: rotate(45deg);
+  width: 4rem;
+  z-index: -3;
+}

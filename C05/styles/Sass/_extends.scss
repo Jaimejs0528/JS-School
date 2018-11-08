@@ -1,0 +1,17 @@
+
+//extend flex column
+%flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+%overlay-visible {
+  opacity: .75;
+  z-index: 3;
+}
+
+%border-overlay {
+  background-color: $black;
+  border: 1px solid $black;
+  border-radius: 5px;
+}

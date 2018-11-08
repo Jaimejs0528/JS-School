@@ -1,0 +1,67 @@
+@import 'variables';
+@import 'fonts';
+@import 'extends';
+@import 'header';
+@import 'aside';
+@import 'bookShelfHeader';
+@import 'overlayBook';
+@import 'bookshelf';
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.main {
+  display: flex;
+  height: 92vh;
+}
+
+.sidebar {
+  flex-basis: 15vw;
+}
+
+.hidde-overflow-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.circle-img {
+  background: $white-primary;
+  border-radius: 100%;
+}
+
+
+@media screen and (max-width: 1000px) {
+
+  %size-left-side {
+    min-width: $min-width-left-side-container;
+    width: 22.5%;
+  }
+
+  .right-side {
+    display: none;
+  }
+
+  .left-side {
+    @extend %size-left-side;
+  }
+
+  .header-body .header-logo {
+    @extend %size-left-side;
+  }
+  .books-container {
+    width: calc(100% - 190px);
+  }
+  .profile > span {
+    display: none;
+  }
+}

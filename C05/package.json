@@ -1,0 +1,28 @@
+{
+  "name": "c05",
+  "version": "1.0.0",
+  "description": "Bookshelf with sass",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaimejs0528/JS-School.git"
+  },
+  "keywords": [
+    "sass",
+    "bookshelf",
+    "html5",
+    "css",
+    "js",
+    "js_school"
+  ],
+  "author": "Jaime Jimenez Serrano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jaimejs0528/JS-School/issues"
+  },
+  "homepage": "https://github.com/Jaimejs0528/JS-School#readme",
+  "devDependencies": {}
+}
