@@ -22,12 +22,13 @@
   font-family: "PlutoSansCondMedium";
   src: url("../../fonts/HVD Fonts - PlutoSansCondMedium.otf") format("opentype");
 }
-.book, .header-summary, .summary-container, .list-header, .header-menu, .aside-list, .right-side {
+.book, .header-summary, .recommended-by, .book-summary-rating, .book-paragraph, .summary-container, .list-header, .header-menu, .aside-list, .right-side {
   display: flex;
   flex-direction: column;
 }
 
 .overlay-container:hover .overlay-summary, .overlay-container:hover .overlay-img {
+  display: inline;
   opacity: 0.75;
   z-index: 3;
 }
@@ -169,7 +170,7 @@ input[type=search] {
   font-size: 0.8rem;
   list-style-position: inside;
   margin-bottom: 1.63rem;
-  max-width: 177px;
+  max-width: 10.793vw;
 }
 
 .header-title {
@@ -271,6 +272,7 @@ input[type=search] {
   position: relative;
 }
 .overlay-img {
+  display: none;
   bottom: 0;
   height: 250px;
   left: 0;
@@ -307,6 +309,7 @@ input[type=search] {
 
 .overlay-summary {
   color: #fff;
+  display: none;
   height: 22.375rem;
   left: 205px;
   opacity: 0;
@@ -335,20 +338,11 @@ input[type=search] {
 }
 
 .book-paragraph {
-  display: flex;
-  flex-direction: column;
   margin-bottom: 1.5rem;
 }
 
 .book-summary-rating {
-  display: flex;
-  flex-direction: column;
   margin-bottom: 1.3125rem;
-}
-
-.recommended-by {
-  display: flex;
-  flex-direction: column;
 }
 
 .summary-paragraph {
@@ -357,8 +351,11 @@ input[type=search] {
   font-style: normal;
   font-weight: 400;
   line-height: 19px;
+  max-height: 95px;
+  overflow: hidden;
   padding: 0 1rem 0 0;
   text-align: left;
+  text-overflow: ellipsis;
 }
 
 .header-summary {
@@ -490,8 +487,7 @@ input[type=search] {
   font-size: 12.5px;
   width: 76px;
 }
-
-.rating > i {
+.rating i {
   height: 17px;
   width: 20px;
 }
