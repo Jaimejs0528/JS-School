@@ -1,0 +1,100 @@
+.books-container {
+  background: $white-bg-bookshelf;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 72vw;
+
+}::-scrollbar {
+  display: none;
+}
+
+.bookshelf {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 0 5rem;
+}
+
+.book {
+  @extend %flex-column;
+  cursor: pointer;
+  height: 20rem;
+  justify-content: space-between;
+  margin-bottom: 27%;
+  width: 176px;
+}
+
+.book-options {
+  color: $gray-fourth;
+}
+
+.child {
+  display: flex;
+  font-size: .875rem;
+  height: 12%;
+  position: absolute;
+  top: 6%;
+  width: 17%;
+}
+
+.left {
+  left: 8.5%;
+}
+
+.right {
+  right: 8.5%;
+}
+
+.mid-child {
+  bottom: 41.6%;
+  color: $soft-blue;
+  display: flex;
+  font-size: 1.5rem;
+  height: 19.2%;
+  margin: auto;
+  position: absolute;
+  right: 36%;
+  width: 27.3%;
+}
+
+.book-options>div>i {
+  margin: auto;
+}
+
+.user-icons {
+  display: flex;
+}
+
+.user-icons>div {
+  margin: 0 .7rem 0 0;
+}
+
+.img-container {
+  height: 250px;
+  margin-bottom: .5rem;
+  width: 176px;
+}
+
+.book-title {
+  color: $black-medium;
+  font-family: 'PlutoSansCondMedium';
+  font-size: .9rem;
+}
+
+.author {
+  color: $gray-fourth;
+  font-family: 'PlutoSansCondLight';
+  font-size: .813rem;
+}
+
+.rating {
+  color: $soft-blue;
+  display: flex;
+  font-size: 12.5px;
+  width: 76px;
+
+  i {
+    height: 17px;
+    width: 20px;
+  }
+}

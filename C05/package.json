@@ -1,0 +1,38 @@
+{
+  "name": "c05",
+  "version": "1.0.0",
+  "description": "Bookshelf with sass",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaimejs0528/JS-School.git"
+  },
+  "keywords": [
+    "sass",
+    "bookshelf",
+    "html5",
+    "css",
+    "js",
+    "js_school"
+  ],
+  "author": "Jaime Jimenez Serrano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jaimejs0528/JS-School/issues"
+  },
+  "homepage": "https://github.com/Jaimejs0528/JS-School#readme",
+  "devDependencies": {
+    "css-loader": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "npx": "^10.2.0",
+    "sass": "^1.14.3",
+    "sass-lint": "^1.12.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
