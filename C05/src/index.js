@@ -84,6 +84,7 @@ const appBookShelf = () => {
     overlayBookImg.classList.add('overlay-container', 'img-container');
     bookImage.src = '/src/images/books/book-1.png';
     bookImage.alt = 'bookImage';
+    // Thats no the correct ratio for de image, but yes for pixel perfect
     bookImage.setAttribute('height', '250px');
     bookImage.setAttribute('width', '176px');
     // Append childs to Overlay Image
@@ -185,49 +186,58 @@ const appBookShelf = () => {
     }
   };
 
-  const fillBooks = () => {
+  const fillBooks = async () => {
     const bookShelfContainer = document.querySelector('.bookshelf');
     const offDOM = document.createDocumentFragment();
-    getJson('/src/js/json', 'book1.json')
-      .then((booksresponse) => {
-        const { books } = booksresponse;
-        const bookEmpty = createEstructureBook();
-        books.map((infoBook) => {
-          const book = bookEmpty.cloneNode(true);
-          const overlayImgContainer = book.querySelector('.img-container');
-          const imageBoot = overlayImgContainer.querySelector('img');
-          imageBoot.src = infoBook.image;
-          const ratingInside = overlayImgContainer.querySelector('.overlay-img')
-            .lastChild;
-          fillRating(ratingInside, infoBook.rating);
-          const titleOutside = book.querySelector('.book-title');
-          const authorOutside = titleOutside.nextSibling;
-          titleOutside.innerText = infoBook.title;
-          authorOutside.innerText = infoBook.author;
-          const ratingOutside = authorOutside.nextSibling;
-          fillRating(ratingOutside, infoBook.rating);
-          const summaryContainer = book.querySelector('.summary-container');
-          const headerContainer = summaryContainer.querySelector('header');
-          const articleTitle = headerContainer.querySelector('div')
-            .firstChild;
-          const articleYear = articleTitle.nextSibling;
-          articleTitle.innerText = infoBook.title;
-          articleYear.innerText = infoBook.year;
-          const numPages = headerContainer.lastChild;
-          const authorSumary = numPages.previousSibling.children[0];
-          authorSumary.innerText = infoBook.author;
-          numPages.innerText = `${infoBook.numPages} Pages`;
-          const bookParagraph = summaryContainer.querySelector('.summary-paragraph');
-          bookParagraph.innerText = infoBook.description;
-          const ratingSummary = summaryContainer.querySelector('.rating');
-          fillRating(ratingSummary, infoBook.rating);
-          offDOM.appendChild(book);
-          return undefined;
-        });
-        bookShelfContainer.appendChild(offDOM);
-      });
+    const bookResponse = await getJson('/src/js/json', 'books.json');
+    const { books } = bookResponse;
+    const bookEmpty = createEstructureBook();
+    books.map((infoBook) => {
+      const book = bookEmpty.cloneNode(true);
+      const overlayImgContainer = book.querySelector('.img-container');
+      const imageBoot = overlayImgContainer.querySelector('img');
+      imageBoot.src = infoBook.image;
+      const ratingInside = overlayImgContainer.querySelector('.overlay-img')
+        .lastChild;
+      fillRating(ratingInside, infoBook.rating);
+      const titleOutside = book.querySelector('.book-title');
+      const authorOutside = titleOutside.nextSibling;
+      titleOutside.innerText = infoBook.title;
+      authorOutside.innerText = infoBook.author;
+      const ratingOutside = authorOutside.nextSibling;
+      fillRating(ratingOutside, infoBook.rating);
+      const summaryContainer = book.querySelector('.summary-container');
+      const headerContainer = summaryContainer.querySelector('header');
+      const articleTitle = headerContainer.querySelector('div')
+        .firstChild;
+      const articleYear = articleTitle.nextSibling;
+      articleTitle.innerText = infoBook.title;
+      articleYear.innerText = infoBook.year;
+      const numPages = headerContainer.lastChild;
+      const authorSumary = numPages.previousSibling.children[0];
+      authorSumary.innerText = infoBook.author;
+      numPages.innerText = `${infoBook.numPages} Pages`;
+      const bookParagraph = summaryContainer.querySelector('.summary-paragraph');
+      bookParagraph.innerText = infoBook.description;
+      const ratingSummary = summaryContainer.querySelector('.rating');
+      fillRating(ratingSummary, infoBook.rating);
+      offDOM.appendChild(book);
+      return undefined;
+    });
+    bookShelfContainer.appendChild(offDOM);
+  };
+
+  const updateView = () => {
+    const img = document.querySelector('.header-logo').querySelector('img');
+    if (window.innerWidth <= 768) {
+      img.src = '/src/images/favicon.png';
+    } else {
+      img.src = '/src/images/logo.png';
+    }
   };
   fillBooks();
+  updateView();
+  window.addEventListener('resize', updateView);
 };
 
 window.addEventListener('load', appBookShelf);

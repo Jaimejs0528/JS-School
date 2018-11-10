@@ -7,11 +7,12 @@ const Tools = () => {
   };
 
   const addBookToJson = async (isbn) => {
-    const resBook = fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
-    const currentBooks = getJson('/src/js/json', 'book1.json');
+    const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
+    const resBook = fetch(url);
+    const currentBooks = getJson('/src/js/json', 'books.json');
     const responses = await Promise.all([resBook, currentBooks]);
     const jsonBook = await responses[0].json();
-    console.log(responses[1].books);
+    let allBooks = await responses[1].books;
     const bookInfo = jsonBook.items[0].volumeInfo;
     const {
       title,
@@ -25,20 +26,26 @@ const Tools = () => {
     const year = publishedDate.split('-')[0];
     const author = authors[0];
     const image = imageLinks.thumbnail;
-    console.log(title);
-    console.log(author);
-    console.log(rating);
-    console.log(description);
-    console.log(image);
-    console.log(numPages);
-    console.log(year);
+    const newBook = {
+      title,
+      author,
+      year,
+      description,
+      numPages,
+      rating,
+      image,
+    };
+    allBooks.push(newBook);
+    allBooks = allBooks.map(value => JSON.stringify(value));
+    const joinBooks = allBooks.join();
+    const output = `{"books":[${joinBooks}]}`;
     const hiddenElement = document.createElement('a');
-    hiddenElement.href = `data:attachment/json,${encodeURI(JSON.stringify(bookInfo))}`;
+    hiddenElement.href = `data:attachment/text,${encodeURI(output)}`;
     hiddenElement.target = '_blank';
-    hiddenElement.download = 'myFile.json';
+    hiddenElement.rel = 'noopener';
+    hiddenElement.download = 'books.json';
     hiddenElement.click();
   };
-
 
   return {
     getJson,

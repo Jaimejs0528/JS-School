@@ -4,8 +4,17 @@
   overflow-y: scroll;
   width: 72vw;
 
-}::-scrollbar {
-  display: none;
+  @include md-view{
+     width: 100vw;
+  }
+
+  @include xlg-view-min{
+    width: calc(100vw - 190px);
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .bookshelf {
@@ -13,6 +22,10 @@
   flex-flow: row wrap;
   justify-content: space-between;
   padding: 0 5rem;
+
+  @include xlg-view{
+    justify-content: space-around;
+  }
 }
 
 .book {

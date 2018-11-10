@@ -1,4 +1,3 @@
-
 const appBuildPiano = function main() {
   // Use for key class
   const typeKeys = {

@@ -8,11 +8,26 @@
 %overlay-visible {
   display: inline;
   opacity: .75;
-  z-index: 3;
+  z-index: 2;
 }
 
 %border-overlay {
   background-color: $black;
   border: 1px solid $black;
   border-radius: 5px;
+}
+
+@include md-view{
+  %center-element {
+    padding: 0;
+    margin: auto;
+    text-align: center;
+  }
+}
+
+@include xlg-view {
+  %size-left-side {
+    min-width: $min-width-left-side-container;
+    width: 22.5vw;
+  }
 }
