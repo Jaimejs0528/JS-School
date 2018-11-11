@@ -1,0 +1,309 @@
+.books-container {
+  display: flex;
+  flex-direction: column;
+  background: #F5F6F8;
+  width: 72vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.books-header {
+  height: 5.066rem;
+  padding: 1.875rem 4.938rem 1.69rem 5.063rem;
+  display: flex;
+  flex-flow: nowrap;
+  justify-content: space-between;
+  align-content: center;
+  position: sticky;
+  z-index: 3;
+  background: #F5F6F8;
+  top: 0;
+  color: #858585;
+  font-family: 'PlutoSansCondRegular'
+}
+
+.books-header>h3 {
+  color: #231f20;
+  font-size: 1.25rem;
+  font-family: 'PlutoSansCondLight';
+  font-style: normal;
+  font-stretch: normal;
+  font-weight: 400;
+  line-height: 27px;
+  text-align: left;
+}
+
+.view-books {
+  display: flex;
+  justify-content: space-between;
+  width: 2.8rem;
+  font-size: 1.2rem;
+  color: #6EC1E4 !important
+}
+
+.bookshelf {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.book {
+  display: flex;
+  width: 176px;
+  justify-content: space-between;
+  flex-direction: column;
+  cursor: pointer;
+  height: 20rem;
+  margin-bottom: 27%
+}
+
+.book-options {
+  color: #9e9e9e;
+}
+
+.child {
+  display: flex;
+  font-size: 0.875rem;
+  height: 12%;
+  width: 17%;
+  position: absolute;
+  top: 6%;
+}
+
+.left {
+  left: 8.5%;
+}
+
+.right {
+  right: 8.5%;
+}
+
+.mid-child {
+  position: absolute;
+  display: flex;
+  color: #6EC1E4;
+  font-size: 1.5rem;
+  margin: auto;
+  height: 19.2%;
+  width: 27.3%;
+  bottom: 41.6%;
+  right: 36%;
+}
+
+.book-options>div>i {
+  margin: auto;
+}
+
+.overlay-container {
+  position: relative;
+  color: #fcf8f3;
+  border-radius: 5px;
+}
+
+.user-icons {
+  display: flex;
+}
+
+.user-icons>div {
+  margin: 0 0.7rem 0 0;
+}
+
+.img-container {
+  width: 176px;
+  height: 250px;
+  margin-bottom: 0.5rem;
+}
+
+.overlay-container:hover .overlay-img, .overlay-container:hover .overlay-summary {
+  opacity: 0.75;
+  z-index: 3;
+}
+
+.overlay-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 176px;
+  height: 250px;
+  opacity: 0;
+  transition: 0.2s;
+  background-color: #000;
+  border: #000 solid 1px;
+  border-radius: 5px;
+}
+
+.overlay-summary {
+  position: absolute;
+  top: 0;
+  left: 205px;
+  width: 23.8rem;
+  height: 22.375rem;
+  opacity: 0;
+  transition: 0.2s;
+  background-color: #000;
+  border: #000 solid 1px;
+  border-radius: 3px;
+  color: #FFF;
+}
+
+.summary-container {
+  position: absolute;
+  margin: 1.8rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'PlutoSansCondRegular';
+}
+
+.summary-container span {
+  color: #858585;
+  font-family: 'PlutoSansCondBold';
+  font-size: 0.75rem;
+  padding:0 0 0 0.15rem;
+  height: 1.5rem;
+  text-transform: uppercase;
+}
+
+.book-paragraph{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.book-summary-rating{
+  display: flex;
+  flex-direction: column;
+  margin-bottom:1.3125rem
+}
+
+.recommended-by{
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-paragraph {
+  font-size: 0.75rem;
+  font-style: normal;
+  font-stretch: normal;
+  font-weight: 400;
+  line-height: 19px;
+  text-align: left;
+  padding: 0 1rem 0 0;
+}
+
+.header-summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 0 1rem 0;
+  font-size: 0.5417rem !important;
+}
+
+.header-summary>div {
+  color: #6EC1E4;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'PlutoSansCondBold';
+  margin-bottom: -0.125rem;
+}
+.header-summary > h2 {
+  margin: 0 0 0.25rem 0;
+}
+.header-summary span {
+  font-size: 0.8125rem;
+  text-transform: capitalize;
+  margin: 0 0 0.5rem 0;
+}
+
+.header-summary > p{
+  font-size:0.8125rem;
+}
+
+.arrow {
+  position: relative;
+  background: #000;
+  margin: 5.8rem 0 0 0;
+  width: 4rem;
+  height: 4rem;
+  transform: rotate(45deg);
+  z-index: -3;
+}
+
+.book-title {
+  font-family: 'PlutoSansCondMedium';
+  color: #383838;
+  font-size: 0.9rem;
+}
+
+.author {
+  color: #9e9e9e;
+  font-family: 'PlutoSansCondLight';
+  font-size: 0.813rem;
+}
+
+.rating {
+  display: flex;
+  font-size: 12.5px;
+  width: 76px;
+  color: #6EC1E4;
+}
+
+.rating>i {
+  width: 20px;
+  height: 17px;
+}
+
+.overlay-img .rating {
+  color: #e9bd49 !important;
+  height: 13px;
+  position: absolute;
+  bottom: 5.6%;
+  right: 28%;
+  margin: 0 auto;
+}
+
+.overlay-img>span {
+  position: absolute;
+  font-size: 0.7rem;
+  font-family: 'PlutoSansCondMedium';
+  font-style: normal;
+  font-stretch: normal;
+  font-weight: 400;
+  line-height: 15px;
+  text-decoration: none;
+  letter-spacing: 0px;
+  bottom: 12.8%;
+  right: 26.7%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.order-options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  width: 10.6rem;
+  font-style: normal;
+  font-stretch: normal;
+  font-weight: 400;
+  line-height: 19px;
+  text-align: left;
+  margin-left: -5rem;
+  color: #979797;
+}
+
+.order-options .vertical-line{
+  height: 1rem;
+  margin: 0
+}
+
+.books-container::-webkit-scrollbar {
+  display: none;
+}
