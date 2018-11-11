@@ -1,0 +1,130 @@
+.left-side {
+  background: $aside-bg;
+  color: $soft-blue;
+  min-width: $min-width-left-side-container;
+
+  @include md-view{
+    width: 100vw;
+  }
+
+  @include xlg-view{
+    @extend %size-left-side;
+  }
+}
+
+.right-side {
+  @extend %flex-column;
+  background: $aside-bg;
+  color: $gray-secondary;
+
+  @include xlg-view{
+    display: none;
+  }
+}
+
+.aside-title {
+  font-family: 'PlutoSansCondBold';
+  font-size: .813rem;
+  mix-blend-mode: normal;
+  opacity: .7;
+  padding: 2.315rem 0 1.63rem 2.25rem;
+  text-transform: uppercase;
+}
+
+.aside-list {
+  @extend %flex-column;
+  padding: 0 0 0 2.125rem;
+
+  li {
+    font-family: 'PlutoSansCondLight';
+    font-size: .8rem;
+    list-style-position: inside;
+    margin-bottom: 1.63rem; // cambio de margin: 0 0 1.63rem 0;
+    max-width: 10.793vw;
+  }
+}
+
+.header-menu {
+  @extend %flex-column;
+  font-family: 'PlutoSansCondBold';
+
+  @include md-view{
+    border-bottom: $gray-primary  solid 1px;
+  }
+}
+
+.header-title {
+  color: $white-secondary;
+  font-size: .8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+
+   @include md-view{
+    @extend %center-element;
+    padding: .5rem 0;
+  }
+
+  @include lg-view{
+    padding: 2.25rem 0 .5rem 2.5rem;
+  }
+}
+
+.list-header {
+  @extend %flex-column;
+
+  @include md-view{
+    @extend %center-element;
+    display: none;
+  }
+
+  @include lg-view{
+    padding: .75rem 2.5625rem 0 2.5625rem;
+    justify-content: space-between;
+  }
+}
+
+.selected {
+  color: $white-primary;
+
+  &:hover{
+    text-shadow: $soft-blue 0px 0px 4px;
+  }
+}
+
+.menu-item {
+  display: flex;
+  flex-flow: row;
+  cursor: pointer;
+  margin-bottom: 1.25rem;
+
+  &:hover{
+    text-shadow: $white-primary 0px 0px 4px;
+  }
+
+  i {
+    width: 20%;
+
+    @include md-view{
+      margin: $auto-height;
+      font-size: 0.8em;
+    }
+  }
+
+  a {
+    font-family: 'PlutoSansCondRegular';
+    font-size: .9rem;
+    text-align: left;
+    text-decoration: none;
+    text-transform: none;
+    width: 70%;
+
+    @include md-view{
+      width: initial;
+    }
+  }
+
+  @include md-view{
+    margin-bottom:  0.375rem;
+    width: 35vw;
+  }
+}
