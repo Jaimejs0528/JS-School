@@ -71,7 +71,6 @@
 
 .list-header {
   @extend %flex-column;
-  transition: display 1s;
 
   @include md-view{
     @extend %center-element;

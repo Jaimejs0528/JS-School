@@ -83,9 +83,20 @@
 }
 
 .img-container {
+  @extend %border-overlay;
   height: 250px;
   margin-bottom: .5rem;
   width: 176px;
+
+  &:hover {
+    .overlay-img {
+      @extend %overlay-visible;
+    }
+  }
+}
+
+.img-border{
+  @extend %border-overlay;
 }
 
 .book-title {

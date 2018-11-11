@@ -108,6 +108,8 @@ const appBookShelf = () => {
     // Summary container
     const summaryContainer = document.createElement('div');
     const arrow = summaryContainer.cloneNode(); // arrow indicator
+    const summaryOptions = summaryContainer.cloneNode();
+    const buttonReservation = document.createElement('button');
     const articleSummary = document.createElement('article');
     const headerSummary = document.createElement('header');
     // Into headerSummary
@@ -154,9 +156,14 @@ const appBookShelf = () => {
     articleSummary.appendChild(headerSummary);
     articleSummary.appendChild(bookParagraph);
     articleSummary.appendChild(ratingContainer);
+    // Append to summaryOptions
+    buttonReservation.className = 'button-lend';
+    buttonReservation.innerText = 'lend';
+    summaryOptions.append(buttonReservation);
+    summaryOptions.appendChild(articleSummary);
     // Append to summaryContainer
     summaryContainer.append(arrow);
-    summaryContainer.append(articleSummary);
+    summaryContainer.append(summaryOptions);
     return summaryContainer;
   };
 
@@ -197,6 +204,7 @@ const appBookShelf = () => {
       const overlayImgContainer = book.querySelector('.img-container');
       const imageBoot = overlayImgContainer.querySelector('img');
       imageBoot.src = infoBook.image;
+      imageBoot.className = 'img-border';
       const ratingInside = overlayImgContainer.querySelector('.overlay-img')
         .lastChild;
       fillRating(ratingInside, infoBook.rating);
@@ -227,6 +235,45 @@ const appBookShelf = () => {
     bookShelfContainer.appendChild(offDOM);
   };
 
+  const addActionToList = (first, second) => {
+    first.map((value) => {
+      const action = () => () => {
+        first.map((item) => {
+          item.classList.remove('selected');
+          return undefined;
+        });
+        second.map((item) => {
+          item.classList.remove('selected');
+          return undefined;
+        });
+        value.classList.add('selected');
+      };
+      const clousureAction = action();
+      value.addEventListener('click', clousureAction);
+      return null;
+    });
+  };
+
+  const addListeners = () => {
+    const parent = document.querySelector('.left-side');
+    const menu = parent.querySelector('#menu');
+    const menuList = Array.prototype.slice.call(menu.children[1].children, 0);
+    const uBooks = parent.querySelector('#u-books');
+    const uBooksList = Array.prototype.slice.call(uBooks.children[1].children, 0);
+    addActionToList(menuList, uBooksList);
+    addActionToList(uBooksList, menuList);
+    const toggleList = (parentContainer) => {
+      const listItems = parentContainer.children[1];
+      return () => {
+        listItems.classList.toggle('show');
+      };
+    };
+    const menuAction = toggleList(menu);
+    const uBooksAction = toggleList(uBooks);
+    menu.addEventListener('click', menuAction);
+    uBooks.addEventListener('click', uBooksAction);
+  };
+
   const updateView = () => {
     const img = document.querySelector('.header-logo').querySelector('img');
     if (window.innerWidth <= 768) {
@@ -237,6 +284,7 @@ const appBookShelf = () => {
   };
   fillBooks();
   updateView();
+  addListeners();
   window.addEventListener('resize', updateView);
 };
 
