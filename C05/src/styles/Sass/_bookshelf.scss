@@ -95,6 +95,19 @@
   }
 }
 
+.lend-book{
+  display: none;
+  position: absolute;
+  right: -10px;
+  top: 30px;
+
+  i{
+    position: absolute;
+    top: 6px;
+    left: 20px;
+  }
+}
+
 .img-border{
   @extend %border-overlay;
 }

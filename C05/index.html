@@ -3,25 +3,24 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="theme-color">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#6ec1e4"/>
     <title>Jobsity Bookshelt</title>
     <link rel="icon" href="src/images/favicon.png">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
-        crossorigin="anonymous">
-    <link href="./src/styles/Css/main.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 </head>
 
 <body>
     <header class="header-container">
         <div class="sidebar header-logo">
-            <img src="src/images/logo.png" alt="Jobsity-icon">
+            <img src="/src/images/logo.png" alt="Jobsity-icon">
         </div>
         <div class="header-search">
             <h1 class="title">Bookshelf</h1>
             <form class="input-search">
                 <i class="fas fa-search fa-lg"></i>
-                <label for="search"></label><input id="search" type="search" placeholder="Search...">
+                <input id="search" type="search" placeholder="Search..." aria-label="Search">
             </form>
         </div>
         <div class="sidebar header-profile">
@@ -29,7 +28,7 @@
             <div class="profile">
                 <span>Jakob Treml</span>
                 <i class="fas fa-angle-down"></i>
-                <img src="src/images/jakob.png" class="circle-img" alt="user-image">
+                <img src="/src/images/jakob.png" class="circle-img" alt="user-image">
             </div>
         </div>
     </header>
@@ -71,79 +70,7 @@
                 </div>
             </div>
             <div class="bookshelf">
-                <!-- Start a book-->
-                <!--<div class="overlay-container">
-                    <div class="book">
-                        <div class="overlay-container img-container">
-                            <img src="src/images/books/book-1.png" alt="book-1" width="176" height="250">
-                            <div class="overlay-img">
-                                <div class="book-options">
-                                    <div class="child left circle-img"><i class="far fa-heart"></i></div>
-                                    <div class="mid-child circle-img"><i class="fas fa-book-open"></i></div>
-                                    <div class="child right circle-img"><i class="far fa-bookmark"></i></div>
-                                </div>
-                                <span>RATE THIS BOOK</span>
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <span class="book-title hidde-overflow-text">Everything I never Told You</span>
-                        <span class="author hidde-overflow-text">Celeste Ng</span>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="overlay-summary">
-                        <div class="arrow"></div>
-                        <article class="summary-container">
-                            <header class="header-summary">
-                                <div>
-                                    <h1>ALL THE LIGHT WE CANNOT SEE</h1>
-                                    <span>2014</span>
-                                </div>
-                                <h2>Novel by <span>Anthony Doerr</span></h2>
-                                <p>544 Pages</p>
-                            </header>
-                            <div class=book-paragraph>
-                                <span>summary</span>
-                                <p class="summary-paragraph">From the highly acclaimed, multiple award-winning
-                                    Anthony Doerr, the beautiful, stunningly ambitious
-                                    instant New York Times bestseller about a blind French
-                                    girl and German boy whose paths collide in occupied
-                                    France as both try to survive devastation of Word War II.</p>
-                            </div>
-                            <div class="book-summary-rating">
-                                <span>RATING</span>
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                            </div>
-                            <div class="recommended-by">
-                                <span>RECOMMENDED BY</span>
-                                <div class="user-icons">
-                                    <div><img src="src/images/user-icon-1.png"></div>
-                                    <div><img src="src/images/user-icon-2.png"></div>
-                                    <div><img src="src/images/user-icon-3.png"></div>
-                                </div>
-                            </div>
-
-                        </article>
-                    </div>
-                </div> -->
-                <!-- End a book-->
+                <!--With JS-->
             </div>
         </main>
         <!--Right sidebar-->
@@ -160,7 +87,8 @@
         </aside>
     </div>
     <!-- <script src="src/js/Tool.js"></script> -->
-    <script src="src/index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/dist/bundle.js"></script>
 </body>
 
 </html>

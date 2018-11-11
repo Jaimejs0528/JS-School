@@ -38,3 +38,22 @@
   -webkit-flex-flow: $props;
   flex-flow: $props;
 }
+
+@mixin keyframe($properties) {
+  -webkit-animation: display-transition $properties; 
+  -moz-animation: display-transition $properties;
+  -o-animation:  display-transition $properties;
+  animation:  display-transition $properties;
+  @-moz-keyframes display-transition {
+    @content;
+  }
+  @-o-keyframes display-transition {
+    @content;
+  }
+  @-webkit-keyframes display-transition {
+    @content;
+  }
+  @keyframes display-transition {
+    @content;
+  }
+}

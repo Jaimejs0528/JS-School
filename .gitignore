@@ -1,5 +1,3 @@
 .idea/
 C05/.vscode/
-C05/dist/
-C05/webpack.config.js
-C05/package-lock.json
+C05/node_modules/

@@ -1,10 +1,16 @@
-// import Tools from './src/js/Tool';
-// import './styles/Css/main.css';
+import { addListeners, updateView } from './events';
+import '../styles/sass/main.scss';
 
 const appBookShelf = () => {
   // Return a Json Object from our Computer
   const getJson = async (path, fileName) => {
-    const response = await fetch(`${path}/${fileName}`)
+    const response = await fetch(`${path}/${fileName}`, { 
+      referrerPolicy: 'origin-when-cross-origin',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Cache-Control': 'max-age=3600',
+      }),
+    })
       .then(responseJson => responseJson.json());
     return response;
   };
@@ -67,6 +73,9 @@ const appBookShelf = () => {
     const overlayBookImg = BookContainer.cloneNode();
     // Contained in overlayBookImg
     const bookImage = document.createElement('img');
+    const lendContainer = BookContainer.cloneNode();
+    const lendIcon = bookImage.cloneNode();
+    const iconUserCheck = document.createElement('i');
     // Overlay Image
     const overlayImage = BookContainer.cloneNode();
     // Contained in overlayImage
@@ -82,9 +91,15 @@ const appBookShelf = () => {
     // Adding atributes
     BookContainer.classList.add('book');
     overlayBookImg.classList.add('overlay-container', 'img-container');
-    bookImage.src = '/src/images/books/book-1.png';
     bookImage.alt = 'bookImage';
-    // Thats no the correct ratio for de image, but yes for pixel perfect
+    // Lend container
+    lendContainer.className = 'lend-book';
+    lendIcon.alt = 'lend Icon';
+    lendIcon.src = '/src/images/reservation.png';
+    iconUserCheck.className = 'fas fa-user-check';
+    lendContainer.appendChild(lendIcon);
+    lendContainer.appendChild(iconUserCheck);
+    // Thats no the correct ratio for de image, but for pixel perfect yes
     bookImage.setAttribute('height', '250px');
     bookImage.setAttribute('width', '176px');
     // Append childs to Overlay Image
@@ -95,6 +110,7 @@ const appBookShelf = () => {
     overlayImage.appendChild(ratingStarsOverImg);
     // Appeng childs to Overlay Image Container
     overlayBookImg.appendChild(bookImage);
+    overlayBookImg.appendChild(lendContainer);
     overlayBookImg.appendChild(overlayImage);
     // Append childs to Book Container
     BookContainer.appendChild(overlayBookImg);
@@ -233,59 +249,34 @@ const appBookShelf = () => {
       return undefined;
     });
     bookShelfContainer.appendChild(offDOM);
+    addListeners();
   };
-
-  const addActionToList = (first, second) => {
-    first.map((value) => {
-      const action = () => () => {
-        first.map((item) => {
-          item.classList.remove('selected');
-          return undefined;
-        });
-        second.map((item) => {
-          item.classList.remove('selected');
-          return undefined;
-        });
-        value.classList.add('selected');
-      };
-      const clousureAction = action();
-      value.addEventListener('click', clousureAction);
-      return null;
-    });
-  };
-
-  const addListeners = () => {
-    const parent = document.querySelector('.left-side');
-    const menu = parent.querySelector('#menu');
-    const menuList = Array.prototype.slice.call(menu.children[1].children, 0);
-    const uBooks = parent.querySelector('#u-books');
-    const uBooksList = Array.prototype.slice.call(uBooks.children[1].children, 0);
-    addActionToList(menuList, uBooksList);
-    addActionToList(uBooksList, menuList);
-    const toggleList = (parentContainer) => {
-      const listItems = parentContainer.children[1];
-      return () => {
-        listItems.classList.toggle('show');
-      };
-    };
-    const menuAction = toggleList(menu);
-    const uBooksAction = toggleList(uBooks);
-    menu.addEventListener('click', menuAction);
-    uBooks.addEventListener('click', uBooksAction);
-  };
-
-  const updateView = () => {
-    const img = document.querySelector('.header-logo').querySelector('img');
-    if (window.innerWidth <= 768) {
-      img.src = '/src/images/favicon.png';
-    } else {
-      img.src = '/src/images/logo.png';
-    }
-  };
+  
   fillBooks();
   updateView();
-  addListeners();
   window.addEventListener('resize', updateView);
+  $(document).click((event) => {
+    event.stopPropagation();
+    const over = $('.overlay-summary');
+    const imgContainer = $('.img-container');
+    if (over.has(event.target).length === 0
+     && imgContainer.has(event.target).length === 0) {
+      if (over.hasClass('show-summary')) {
+        over.removeClass('show-summary');
+      }
+    }
+    //else {
+    //   over.each((index, obj) => {
+    //     if (obj.classList.contains('show-summary')) {
+    //       const father = over.parent();
+    //       const dd = event.target.parentElement;
+    //       const ddd = dd.querySelector('show-summary');
+    //       console.log(dd);
+    //       console.log(father.has(event.target).length, father);    
+    //     }
+    //   });
+    // }
+  });
 };
 
 window.addEventListener('load', appBookShelf);

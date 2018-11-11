@@ -1,12 +1,7 @@
 .overlay-container {
   color: $white-primary;
   position: relative;
-  &:hover
-  {
-    .overlay-summary{
-      @extend %overlay-visible;
-    }
-  }
+ 
 }
 
 .overlay-img {
@@ -43,9 +38,9 @@
   }
 }
 
-.show-sumary{
-  display: inline;
-  opacity: .75;
+.show-summary{
+  display: block !important;
+  opacity: .75 !important;
   z-index: 2;
 }
 
@@ -73,18 +68,26 @@
 }
 
 .button-lend{
-  color: $soft-blue;
-  background-color: $gray-third;
+  color: $black-medium;
+  background-color: $soft-blue;
   border: $black-medium solid 1px;
   border-radius: 5px;
   bottom: 6%;
   font-family: 'PlutoSansCondMedium', 'sans-serif';
   left: 10%;
+  letter-spacing: 2px;
+  opacity: 1;
   outline: none;
-  padding: 0 1rem;
+  padding: .2rem 1rem;
   position: absolute;
   text-transform: uppercase;
   text-align: center;
+  z-index: 3;
+
+  &:hover{
+    box-shadow: $soft-blue 0 0 10px;
+    color: $white-primary;
+  }
 }
 
 .summary-container {
