@@ -1,4 +1,6 @@
+// import event listener
 import { addListeners, updateView } from './events';
+// Import all CSS
 import '../styles/sass/main.scss';
 
 const appBookShelf = () => {
@@ -10,6 +12,7 @@ const appBookShelf = () => {
     return response;
   };
 
+  // Add Options to Book over the img
   const createOptionsBook = (divClone) => {
     const container = divClone;
     container.className = 'book-options';
@@ -24,6 +27,7 @@ const appBookShelf = () => {
     return container;
   };
 
+  // add rating stars to the book struture
   const createRatingStars = (divClone) => {
     const ratingStars = divClone;
     ratingStars.className = 'rating';
@@ -38,6 +42,8 @@ const appBookShelf = () => {
     return ratingStars;
   };
 
+
+  // Create a empty book
   const createBook = () => {
     // Book Container
     const BookContainer = document.createElement('div');
@@ -92,6 +98,7 @@ const appBookShelf = () => {
     return BookContainer;
   };
 
+  // Create all overlayout summary for the empty book
   const createOverlaySummaryContainer = () => {
     // Summary container
     const summaryContainer = document.createElement('div');
@@ -155,6 +162,7 @@ const appBookShelf = () => {
     return summaryContainer;
   };
 
+  // Create a Empty Book Structure
   const createEstructureBook = () => {
     const container = document.createElement('div');
     const book = createBook();
@@ -165,6 +173,8 @@ const appBookShelf = () => {
     return container;
   };
 
+  // translate number rating into his recpevive icon
+  // aspect
   const fillRating = (element, ratingValue) => {
     const amountFull = Math.floor(ratingValue);
     const extra = (ratingValue - amountFull);
@@ -181,14 +191,16 @@ const appBookShelf = () => {
     }
   };
 
+  // Charge all books into the bookshelf
   const fillBooks = async () => {
     const bookShelfContainer = document.querySelector('.bookshelf');
-    const offDOM = document.createDocumentFragment();
+    const offDOM = document.createDocumentFragment(); // offDOM
+    // Call asynchronously the books.json
     const bookResponse = await getJson('./../src/js/json', 'books.json');
     const { books } = bookResponse;
-    const bookEmpty = createEstructureBook();
+    const bookEmpty = createEstructureBook(); // create a book base
     books.map((infoBook) => {
-      const book = bookEmpty.cloneNode(true);
+      const book = bookEmpty.cloneNode(true); // clone the book base
       const overlayImgContainer = book.querySelector('.img-container');
       const imageBoot = overlayImgContainer.querySelector('img');
       imageBoot.src = infoBook.image;
@@ -220,11 +232,14 @@ const appBookShelf = () => {
       offDOM.appendChild(book);
       return undefined;
     });
+    // Append all the books in the offDOM into the page
     bookShelfContainer.appendChild(offDOM);
+    // Add Events
     addListeners();
   };
 
   fillBooks();
+  // add window events
   updateView();
   window.addEventListener('resize', updateView);
   $(window).click((event) => {
@@ -240,4 +255,5 @@ const appBookShelf = () => {
   });
 };
 
+// Al begins when page structure is loaded
 window.addEventListener('load', appBookShelf);
