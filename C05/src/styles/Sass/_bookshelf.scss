@@ -43,32 +43,17 @@
 
 .child {
   @extend  %flex-row;
-  font-size: .875rem;
-  height: 12%;
-  position: absolute;
-  top: 6%;
-  width: 17%;
-}
-
-.left {
-  left: 8.5%;
-}
-
-.right {
-  right: 8.5%;
-}
-
-.mid-child {
-  @extend  %flex-row;
-  bottom: 41.6%;
   color: $soft-blue;
   font-size: 1.5rem;
   height: 19.2%;
   margin: auto;
   position: absolute;
   right: 36%;
+  bottom: 41.6%;
+  width: 17%;
   width: 27.3%;
 }
+
 
 .book-options>div>i {
   margin: auto;
