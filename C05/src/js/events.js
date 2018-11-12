@@ -1,3 +1,5 @@
+// Funtion to add event to left side, to open its options
+// when the view is mobile or lower than 480px
 const addActionToList = (first, second) => {
   first.map((value) => {
     const action = () => () => {
@@ -17,6 +19,8 @@ const addActionToList = (first, second) => {
   });
 };
 
+
+// Adds event to show overlay summary, hide and positioning it
 const addOverlayActions = (main) => {
   const bookShelf = main.querySelector('.bookshelf');
   const containers = bookShelf.querySelectorAll('.img-container');
@@ -25,14 +29,18 @@ const addOverlayActions = (main) => {
     container.classList.toggle('show-summary');
     if (!container.classList.contains('change-sense')
     && !container.classList.contains('down')) {
-      const wC = container.getBoundingClientRect().width;
-      const pC = container.getBoundingClientRect().left;
-      const rB = bookShelf.getBoundingClientRect().right;
-      const rC = container.getBoundingClientRect().right;
-      if (rC > rB) {
-        if (Math.abs(pC - wC) > wC) {
+      // determine postions of overlay container and its
+      // parent
+      const widthC = container.getBoundingClientRect().width;
+      const leftC = container.getBoundingClientRect().left;
+      const rightB = bookShelf.getBoundingClientRect().right;
+      const rightC = container.getBoundingClientRect().right;
+      if (rightC > rightB) { // If exceds the parent boundary
+        if (leftC - widthC > widthC) {
+          // if its new position is right
           container.classList.add('change-sense');
         } else {
+          // if its new position is down
           container.classList.add('down');
         }
       } else {
@@ -41,6 +49,8 @@ const addOverlayActions = (main) => {
       }
     }
   };
+  // Add funtion to button lend for show icon
+  // reservation and hide it
   containerArray.map((cont) => {
     const parentOverlay = cont.parentElement.parentElement;
     const overlaySummary = parentOverlay.querySelector('.overlay-summary');
@@ -57,6 +67,7 @@ const addOverlayActions = (main) => {
   });
 };
 
+// Call all the events and initialize them
 export const addListeners = () => {
   const main = document.querySelector('.main');
   const parent = main.querySelector('.left-side');
@@ -79,13 +90,15 @@ export const addListeners = () => {
   uBooks.addEventListener('click', uBooksAction);
 };
 
+// Detect page resizing and change the logo icon and
+// delete classes over the overlayout summary container
 export const updateView = () => {
   const img = document.querySelector('.header-logo').querySelector('img');
   $('.change-sense').removeClass('show-summary').removeClass('change-sense');
   $('.down').removeClass('show-summary').removeClass('down');
   if (window.innerWidth <= 768) {
-    img.src = '/src/images/favicon.png';
+    img.src = './../src/images/favicon.png';
   } else {
-    img.src = '/src/images/logo.png';
+    img.src = './../src/images/logo.png';
   }
 };
