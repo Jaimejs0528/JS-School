@@ -207,7 +207,7 @@ const appBookShelf = () => {
   const fillBooks = async () => {
     const bookShelfContainer = document.querySelector('.bookshelf');
     const offDOM = document.createDocumentFragment();
-    const bookResponse = await getJson('/src/js/json', 'books.json');
+    const bookResponse = await getJson('./src/js/json', 'books.json');
     const { books } = bookResponse;
     const bookEmpty = createEstructureBook();
     books.map((infoBook) => {

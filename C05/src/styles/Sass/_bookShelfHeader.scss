@@ -1,10 +1,10 @@
 .books-header {
+  @extend  %flex-row;
   align-content: center;
-  background: $white-bg-bookshelf;
-  color: $gray-third;
-  display: flex;
+  background: $secondary-white;
+  color: $off-gray;
   flex-wrap: nowrap;
-  font-family: 'PlutoSansCondRegular';
+  font-family: 'PlutoSansCondRegular', 'sans-serif';
   height: 5.066rem;
   justify-content: space-between;
   padding: 1.875rem 4.938rem 1.69rem 5.063rem;
@@ -24,8 +24,8 @@
 }
 
 .books-header-title {
-  color: $aside-bg;
-  font-family: 'PlutoSansCondLight';
+  color: $secondary-black;
+  font-family: 'PlutoSansCondLight', 'sans-serif';
   font-size: 1.25rem;
   line-height: 27px;
   text-align: left;
@@ -39,14 +39,14 @@
 }
 
 .view-books {
+  @extend %flex-row;
   color: $soft-blue;
-  display: flex;
   font-size: 1.2rem;
   justify-content: space-between;
   width: 2.8rem;
 
   i:active {
-    text-shadow: $black 0 0 3px;
+    text-shadow: $main-black 0 0 3px;
   }
 
   @include ssm-view{
@@ -63,8 +63,8 @@
 }
 
 .order-options {
-  color: $gray-primary;
-  display: flex;
+  @extend  %flex-row;
+  color: $gray-base;
   font-size: .875rem;
   justify-content: space-between;
   margin-left: -5rem;

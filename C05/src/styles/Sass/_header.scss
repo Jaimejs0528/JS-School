@@ -1,8 +1,8 @@
 // Header Container
 .header-container {
-  background: $white-primary;
+  @extend  %flex-row;
+  background: $base-white;
   border-bottom: 2px solid $soft-blue;
-  display: flex;
   height: $height-header;
   max-height: $max-height-header;
   min-height: $min-height-header;
@@ -10,8 +10,8 @@
 
 // Header right side
 .header-logo {
-  background: $white-secondary;
-  display: flex;
+  @extend  %flex-row;
+  background: $accent-white;
   min-width: $min-width-left-side-container;
 
   img {
@@ -32,7 +32,7 @@
 
 //  Header center
 .header-search {
-  display: flex;
+  @extend  %flex-row;
   flex-basis: 72vw;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -60,14 +60,14 @@
 }
 
 .input-search {
+  @extend  %flex-row;
   align-self: center;
-  background: $white-primary;
+  background: $base-white;
   border: 1px solid $soft-blue;
   border-radius: 1rem;
-  color: $black;
-  display: flex;
+  color: $main-black;
   flex-wrap: nowrap;
-  font-family: 'PlutoSansRegular';
+  font-family: 'PlutoSansRegular', 'sans-serif';
   font-size: .85rem;
   height: 2.25rem;
   min-width: 299px;;
@@ -107,19 +107,19 @@ input[type='search'] {
   width: 90%;
 
   &::placeholder {
-    color: $black;
+    color: $main-black;
   }
 }
 
 
 // Header left side
 .header-profile {
-  background: $white-primary;
-  display: flex;
+  @extend  %flex-row;
+  background: $base-white;
 }
 
 .profile {
-  display: flex;
+  @extend  %flex-row;
   height: fit-content;
   justify-content: space-evenly;
   margin: auto 0.7317vw;
@@ -130,7 +130,7 @@ input[type='search'] {
   }
 
   span {
-    font-family: 'PlutoSansCondRegular';
+    font-family: 'PlutoSansCondRegular', 'sans-serif';
     font-size: .875rem;
     margin: auto 0;
     margin-left: 0.14vw;
@@ -160,7 +160,7 @@ input[type='search'] {
 }
 
 .vertical-line {
-  border-left: 1px solid $gray-primary;
+  border-left: 1px solid $gray-base;
   height: 65%;
   margin: .875rem .05rem;
   width: 0;

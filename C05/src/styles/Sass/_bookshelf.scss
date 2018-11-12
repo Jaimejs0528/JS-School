@@ -1,5 +1,5 @@
 .books-container {
-  background: $white-bg-bookshelf;
+  background: $secondary-white;
   overflow-x: hidden;
   overflow-y: scroll;
   width: 72vw;
@@ -18,7 +18,7 @@
 }
 
 .bookshelf {
-  display: flex;
+  @extend  %flex-row;
   flex-flow: row wrap;
   justify-content: space-between;
   padding: 0 5rem;
@@ -38,11 +38,11 @@
 }
 
 .book-options {
-  color: $gray-fourth;
+  color: $secondary-gray;
 }
 
 .child {
-  display: flex;
+  @extend  %flex-row;
   font-size: .875rem;
   height: 12%;
   position: absolute;
@@ -59,9 +59,9 @@
 }
 
 .mid-child {
+  @extend  %flex-row;
   bottom: 41.6%;
   color: $soft-blue;
-  display: flex;
   font-size: 1.5rem;
   height: 19.2%;
   margin: auto;
@@ -75,7 +75,7 @@
 }
 
 .user-icons {
-  display: flex;
+  @extend  %flex-row;
 }
 
 .user-icons>div {
@@ -114,19 +114,19 @@
 
 .book-title {
   color: $black-medium;
-  font-family: 'PlutoSansCondMedium';
+  font-family: 'PlutoSansCondMedium', 'sans-serif';
   font-size: .9rem;
 }
 
 .author {
-  color: $gray-fourth;
-  font-family: 'PlutoSansCondLight';
+  color: $secondary-gray;
+  font-family: 'PlutoSansCondLight', 'sans-serif';
   font-size: .813rem;
 }
 
 .rating {
+  @extend  %flex-row;
   color: $soft-blue;
-  display: flex;
   font-size: 12.5px;
   width: 76px;
 
