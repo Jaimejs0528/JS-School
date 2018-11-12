@@ -11,39 +11,16 @@ const appBookShelf = () => {
   };
 
   const createOptionsBook = (divClone) => {
-    const arrayTemp = [];
     const container = divClone;
     container.className = 'book-options';
-    const optionLeft = document.createElement('div');
+    const optionMid = document.createElement('div');
     const iconOption = document.createElement('i');
-    optionLeft.appendChild(iconOption);
-    optionLeft.classList.add('circle-img');
-    arrayTemp.push([optionLeft.querySelector('i'), 'left']);
-    const optionMid = optionLeft.cloneNode(true);
-    optionMid.classList.add('mid-child');
-    optionLeft.classList.add('child');
-    arrayTemp.push([optionMid.querySelector('i'), 'mid']);
-    const optionRight = optionLeft.cloneNode(true);
-    optionLeft.classList.add('left');
-    optionRight.classList.add('right');
-    arrayTemp.push([optionRight.querySelector('i'), 'right']);
-    arrayTemp.map((value) => {
-      if (value[1] === 'mid') {
-        value[0].classList.add('fas');
-        value[0].classList.add('fa-book-open');
-      } else {
-        value[0].classList.add('far');
-        if (value[1] === 'left') {
-          value[0].classList.add('fa-heart');
-        } else {
-          value[0].classList.add('fa-bookmark');
-        }
-      }
-      return undefined;
-    });
-    container.appendChild(optionLeft);
+    optionMid.appendChild(iconOption);
+    optionMid.classList.add('circle-img');
+    const icon = optionMid.querySelector('i');
+    icon.className = 'fas fa-bookmark';
+    optionMid.classList.add('child');
     container.appendChild(optionMid);
-    container.appendChild(optionRight);
     return container;
   };
 
@@ -207,7 +184,7 @@ const appBookShelf = () => {
   const fillBooks = async () => {
     const bookShelfContainer = document.querySelector('.bookshelf');
     const offDOM = document.createDocumentFragment();
-    const bookResponse = await getJson('./src/js/json', 'books.json');
+    const bookResponse = await getJson('./../src/js/json', 'books.json');
     const { books } = bookResponse;
     const bookEmpty = createEstructureBook();
     books.map((infoBook) => {
