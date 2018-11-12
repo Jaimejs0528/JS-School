@@ -23,6 +23,23 @@ const addOverlayActions = (main) => {
   const containerArray = Array.prototype.slice.call(containers, 0);
   const actionSummary = container => () => {
     container.classList.toggle('show-summary');
+    if (!container.classList.contains('change-sense')
+    && !container.classList.contains('down')) {
+      const wC = container.getBoundingClientRect().width;
+      const pC = container.getBoundingClientRect().left;
+      const rB = bookShelf.getBoundingClientRect().right;
+      const rC = container.getBoundingClientRect().right;
+      if (rC > rB) {
+        if (Math.abs(pC - wC) > wC) {
+          container.classList.add('change-sense');
+        } else {
+          container.classList.add('down');
+        }
+      } else {
+        container.classList.remove('change-sense');
+        container.classList.remove('down');
+      }
+    }
   };
   containerArray.map((cont) => {
     const parentOverlay = cont.parentElement.parentElement;
@@ -64,6 +81,8 @@ export const addListeners = () => {
 
 export const updateView = () => {
   const img = document.querySelector('.header-logo').querySelector('img');
+  $('.change-sense').removeClass('show-summary').removeClass('change-sense');
+  $('.down').removeClass('show-summary').removeClass('down');
   if (window.innerWidth <= 768) {
     img.src = '/src/images/favicon.png';
   } else {

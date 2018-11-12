@@ -67,6 +67,24 @@
   }
 }
 
+.change-sense {
+  left: -233%;
+
+  .arrow{
+    right: -3px;
+  }
+}
+
+.down{
+  left: -50%;
+  top: 80%;
+
+  .arrow{
+    left: 25%;
+    margin: 0;
+  }
+}
+
 .button-lend{
   color: $black-medium;
   background-color: $soft-blue;
@@ -169,8 +187,8 @@
 .arrow {
   background: $black;
   height: 4rem;
-  margin: 5.8rem 0 0;
-  position: relative;
+  margin: 5.8rem 0;
+  position: absolute;
   transform: rotate(45deg);
   width: 4rem;
   z-index: -3;

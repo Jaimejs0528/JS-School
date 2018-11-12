@@ -13,6 +13,7 @@
   z-index: 3;
 
   @include sm-view {
+    height: 4rem;
     padding: 0 21.8vw;
     flex-wrap: wrap;
   }
