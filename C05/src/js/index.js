@@ -4,14 +4,9 @@ import '../styles/sass/main.scss';
 const appBookShelf = () => {
   // Return a Json Object from our Computer
   const getJson = async (path, fileName) => {
-    const response = await fetch(`${path}/${fileName}`, { 
+    const response = await fetch(`${path}/${fileName}`, {
       referrerPolicy: 'origin-when-cross-origin',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-        'Cache-Control': 'max-age=3600',
-      }),
-    })
-      .then(responseJson => responseJson.json());
+    }).then(responseJson => responseJson.json());
     return response;
   };
 
@@ -212,7 +207,7 @@ const appBookShelf = () => {
   const fillBooks = async () => {
     const bookShelfContainer = document.querySelector('.bookshelf');
     const offDOM = document.createDocumentFragment();
-    const bookResponse = await getJson('/src/js/json', 'books.json');
+    const bookResponse = await getJson('./src/js/json', 'books.json');
     const { books } = bookResponse;
     const bookEmpty = createEstructureBook();
     books.map((infoBook) => {
@@ -251,11 +246,11 @@ const appBookShelf = () => {
     bookShelfContainer.appendChild(offDOM);
     addListeners();
   };
-  
+
   fillBooks();
   updateView();
   window.addEventListener('resize', updateView);
-  $(document).click((event) => {
+  $(window).click((event) => {
     event.stopPropagation();
     const over = $('.overlay-summary');
     const imgContainer = $('.img-container');
@@ -265,17 +260,6 @@ const appBookShelf = () => {
         over.removeClass('show-summary');
       }
     }
-    //else {
-    //   over.each((index, obj) => {
-    //     if (obj.classList.contains('show-summary')) {
-    //       const father = over.parent();
-    //       const dd = event.target.parentElement;
-    //       const ddd = dd.querySelector('show-summary');
-    //       console.log(dd);
-    //       console.log(father.has(event.target).length, father);    
-    //     }
-    //   });
-    // }
   });
 };
 

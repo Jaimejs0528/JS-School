@@ -1,5 +1,5 @@
 .left-side {
-  background: $aside-bg;
+  background: $secondary-black;
   color: $soft-blue;
   min-width: $min-width-left-side-container;
 
@@ -14,8 +14,8 @@
 
 .right-side {
   @extend %flex-column;
-  background: $aside-bg;
-  color: $gray-secondary;
+  background: $secondary-black;
+  color: $accent-gray;
 
   @include xlg-view{
     display: none;
@@ -23,7 +23,7 @@
 }
 
 .aside-title {
-  font-family: 'PlutoSansCondBold';
+  font-family: 'PlutoSansCondBold', 'sans-serif';
   font-size: .813rem;
   mix-blend-mode: normal;
   opacity: .7;
@@ -36,25 +36,25 @@
   padding: 0 0 0 2.125rem;
 
   li {
-    font-family: 'PlutoSansCondLight';
+    font-family: 'PlutoSansCondLight', 'sans-serif';
     font-size: .8rem;
     list-style-position: inside;
-    margin-bottom: 1.63rem; // cambio de margin: 0 0 1.63rem 0;
+    margin-bottom: 1.63rem;
     max-width: 10.793vw;
   }
 }
 
 .header-menu {
   @extend %flex-column;
-  font-family: 'PlutoSansCondBold';
+  font-family: 'PlutoSansCondBold', 'sans-serif';
 
   @include md-view{
-    border-bottom: $gray-primary  solid 1px;
+    border-bottom: $gray-base solid 1px;
   }
 }
 
 .header-title {
-  color: $white-secondary;
+  color: $accent-white;
   font-size: .8rem;
   text-transform: uppercase;
   cursor: pointer;
@@ -84,7 +84,7 @@
 }
 
 .selected {
-  color: $white-primary;
+  color: $base-white;
 
   &:hover{
     text-shadow: $soft-blue 0px 0px 4px;
@@ -92,13 +92,13 @@
 }
 
 .menu-item {
-  display: flex;
+  @extend  %flex-row;
   flex-flow: row;
   cursor: pointer;
   margin-bottom: 1.25rem;
 
   &:hover{
-    text-shadow: $white-primary 0px 0px 4px;
+    text-shadow: $base-white 0px 0px 4px;
   }
 
   i {
@@ -111,7 +111,7 @@
   }
 
   a {
-    font-family: 'PlutoSansCondRegular';
+    font-family: 'PlutoSansCondRegular', 'sans-serif';
     font-size: .9rem;
     text-align: left;
     text-decoration: none;

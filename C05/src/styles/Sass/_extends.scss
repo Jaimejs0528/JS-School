@@ -1,12 +1,22 @@
 
 //extend flex column
 %flex-column {
-  -webkit-display: flex;
-  -o-display: flex;
+  display: -moz-flex;
+  display: -o-flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
-  -o-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+}
+
+%flex-row {
+  display: -moz-flex;
+  display: -o-flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
 }
 
 %overlay-visible {
@@ -16,8 +26,8 @@
 }
 
 %border-overlay {
-  background-color: $black;
-  border: 1px solid $black;
+  background-color: $main-black;
+  border: 1px solid $main-black;
   border-radius: 5px;
 }
 

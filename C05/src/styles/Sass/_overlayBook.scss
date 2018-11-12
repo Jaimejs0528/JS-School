@@ -1,5 +1,5 @@
 .overlay-container {
-  color: $white-primary;
+  color: $base-white;
   position: relative;
  
 }
@@ -27,7 +27,7 @@
 
   > span {
     bottom: 12.8%;
-    font-family: 'PlutoSansCondMedium';
+    font-family: 'PlutoSansCondMedium', 'sans-serif';
     font-size: .7rem;
     line-height: 15px;
     position: absolute;
@@ -46,7 +46,7 @@
 
 .overlay-summary {
   @extend %border-overlay;
-  color: $white-secondary;
+  color: $accent-white;
   display: none;
   height: 22.375rem;
   left: 205px;
@@ -64,6 +64,24 @@
 
   @include ssm-view{
     left: -13vw;
+  }
+}
+
+.change-sense {
+  left: -233%;
+
+  .arrow{
+    right: -3px;
+  }
+}
+
+.down{
+  left: -50%;
+  top: 80%;
+
+  .arrow{
+    left: 25%;
+    margin: 0;
   }
 }
 
@@ -86,7 +104,7 @@
 
   &:hover{
     box-shadow: $soft-blue 0 0 10px;
-    color: $white-primary;
+    color: $base-white;
   }
 }
 
@@ -101,8 +119,8 @@
   top: 0;
 
   span {
-    color: $gray-third;
-    font-family: 'PlutoSansCondBold';
+    color: $off-gray;
+    font-family: 'PlutoSansCondBold', 'sans-serif';
     font-size: .75rem;
     height: 1.5rem;
     padding: 0 0 0 .15rem;
@@ -144,9 +162,9 @@
   margin: 0 0 1rem;
 
   >div {
+    @extend  %flex-row;
     color: $soft-blue;
-    display: flex;
-    font-family: 'PlutoSansCondBold';
+    font-family: 'PlutoSansCondBold', 'sans-serif';
     justify-content: space-between;
     margin-bottom: -.125rem;
   }
@@ -167,10 +185,10 @@
 }
 
 .arrow {
-  background: $black;
+  background: $main-black;
   height: 4rem;
-  margin: 5.8rem 0 0;
-  position: relative;
+  margin: 5.8rem 0;
+  position: absolute;
   transform: rotate(45deg);
   width: 4rem;
   z-index: -3;
