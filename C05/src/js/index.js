@@ -67,7 +67,7 @@ const appBookShelf = () => {
     // Lend container
     lendContainer.className = 'lend-book';
     lendIcon.alt = 'lend Icon';
-    lendIcon.src = '/src/images/reservation.png';
+    lendIcon.src = './../src/images/reservation.png';
     iconUserCheck.className = 'fas fa-user-check';
     lendContainer.appendChild(lendIcon);
     lendContainer.appendChild(iconUserCheck);

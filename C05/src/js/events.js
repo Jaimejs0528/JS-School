@@ -84,8 +84,8 @@ export const updateView = () => {
   $('.change-sense').removeClass('show-summary').removeClass('change-sense');
   $('.down').removeClass('show-summary').removeClass('down');
   if (window.innerWidth <= 768) {
-    img.src = '/src/images/favicon.png';
+    img.src = './../src/images/favicon.png';
   } else {
-    img.src = '/src/images/logo.png';
+    img.src = './../src/images/logo.png';
   }
 };
