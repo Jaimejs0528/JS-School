@@ -94,8 +94,10 @@ export const addListeners = () => {
 // delete classes over the overlayout summary container
 export const updateView = () => {
   const img = document.querySelector('.header-logo').querySelector('img');
-  $('.change-sense').removeClass('show-summary').removeClass('change-sense');
-  $('.down').removeClass('show-summary').removeClass('down');
+
+  // Hide all overlay summaries open
+  $('.overlay-summary').removeClass('show-summary').removeClass('change-sense')
+    .removeClass('down');
   if (window.innerWidth <= 768) {
     img.src = './../src/images/favicon.png';
   } else {
