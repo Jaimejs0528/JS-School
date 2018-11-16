@@ -1,0 +1,31 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "API for Bookshelf JS School",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaimejs0528/JS-School.git"
+  },
+  "keywords": [
+    "API",
+    "Bookshelf",
+    "JS_SCHOOL",
+    "BackEnd"
+  ],
+  "author": "Jaime Jimenez Serrano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jaimejs0528/JS-School/issues"
+  },
+  "homepage": "https://github.com/Jaimejs0528/JS-School#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.2",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.3.12"
+  }
+}
