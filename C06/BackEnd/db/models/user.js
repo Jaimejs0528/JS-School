@@ -1,10 +1,13 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-import { DESTRUCTION } from 'dns';
+// Imports npm
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
-const { Schema } = mongoose.Schema;
+// Locals
+const { DB_USER_COLLECTION } = require('../../utils/constants');
 
-const userSchema = new Schema ({
+const { Schema } = mongoose;
+
+const userSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -29,4 +32,4 @@ userSchema.methods.comparePassword = function comparePassword(pass) {
   return bcrypt.compareSync(pass, this.crypted_pass);
 };
 
-mongoose.model('user', userSchema);
+mongoose.model(DB_USER_COLLECTION, userSchema);

@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-import constants from '../../utils/constants';
+import { DB_BOOK_COLLECTION } from '../../utils/constants';
 
-const { Schema } = mongoose.Schema;
+const { Schema } = mongoose;
 
 const bookInfoSchema = new Schema({
   title: {
@@ -70,27 +70,45 @@ const bookSchema = new Schema({
 });
 
 bookSchema.methods.booksByCity = function booksByCity(city) {
-  return this.model(constants.DB_BOOK_COLLECTION).find({ cities: this.cities }, city);
+  return this.model(DB_BOOK_COLLECTION).find({ cities: this.cities }, city);
 };
 
 bookSchema.methods.booksByCityLimit = function booksByCityLimit(city, limit, skip) {
-  return this.model(constants.DB_BOOK_COLLECTION).find({ cities: this.cities }, city)
+  return this.model(DB_BOOK_COLLECTION).find({ cities: this.cities }, city)
     .limit(limit).skip(skip);
 };
 
 bookSchema.methods.bookLendByUser = function bookLendByUser(userEmail) {
-  return this.model(constants.DB_BOOK_COLLECTION).find({ 'lends.userEmail': this.lends },
+  return this.model(DB_BOOK_COLLECTION).find({ 'lends.userEmail': this.lends },
     userEmail);
 };
 
 bookSchema.methods.bookLendByUserLimit = function bookLendByUserLimit(userEmail, limit, skip) {
-  return this.model(constants.DB_BOOK_COLLECTION).find({ 'lends.userEmail': this.lends },
+  return this.model(DB_BOOK_COLLECTION).find({ 'lends.userEmail': this.lends },
     userEmail).limit(limit).skip(skip);
 };
 
 bookSchema.methods.digitalBooks = function digitalBooks() {
-  return this.model(constants.DB_BOOK_COLLECTION)
+  return this.model(DB_BOOK_COLLECTION)
     .find({ hasDigitalCopy: this.hasDigitalCopy }, true);
 };
 
-mongoose.model(constants.DB_BOOK_COLLECTION, bookSchema);
+bookSchema.methods.digitalBooksLimit = function digitalBooksLimit(limit, skip) {
+  return this.model(DB_BOOK_COLLECTION)
+    .find({ hasDigitalCopy: this.hasDigitalCopy }, true)
+    .limit(limit).skip(skip);
+};
+
+bookSchema.methods.sortByPopularity = function sortByPopularity(rating) {
+  return this.model(DB_BOOK_COLLECTION).find()
+    .sort({ 'infobook.rating': this.infobook.rating }, rating);
+};
+
+bookSchema.methods.sortByPopularityLimit = function sortByPopularityLimit(rating, limit, skip) {
+  return this.model(DB_BOOK_COLLECTION).find()
+    .sort({ 'infobook.rating': this.infobook.rating }, rating)
+    .limit(limit)
+    .skip(skip);
+};
+
+mongoose.model(DB_BOOK_COLLECTION, bookSchema);

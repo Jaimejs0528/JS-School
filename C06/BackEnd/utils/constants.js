@@ -1,10 +1,6 @@
 
-export const DB_BOOK_COLLECTION = 'books';
-export const DB_USER_COLLECTION = 'users';
-export const DB_NAME = 'bookshelf';
-
-export default {
-  DB_BOOK_COLLECTION,
-  DB_USER_COLLECTION,
-  DB_NAME,
-};
+exports.DB_BOOK_COLLECTION = 'books';
+exports.DB_USER_COLLECTION = 'users';
+exports.DB_NAME = 'bookshelf';
+exports.PORT = 3202;
+exports.DB_FULL_PATH = `mongodb://localhost/${this.DB_NAME}`;
