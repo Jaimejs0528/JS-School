@@ -1,0 +1,47 @@
+
+//extend flex column
+%flex-column {
+  display: -moz-flex;
+  display: -o-flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+%flex-row {
+  display: -moz-flex;
+  display: -o-flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+%overlay-visible {
+  display: block;
+  opacity: .75;
+  z-index: 2;
+}
+
+%border-overlay {
+  background-color: $main-black;
+  border: 1px solid $main-black;
+  border-radius: 5px;
+}
+
+@include md-view{
+  %center-element {
+    padding: 0;
+    margin: auto;
+    text-align: center;
+  }
+}
+
+@include xlg-view {
+  %size-left-side {
+    min-width: $min-width-left-side-container;
+    width: 22.5vw;
+  }
+}
