@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#6ec1e4"/>
+    <title>Jobsity Bookshelf</title>
+    <link rel="icon" href="./../src/images/favicon.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+</head>
+
+<body>
+    <header class="header-container">
+        <div class="sidebar header-logo">
+            <img src="./../src/images/logo.png" alt="Jobsity-icon">
+        </div>
+        <div class="header-search">
+            <h1 class="title">Bookshelf</h1>
+            <form class="input-search">
+                <i class="fas fa-search fa-lg"></i>
+                <input id="search" type="search" placeholder="Search..." aria-label="Search">
+            </form>
+        </div>
+        <div class="sidebar header-profile">
+            <div class="vertical-line"></div>
+            <div class="profile">
+                <span>Jakob Treml</span>
+                <i class="fas fa-angle-down"></i>
+                <img src="./../src/images/jakob.png" class="circle-img" alt="user-image">
+            </div>
+        </div>
+    </header>
+    <div class="main">
+        <nav class="sidebar left-side">
+            <div id="menu" class="header-menu">
+                <h4 class="header-title">MAIN</h4>
+                <div class="list-header">
+                    <div class="menu-item"><i class="fas fa-globe"></i><a>Quito</a></div>
+                    <div class="menu-item"><i class="fas fa-globe"></i><a>Cartagena</a></div>
+                    <div class="menu-item"><i class="fas fa-globe"></i><a>Medellin</a></div>
+                    <div class="menu-item"><i class="fas fa-tablet-alt"></i><a>Digital</a></div>
+                    <div class="menu-item"><i class="fas fa-user-tag"></i><a>Personal Loans</a></div>
+                    <div class="menu-item selected"><i class="fas fa-tags"></i><a>New Releases</a></div>
+                </div>
+            </div>
+            <div id="u-books" class="header-menu">
+                <h4 class="header-title">Your Books</h4>
+                <div class="list-header">
+                    <div class="menu-item"><i class="fas fa-book-open"></i><a>Readings</a></div>
+                    <div class="menu-item"><i class="fas fa-history"></i><a>History</a></div>
+                    <div class="menu-item"><i class="fas fa-bookmark"></i><a>Read later</a></div>
+                    <div class="menu-item"><i class="fas fa-heart"></i><a>Favorites</a></div>
+                </div>
+            </div>
+        </nav>
+        <!--Book's Main container-->
+        <main class="books-container">
+            <div class="books-header">
+                <h3 class="books-header-title">New Releases</h3>
+                <div class="order-options">
+                    <span>Release Date</span>
+                    <div class="vertical-line"></div>
+                    <span>Popularity</span>
+                </div>
+                <div class="view-books">
+                    <i class="fas fa-th-large"></i>
+                    <i class="fas fa-th-list"></i>
+                </div>
+            </div>
+            <div class="bookshelf">
+                <!--With JS-->
+            </div>
+        </main>
+        <!--Right sidebar-->
+        <aside class="sidebar right-side">
+            <h4 class="aside-title">Most Read Books</h4>
+            <ol class="aside-list">
+                <li class="hidde-overflow-text">Hooked: How to Build Habit-Forming Products</li>
+                <li class="hidde-overflow-text">The Inevitable: Understanding the 12 Technological Forces That Will
+                    Shape Our Future</li>
+                <li class="hidde-overflow-text">Lean In: Women, Work, and the Will to Lead</li>
+                <li class="hidde-overflow-text">Building a Business When There Are No Easy Answers</li>
+                <li class="hidde-overflow-text">How Google Works</li>
+            </ol>
+        </aside>
+    </div>
+    <!-- <script src="src/js/Tool.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./bundle.js"></script>
+</body>
+
+</html>

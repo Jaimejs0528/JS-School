@@ -1,0 +1,59 @@
+@mixin ssm-view() {
+  @media screen and (max-width:320px){
+    @content;
+  }
+}
+
+@mixin sm-view() {
+  @media screen and (max-width:480px){
+    @content;
+  }
+}
+
+@mixin md-view() {
+  @media screen and (max-width: 768px){
+    @content;
+  }
+}
+
+@mixin lg-view() {
+  @media screen and (min-width: 769px) {
+    @content;
+  }
+}
+
+@mixin xlg-view() {
+  @media screen and (max-width: 1024px) {
+    @content
+  }
+}
+
+@mixin xlg-view-min() {
+  @media screen and (min-width:769px) and (max-width: 1024px) {
+    @content
+  }
+}
+
+@mixin display-flex($props) {
+  -webkit-flex-flow: $props;
+  flex-flow: $props;
+}
+
+@mixin keyframe($properties) {
+  -webkit-animation: display-transition $properties; 
+  -moz-animation: display-transition $properties;
+  -o-animation:  display-transition $properties;
+  animation:  display-transition $properties;
+  @-moz-keyframes display-transition {
+    @content;
+  }
+  @-o-keyframes display-transition {
+    @content;
+  }
+  @-webkit-keyframes display-transition {
+    @content;
+  }
+  @keyframes display-transition {
+    @content;
+  }
+}
