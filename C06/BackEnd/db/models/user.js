@@ -7,6 +7,7 @@ const { DB_USER_COLLECTION } = require('../../utils/constants');
 
 const { Schema } = mongoose;
 
+// User Schema document
 const userSchema = new Schema({
   name: {
     type: String,

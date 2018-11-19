@@ -1,14 +1,16 @@
+// Imports npm
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
+// Local imports
 const { DB_BOOK_COLLECTION, DB_USER_COLLECTION } = require('../utils/constants');
 const messageGenerator = require('../utils/MessageGenerator');
 const tool = require('../utils/Tool');
 
+// Create books model
 const Book = mongoose.model(DB_BOOK_COLLECTION);
 Book.createIndexes();
 
+// Validates if a user can lend a book
 const validateBooksLoans = (lends, copies, emailUser) => {
   const alreadyLoan = lends.filter(value => value.userEmail === emailUser);
   const arrayTemp = lends.map(item => item.bookCode);
@@ -28,6 +30,7 @@ const validateBooksLoans = (lends, copies, emailUser) => {
   };
 };
 
+// Creates a  new book
 exports.addOneBook = (req, res) => {
   messageGenerator.bodyValidator(req.body, res);
   const newBook = new Book(req.body);
@@ -54,6 +57,7 @@ exports.addOneBook = (req, res) => {
     .send(messageGenerator.ErrorMessage(err, DB_BOOK_COLLECTION))));
 };
 
+// Allow to Userr lend a book
 exports.lendABook = (req, res) => {
   const emailUserLogged = req.user.email;
   const bookIsbn = req.body.isbn;
@@ -83,24 +87,30 @@ exports.lendABook = (req, res) => {
   getBooks().catch(err => console.log(err));
 };
 
+// returns all books
 exports.findAllBooks = (req, res) => {
   tool.findQuery(res, {}, Book);
 };
 
+// returns a book by ISBN
 exports.findByISBN = (req, res) => {
   const { isbn } = req.params;
   tool.findOneQuery(res, { 'bookinfo.isbn': isbn }, Book);
 };
 
+// returns all books with a digital copy
 exports.getDigitals = (req, res) => {
   tool.findQuery(res, { hasDigitalCopy: true }, Book);
 };
 
+
+// returns all book if a specific city
 exports.findByCity = (req, res) => {
   const { city } = req.params;
   tool.findQuery(res, { cities: city }, Book);
 };
 
+// return books loans for a specific user
 exports.findByUserLoans = (req, res) => {
   const emailUserLogged = req.user.email;
   tool.findQuery(res, { 'lends.userEmail': emailUserLogged }, Book);
