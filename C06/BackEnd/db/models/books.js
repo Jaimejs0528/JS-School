@@ -6,6 +6,7 @@ const { DB_BOOK_COLLECTION } = require('../../utils/constants');
 
 const { Schema } = mongoose;
 
+// Schema for bookinfo document
 const bookInfoSchema = new Schema({
   isbn: {
     type: String,
@@ -43,7 +44,7 @@ const bookInfoSchema = new Schema({
     required: true,
   },
 });
-
+// Schema for lends document
 const bookLendSchema = new Schema({
   userEmail: {
     type: String,
@@ -55,6 +56,7 @@ const bookLendSchema = new Schema({
   },
 });
 
+// Schema for book document
 const bookSchema = new Schema({
   bookinfo: {
     type: bookInfoSchema,
@@ -79,25 +81,12 @@ const bookSchema = new Schema({
   },
 });
 
+// returns is exist a book
 bookSchema.methods.findByISBN = async function findByISBN(isbn) {
   return this.model(DB_BOOK_COLLECTION).findOne({ 'bookinfo.isbn': isbn });
 };
 
-bookSchema.methods.bookLendByUser = async function bookLendByUser(userEmail) {
-  return this.model(DB_BOOK_COLLECTION).find({ 'lends.userEmail': userEmail });
-};
-
-bookSchema.methods.bookLendByUserLimit = async function
-bookLendByUserLimit(userEmail, limit, skip) {
-  return this.model(DB_BOOK_COLLECTION).find({ 'lends.userEmail': userEmail })
-    .limit(limit).skip(skip);
-};
-
-bookSchema.methods.sortByPopularity = async function sortByPopularity(rating) {
-  return this.model(DB_BOOK_COLLECTION).find()
-    .sort({ 'infobook.rating': this.infobook.rating }, rating);
-};
-
+// sort by rating
 bookSchema.methods.sortByPopularityLimit = async function
 sortByPopularityLimit(rating, limit, skip) {
   return this.model(DB_BOOK_COLLECTION).find()

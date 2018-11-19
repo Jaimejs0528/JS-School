@@ -1,14 +1,18 @@
+// Imports npm
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+// Local imports
 const { DB_USER_COLLECTION, SECRET } = require('../utils/constants');
 const messageController = require('../utils/MessageGenerator');
 const tool = require('../utils/Tool');
 
+// create model user collection
 const User = mongoose.model(DB_USER_COLLECTION);
 User.createIndexes();
 
+// SignUp function that register a new user into db
 exports.signUp = (req, res) => {
   messageController.bodyValidator(req.body, res);
   const newUser = new User(req.body);
@@ -25,6 +29,8 @@ exports.signUp = (req, res) => {
   }
 };
 
+
+// signIn a user and generate jwt token.
 exports.signIn = (req, res) => {
   messageController.bodyValidator(req.body, res);
   User.findOne({
@@ -48,6 +54,7 @@ exports.signIn = (req, res) => {
   });
 };
 
+// Validates if a user logged
 exports.isLogin = (req, res, next) => {
   if (req.user) {
     next();

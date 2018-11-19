@@ -1,3 +1,4 @@
+// Imports npm
 const express = require('express');
 const https = require('https');
 const http = require('http');
@@ -7,6 +8,7 @@ const bodyParser = require('body-parser');
 const bodyParserError = require('bodyparser-json-error');
 const jwt = require('jsonwebtoken');
 
+// Local imports
 require('./db/models/user');
 require('./db/models/books');
 const constant = require('./utils/constants');
@@ -52,15 +54,19 @@ app.use((req, res, next) => {
   }
 });
 
+// Add routes
 userRoutes.userRoutes(app);
 bookRoutes.bookRoutes(app);
 
-https.createServer(options, app).listen(constant.PORT_HTTPS, (req, res) => {
+// Init https server
+https.createServer(options, app).listen(constant.PORT_HTTPS, () => {
   console.log(`Using port ${constant.PORT_HTTPS}`);
 });
 
-http.createServer(app).listen(constant.PORT, (req, res) => {
+// Init http server
+http.createServer(app).listen(constant.PORT, () => {
   console.log(`Using port ${constant.PORT}`);
 });
-// app.listen(constant.PORT);
+
+// THE NEXT LINE ALLOWS CREATE MULTIPLES BOOKS
 // tool.baseBooks();

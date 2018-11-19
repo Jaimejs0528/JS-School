@@ -163,15 +163,16 @@ const addBookISBN = async (isbn, cities, copies) => {
   return response;
 };
 
-
+// Select randomly the cities to add to book.
 const selectCities = () => {
   const cities = ['medellin', 'quito', 'cartagena'];
   let selected = cities.filter(city => (Math.floor((Math.random() * 100)) >= 65 && city));
   selected = (selected.length === 0) ? [cities[Math.floor((Math.random() * 3))]] : selected;
-  console.log(selected);
   return selected;
 };
 
+
+// Generate randomly codes for book's copies.
 const generateCopiesCode = () => {
   const copies = [];
   const amount = Math.floor((Math.random() * 10));
@@ -181,6 +182,8 @@ const generateCopiesCode = () => {
   return copies;
 };
 
+
+// Create a base of books.
 const baseBooks = async () => {
   const allBooks = await Promise.all([
     addBookISBN('9781451648546', selectCities(), generateCopiesCode()),
@@ -203,6 +206,8 @@ const baseBooks = async () => {
   console.log(allBooks);
 };
 
+
+// EXPORTS
 exports.isEmpty = isEmpty;
 exports.checkEmailFormat = checkEmailFormat;
 exports.validatePassword = validatePassword;
