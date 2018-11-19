@@ -1,17 +1,26 @@
-import mongoose from 'mongoose';
+// Imports npm
+const mongoose = require('mongoose');
 
-import { DB_BOOK_COLLECTION } from '../../utils/constants';
+// Locals
+const { DB_BOOK_COLLECTION } = require('../../utils/constants');
 
 const { Schema } = mongoose;
 
 const bookInfoSchema = new Schema({
+  isbn: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   title: {
     type: String,
     required: true,
+    lowercase: true,
   },
   author: {
     type: String,
     required: true,
+    lowercase: true,
   },
   year: {
     type: Number,
@@ -54,14 +63,15 @@ const bookSchema = new Schema({
   cities: {
     type: [String],
     required: true,
+    lowercase: true,
   },
   hasDigitalCopy: {
     type: Boolean,
     default: false,
   },
-  availables: {
+  copies: {
     type: [Number],
-    required: true,
+    default: [],
   },
   lends: {
     type: [bookLendSchema],
@@ -69,42 +79,27 @@ const bookSchema = new Schema({
   },
 });
 
-bookSchema.methods.booksByCity = function booksByCity(city) {
-  return this.model(DB_BOOK_COLLECTION).find({ cities: this.cities }, city);
+bookSchema.methods.findByISBN = async function findByISBN(isbn) {
+  return this.model(DB_BOOK_COLLECTION).findOne({ 'bookinfo.isbn': isbn });
 };
 
-bookSchema.methods.booksByCityLimit = function booksByCityLimit(city, limit, skip) {
-  return this.model(DB_BOOK_COLLECTION).find({ cities: this.cities }, city)
+bookSchema.methods.bookLendByUser = async function bookLendByUser(userEmail) {
+  return this.model(DB_BOOK_COLLECTION).find({ 'lends.userEmail': userEmail });
+};
+
+bookSchema.methods.bookLendByUserLimit = async function
+bookLendByUserLimit(userEmail, limit, skip) {
+  return this.model(DB_BOOK_COLLECTION).find({ 'lends.userEmail': userEmail })
     .limit(limit).skip(skip);
 };
 
-bookSchema.methods.bookLendByUser = function bookLendByUser(userEmail) {
-  return this.model(DB_BOOK_COLLECTION).find({ 'lends.userEmail': this.lends },
-    userEmail);
-};
-
-bookSchema.methods.bookLendByUserLimit = function bookLendByUserLimit(userEmail, limit, skip) {
-  return this.model(DB_BOOK_COLLECTION).find({ 'lends.userEmail': this.lends },
-    userEmail).limit(limit).skip(skip);
-};
-
-bookSchema.methods.digitalBooks = function digitalBooks() {
-  return this.model(DB_BOOK_COLLECTION)
-    .find({ hasDigitalCopy: this.hasDigitalCopy }, true);
-};
-
-bookSchema.methods.digitalBooksLimit = function digitalBooksLimit(limit, skip) {
-  return this.model(DB_BOOK_COLLECTION)
-    .find({ hasDigitalCopy: this.hasDigitalCopy }, true)
-    .limit(limit).skip(skip);
-};
-
-bookSchema.methods.sortByPopularity = function sortByPopularity(rating) {
+bookSchema.methods.sortByPopularity = async function sortByPopularity(rating) {
   return this.model(DB_BOOK_COLLECTION).find()
     .sort({ 'infobook.rating': this.infobook.rating }, rating);
 };
 
-bookSchema.methods.sortByPopularityLimit = function sortByPopularityLimit(rating, limit, skip) {
+bookSchema.methods.sortByPopularityLimit = async function
+sortByPopularityLimit(rating, limit, skip) {
   return this.model(DB_BOOK_COLLECTION).find()
     .sort({ 'infobook.rating': this.infobook.rating }, rating)
     .limit(limit)

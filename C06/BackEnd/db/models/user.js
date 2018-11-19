@@ -18,7 +18,7 @@ const userSchema = new Schema({
     required: true,
     lowercase: true,
   },
-  crypted_pass: {
+  password: {
     type: String,
     required: true,
   },
@@ -28,8 +28,9 @@ const userSchema = new Schema({
   },
 });
 
+// Compare password with password's user.
 userSchema.methods.comparePassword = function comparePassword(pass) {
-  return bcrypt.compareSync(pass, this.crypted_pass);
+  return bcrypt.compareSync(pass, this.password);
 };
 
 mongoose.model(DB_USER_COLLECTION, userSchema);
