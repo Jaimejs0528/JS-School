@@ -1,4 +1,4 @@
-#  Challenge C05: 
+#  Challenge C05: Homepage for the final project
 
 
 - Create a designs folder for upload all the specs, to be required to create the application
@@ -15,9 +15,10 @@ In this challenge were used the resources of challenge 03, to improve it, using 
 
 To init the page, you need to use NPM to install all dependencies and a http-server.
 
-> npm install  
+> npm install  // To install all the dependencies.
+> cd dist/ // Here is index.html (You must be inside C05 folder)
 > npm -g i http-server  
 > npm run build-dev //if you need to build the project with webpack.
 
 
-you could find the index.html inside dist folder if you have any issue with it.
+Note: you could find the index.html inside dist folder if you have any issue with it.

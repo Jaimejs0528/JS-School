@@ -1,4 +1,4 @@
-# <span style="color:#218d21">Challenge 05: BackEnd endpoints
+# <span style="color:#218d21"> Challenge 06: BackEnd endpoints
 
 - Generate a backend rest service with the necessary endpoints to use in the application.
 - Integrate MongoDB to save all reservations.
@@ -15,6 +15,8 @@
 - Create at least 3 endpoints to be consumed.
 - Use express architecture to mount all services.
 - Push all changes to your GitHub repo.
+
+
 
 
 First of all, We need install [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
@@ -115,14 +117,14 @@ For consume this service, you only need put into the URL the isbn code that you 
 Such as get all books, you don't need anything, just put it into the browser or [Postman](https://www.getpostman.com/).
 
 
-### <span style="color:#218d21">/bookshelf/books/cities/:city Get all books by a specific city.
+### <span style="color:#218d21">/bookshelf/books/cities/:city : Get all books by a specific city.
 ---------
 
 For consume this service, you only need put into the URL the city name that you want search.
 
 cities names: "medellin", "quito", "cartagena".
 
-> /bookshelf/books/cities/quito6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example
+> /bookshelf/books/cities/quito&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example
 
 ### <span style="color:#218d21">/bookshelf/books/lends : Get books loans by a specific user and lend a book.
 
