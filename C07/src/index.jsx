@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import ReactDom from 'react-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 import HeaderComp from './components/header';
-import SearchContainerComp from './components/searchContainer';
 
 library.add(faSearch);
+library.add(faAngleDown);
 
 class App extends PureComponent {
   render() {

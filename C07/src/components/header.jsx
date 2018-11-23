@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 
 import smallLogo from '../assets/images/favicon.png';
 import logo from '../assets/images/logo.png';
+import userIcon from '../assets/images/jakob.png';
 import LogoComp from './logo';
 import { MD_VIEW, BOOKSHELF_TITLE } from '../utils/constants';
 import SearchContainer from './searchContainer';
+import UserInfo from './userInfo';
 
 class Header extends Component {
   constructor(props) {
@@ -18,6 +20,7 @@ class Header extends Component {
     this.screenHasChanged = this.screenHasChanged.bind(this);
     this.changeLogoIcon = this.changeLogoIcon.bind(this);
     this.getInput = this.getInput.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +32,12 @@ class Header extends Component {
     window.removeEventListener('resize', this.screenHasChanged);
   }
 
+  onSubmit(event) {
+    event.preventDefault();
+    this.t = event;
+    // console.log(event.target.querySelector('input').value);
+  }
+
   getInput(event) {
     this.setState({
       inputValue: event.target.value,
@@ -38,7 +47,6 @@ class Header extends Component {
   screenHasChanged() {
     this.setState({
       screenX: window.innerWidth,
-      // screenY: window.screen.height,
     }, this.changeLogoIcon.bind(this));
   }
 
@@ -53,19 +61,23 @@ class Header extends Component {
 
   render() {
     const { isSmallLogo } = this.state;
-    // const { getInput } = this.props;
+    // const { onSubmit } = this.props;
     return (
       <div>
         {isSmallLogo ? <LogoComp logo={smallLogo} /> : <LogoComp logo={logo} />}
-        <h1>{this.state.inputValue}</h1>
-        <SearchContainer title={BOOKSHELF_TITLE} getInput={this.getInput} />
+        <SearchContainer
+          title={BOOKSHELF_TITLE}
+          getInput={this.getInput}
+          onSubmit={this.onSubmit}
+        />
+        <UserInfo userName="Jakob Treml" userIcon={userIcon} />
       </div>
     );
   }
 }
 
 // Header.propTypes = {
-//   getInput: PropTypes.func.isRequired,
+//   onSubmit: PropTypes.func.isRequired,
 // };
 
 export default Header;

@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class SearchInput extends PureComponent {
   render() {
-    const { getInput } = this.props;
+    const { getInput, onSubmit } = this.props;
     return (
-      <form action="post">
+      <form onSubmit={onSubmit}>
         <FontAwesomeIcon icon="search" />
-        <input type="search" placeholder="Search..." aria-label="Search" onChange={getInput} />
+        <input type="search" name="Search" placeholder="Search..." aria-label="Search" onChange={getInput} />
       </form>
     );
   }
@@ -16,6 +16,7 @@ class SearchInput extends PureComponent {
 
 SearchInput.propTypes = {
   getInput: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default SearchInput;

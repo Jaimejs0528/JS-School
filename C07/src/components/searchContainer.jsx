@@ -5,11 +5,14 @@ import SearchInput from './searchInput';
 
 class SearchContainer extends PureComponent {
   render() {
-    const { title, getInput } = this.props;
+    const { title, getInput, onSubmit } = this.props;
     return (
       <div>
         <h1>{title}</h1>
-        <SearchInput getInput={getInput} />
+        <SearchInput
+          getInput={getInput}
+          onSubmit={onSubmit}
+        />
       </div>
     );
   }
@@ -18,6 +21,7 @@ class SearchContainer extends PureComponent {
 SearchContainer.propTypes = {
   title: PropTypes.string.isRequired,
   getInput: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default SearchContainer;
