@@ -1,11 +1,22 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
-class Main extends PureComponent {
+import ReadList from './readList';
+
+class MostRead extends PureComponent {
   render() {
-    const { title } = this.props;
+    const { title, items } = this.props;
     return (
-      <div>
-        
-      </div>);
+      <aside>
+        <h4>{title}</h4>
+        <ReadList lectures={items} />
+      </aside>);
   }
 }
+
+MostRead.propTypes = {
+  title: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+export default MostRead;
