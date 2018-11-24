@@ -18,3 +18,4 @@ export const MOST_READ = ['Hooked: How to Build Habit-Forming Products',
   'Building a Business When There Are No Easy Answers',
   'How Google Works'];
 export const STARS_ERROR = 'Ups! your rating is major to maximum stars number';
+export const MAX_NUMB_STARS = 5;

@@ -4,6 +4,7 @@ import NavMenu from './navMenu';
 import { NAV_MENU, MOST_READ } from '../utils/constants';
 import MostRead from './mostRead';
 import BooksContainer from './booksContainer';
+import Rating from './Rating';
 
 class Main extends Component {
   constructor(props) {
