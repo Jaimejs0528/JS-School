@@ -2,9 +2,9 @@
 const mongoose = require('mongoose');
 
 // Local imports
-const { DB_BOOK_COLLECTION, DB_USER_COLLECTION } = require('../utils/constants');
-const messageGenerator = require('../utils/MessageGenerator');
-const tool = require('../utils/Tool');
+const { DB_BOOK_COLLECTION, DB_USER_COLLECTION, CITIES } = require('../utils/constants');
+const messageGenerator = require('../utils/messageGenerator');
+const tool = require('../utils/tool');
 
 // Create books model
 const Book = mongoose.model(DB_BOOK_COLLECTION);
@@ -30,31 +30,61 @@ const validateBooksLoans = (lends, copies, emailUser) => {
   };
 };
 
+// Validates if exist an invalid city or array is empty
+const citiesValidation = (cities, res) => {
+  if (cities.length === 0) {
+    res.status(400)
+      .send(messageGenerator.ErrorMessage(messageGenerator.WITHOUT_CITIES, DB_BOOK_COLLECTION));
+    return false;
+  }
+  const citiesLocal = (cities.length > CITIES.length) ? cities.slice(0, CITIES.length) : cities;
+  const output = citiesLocal.filter(city => (CITIES
+    .filter(compare => compare.test(city))).length > 0);
+  if (output.length !== citiesLocal.length) {
+    res.status(400)
+      .send(messageGenerator.ErrorMessage(messageGenerator.INVALID_CITIES, DB_BOOK_COLLECTION));
+    return false;
+  }
+  return true;
+};
+
 // Creates a  new book
 exports.addOneBook = (req, res) => {
-  messageGenerator.bodyValidator(req.body, res);
   const newBook = new Book(req.body);
-  const processAdd = async () => {
-    const existent = await newBook.findByISBN(req.body.bookinfo.isbn);
-    if (existent) {
-      const { copies: toLend } = existent;
-      toLend.push(req.body.internalCode);
-      // eslint-disable-next-line no-underscore-dangle
-      const id = existent._id;
-      const intCode = req.body.internalCode;
-      // eslint-disable-next-line no-underscore-dangle
-      const update = await Book.findOneAndUpdate({
-        $and: [{ _id: id }, { copies: { $ne: intCode } }],
-      }, { $set: { copies: toLend } }, { upsert: true, new: true });
 
-      return update;
-    }
-    newBook.copies.push(req.body.internalCode);
-    const saved = await newBook.save();
-    return saved;
-  };
-  processAdd(req).then(response => res.status(201).send(response)).catch((err => res.status(400)
-    .send(messageGenerator.ErrorMessage(err, DB_BOOK_COLLECTION))));
+  // Validates cities diferents to quito, medellin and cartagena
+  if (messageGenerator.bodyValidator(req.body, res) && citiesValidation(newBook.cities, res)) {
+    // Return a book added to db
+    const processAdd = async () => {
+      const existent = await newBook.findByISBN(req.body.bookinfo.isbn);
+      if (existent) {
+        const { copies: toLend } = existent;
+        toLend.push(req.body.internalCode);
+        // eslint-disable-next-line no-underscore-dangle
+        const id = existent._id;
+        const intCode = req.body.internalCode;
+
+        // eslint-disable-next-line no-underscore-dangle
+        const update = await Book.findOneAndUpdate({
+          $and: [{ _id: id }, { copies: { $ne: intCode } }],
+        }, { $set: { copies: toLend } }, { upsert: true, new: true });
+        return update;
+      }
+      newBook.copies.push(req.body.internalCode);
+      newBook.lends = [];
+      const saved = await newBook.save()
+        .catch((err) => {
+          res.status(400)
+            .send(messageGenerator.ErrorMessage(err, DB_BOOK_COLLECTION));
+          return undefined;
+        });
+      return saved;
+    };
+
+    // Execute previous Async function
+    processAdd(req).then(response => res.status(201).send(response)).catch((err => res.status(400)
+      .send(messageGenerator.ErrorMessage(err, DB_BOOK_COLLECTION))));
+  }
 };
 
 // Allow to Userr lend a book
@@ -74,7 +104,6 @@ exports.lendABook = (req, res) => {
         res.status(200).send(output);
       } else {
         lendsArray.push(output);
-        console.log(lendsArray);
         const update = await Book.findOneAndUpdate({ 'bookinfo.isbn': bookIsbn },
           { $set: { lends: lendsArray } }, { upsert: true, new: true });
         res.status(200).send(update);
@@ -84,7 +113,8 @@ exports.lendABook = (req, res) => {
         .ErrorMessage(messageGenerator.NOT_FOUND, DB_BOOK_COLLECTION));
     }
   };
-  getBooks().catch(err => console.log(err));
+  getBooks().catch(err => res.status(400)
+    .send(messageGenerator.ErrorMessage(err, DB_BOOK_COLLECTION)));
 };
 
 // returns all books

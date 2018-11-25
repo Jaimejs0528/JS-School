@@ -14,8 +14,7 @@ require('./db/models/books');
 const constant = require('./utils/constants');
 const userRoutes = require('./routes/userRoutes');
 const bookRoutes = require('./routes/booksRoutes');
-const messageGenerator = require('./utils/MessageGenerator');
-const tool = require('./utils/Tool');
+const messageGenerator = require('./utils/messageGenerator');
 
 const app = express();
 const options = {
@@ -25,8 +24,11 @@ const options = {
 };
 
 mongoose.Promise = global.Promise;
+
 // Allows use FindOneAndUpdate, this is doubt to a bug
+
 mongoose.set('useFindAndModify', false);
+
 // Avoiding deprecation
 mongoose.set('useCreateIndex', true);
 mongoose.connect(constant.DB_FULL_PATH, { useNewUrlParser: true })
@@ -41,7 +43,8 @@ app.use(bodyParserError.beautify({
 }));
 
 app.use((req, res, next) => {
-  if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+  if (req.headers && req.headers.authorization
+    && req.headers.authorization.split(' ')[0] === constant.TOKEN_TYPE) {
     const token = req.headers.authorization.split(' ')[1];
     jwt.verify(token, constant.SECRET, (err, decode) => {
       if (err) req.user = undefined;
@@ -60,13 +63,10 @@ bookRoutes.bookRoutes(app);
 
 // Init https server
 https.createServer(options, app).listen(constant.PORT_HTTPS, () => {
-  console.log(`Using port ${constant.PORT_HTTPS}`);
+  console.log(`HTPPS Using port ${constant.PORT_HTTPS}`);
 });
 
 // Init http server
 http.createServer(app).listen(constant.PORT, () => {
-  console.log(`Using port ${constant.PORT}`);
+  console.log(`HTPP Using port ${constant.PORT}`);
 });
-
-// THE NEXT LINE ALLOWS CREATE MULTIPLES BOOKS
-// tool.baseBooks();

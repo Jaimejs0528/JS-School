@@ -2,7 +2,7 @@
 const fetch = require('node-fetch');
 
 // Local
-const messageGenerator = require('./MessageGenerator');
+const messageGenerator = require('./messageGenerator');
 const { DB_USER_COLLECTION, DB_BOOK_COLLECTION } = require('./constants');
 
 // Validates if the object is empty
@@ -67,6 +67,7 @@ const validatePassword = (password, res) => {
   } else {
     res.status(400).send(messageGenerator
       .ErrorMessage(messageGenerator.INVALID_BODY, messageGenerator.COMMON));
+    return false;
   }
   return true;
 };
@@ -105,15 +106,6 @@ const validateTextField = (text, res) => {
   }
   return true;
 };
-
-// All Validations over User's fields.
-const validationFieldsUsers = (body, res) => {
-  if (!validateTextField(body.name, res)) return false;
-  if (!validatePassword(body.password, res)) return false;
-  if (!checkEmailFormat(body.email, res)) return false;
-  return true;
-};
-
 
 // Add new Book from API GOOGLE with a specific ISBN
 const addBookISBN = async (isbn, cities, copies) => {
@@ -159,7 +151,6 @@ const addBookISBN = async (isbn, cities, copies) => {
     },
     body: JSON.stringify(newBook),
   });
-  // eslint-disable-next-line no-console
   return response;
 };
 
@@ -171,7 +162,6 @@ const selectCities = () => {
   return selected;
 };
 
-
 // Generate randomly codes for book's copies.
 const generateCopiesCode = () => {
   const copies = [];
@@ -182,37 +172,10 @@ const generateCopiesCode = () => {
   return copies;
 };
 
-
-// Create a base of books.
-const baseBooks = async () => {
-  const allBooks = await Promise.all([
-    addBookISBN('9781451648546', selectCities(), generateCopiesCode()),
-    addBookISBN('9781501175466', selectCities(), generateCopiesCode()),
-    addBookISBN('9780547928227', selectCities(), generateCopiesCode()),
-    addBookISBN('9780618212903', selectCities(), generateCopiesCode()),
-    addBookISBN('9780547928203', selectCities(), generateCopiesCode()),
-    addBookISBN('9781328613042', selectCities(), generateCopiesCode()),
-    addBookISBN('9780345325815', selectCities(), generateCopiesCode()),
-    addBookISBN('9780812974010', selectCities(), generateCopiesCode()),
-    addBookISBN('9781476770390', selectCities(), generateCopiesCode()),
-    addBookISBN('9781501173219', selectCities(), generateCopiesCode()),
-    addBookISBN('9780804172448', selectCities(), generateCopiesCode()),
-    addBookISBN('9780425274866', selectCities(), generateCopiesCode()),
-    addBookISBN('9780060883287', selectCities(), generateCopiesCode()),
-    addBookISBN('9780785814535', selectCities(), generateCopiesCode()),
-    addBookISBN('9781454921356', selectCities(), generateCopiesCode()),
-    addBookISBN('9780802123701', selectCities(), generateCopiesCode()),
-  ]);
-  console.log(allBooks);
-};
-
-
 // EXPORTS
 exports.isEmpty = isEmpty;
 exports.checkEmailFormat = checkEmailFormat;
 exports.validatePassword = validatePassword;
 exports.validateTextField = validateTextField;
-exports.validationFieldsUsers = validationFieldsUsers;
 exports.findOneQuery = findOneQuery;
 exports.findQuery = findQuery;
-exports.baseBooks = baseBooks;

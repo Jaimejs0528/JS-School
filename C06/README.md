@@ -17,7 +17,7 @@
 - Push all changes to your GitHub repo.
 
 
-
+## SETUP
 
 First of all, We need install [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
@@ -30,16 +30,27 @@ To import just must do the next commands:
 > mongoimport --db bookshelf --collection users --file /path/users.js<br>
 > mongoimport --db bookshelf --collection books --file /path/books.js
 
+NOTE: If you don't wanna import books collection, you can run the next command.
+
+> npm run populateDB
+
+With this command you add books to the books collection by [Google books API](https://www.googleapis.com/books/v1/volumes?q=isbn).
+If you wanna add or change the defaults books to add, the JS script is > [./BackEnd/uils/PopulateDB.js], modifying the books array.(https://github.com/Jaimejs0528/JS-School/tree/master/C06/BackEnd/utils/PopulateDB.js)
+
 After import the db, We need to execute the next command:
 
-> npm install // install all project dependencies
+> npm install
+
+To install all dependencies.
 
 If all runs correctly, just run the next command:
 > npm start // init our server.js
 
-With our server runing, We are already for consume the services. You can notice that has two servers one https running in port 443 and http running in port 3202. When you go to consume any service, you must specify one of them.
+With our server runing, We are already for consume the services. You can notice that has two servers one https running in port 4420 and http running in port 3202. When you go to consume any service, you must specify one of them.
 
 For this I recommend use [Postman](https://www.getpostman.com/), thought you can use [curl](https://curl.haxx.se/) or another tool that you want.
+
+## USING ENDPOINTS
 
 Ok, Let's start with specify all services (endpoints).
 
@@ -64,7 +75,7 @@ To consume this service, you need to put into the body the next json structure.
 
 Where email and passsword must satisfy the respective format.
 - email: begins with letter, has @, has . and end in letter too
-- password: a least one digit, letter lowercase and uppercase and special Char, its length must be between 6 to 15 chars.
+- password: minimum one digit, letter lowercase, letter uppercase and special Char, its length must be between 6 to 15 chars.
 
 ### <span style="color:#218d21">/auth/sign_in : Sign In a user Account
 ---------
@@ -98,6 +109,8 @@ If you use this endpoint with POST method, you need consume it with the next str
 For this you need add to header the next line.
 
 > Authorization: Bearer 'JWT TOKEN TOO LONG'
+
+You get tis token using "Sign In a user Account" service.
 
 With this you add a new book to data base.
 

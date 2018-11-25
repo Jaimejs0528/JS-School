@@ -1,7 +1,7 @@
 
 // Local imports
 const { DB_USER_COLLECTION, DB_BOOK_COLLECTION } = require('./constants');
-const tool = require('./Tool');
+const tool = require('./tool');
 
 // OWN ERROR CODES
 const INVALID_PASSWORD = 11;
@@ -13,6 +13,9 @@ const INVALID_CREDENTIALS = 66;
 const U_ALREADY_LOAN = 77;
 const INVALID_BODY = 88;
 const UNAUTHORIZED_ACCESS = 99;
+const INVALID_FIELD = 111;
+const INVALID_CITIES = 122;
+const WITHOUT_CITIES = 133;
 
 // EXPORTS ERRORS
 exports.NOT_FOUND = NOT_FOUND;
@@ -24,6 +27,9 @@ exports.INVALID_PASSWORD = INVALID_PASSWORD;
 exports.U_ALREADY_LOAN = U_ALREADY_LOAN;
 exports.COMMON = 'common';
 exports.UNAUTHORIZED_ACCESS = UNAUTHORIZED_ACCESS;
+exports.INVALID_FIELD = INVALID_FIELD;
+exports.INVALID_CITIES = INVALID_CITIES;
+exports.WITHOUT_CITIES = WITHOUT_CITIES;
 
 // MONGO ERROR CODES
 const EXIST = 11000;
@@ -73,6 +79,14 @@ const ERROR_MESSAGES = {
       code: NOT_AVAILABLE,
       message: 'Book non-available',
     },
+    [INVALID_CITIES]: {
+      code: INVALID_CITIES,
+      message: 'Some city is not allowed',
+    },
+    [WITHOUT_CITIES]: {
+      code: WITHOUT_CITIES,
+      message: 'Add a city',
+    },
   },
   common: {
     [INVALID_BODY]: {
@@ -84,9 +98,11 @@ const ERROR_MESSAGES = {
 
 // return error object that shows the error code and message.
 exports.ErrorMessage = function ErrorMessage(error, controllerTransmitter) {
-  console.log(error, controllerTransmitter);
-  if (error && error.code) {
+  if (error.code) {
     return ERROR_MESSAGES[controllerTransmitter][error.code];
+  }
+  if (error.message) {
+    return { code: INVALID_FIELD, message: error.message };
   }
   return ERROR_MESSAGES[controllerTransmitter][error];
 };
@@ -95,5 +111,7 @@ exports.ErrorMessage = function ErrorMessage(error, controllerTransmitter) {
 exports.bodyValidator = function bodyValidator(body, res) {
   if (!body || tool.isEmpty(body)) {
     res.status(400).json(ERROR_MESSAGES.common[INVALID_BODY]);
+    return false;
   }
+  return true;
 };
