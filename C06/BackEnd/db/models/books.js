@@ -9,7 +9,7 @@ const { Schema } = mongoose;
 // Schema for bookinfo document
 const bookInfoSchema = new Schema({
   isbn: {
-    type: String,
+    type: Number,
     required: true,
     unique: true,
   },
@@ -38,6 +38,7 @@ const bookInfoSchema = new Schema({
   rating: {
     type: Number,
     required: true,
+    default: -1,
   },
   image: {
     type: String,
