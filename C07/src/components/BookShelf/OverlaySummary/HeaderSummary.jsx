@@ -7,7 +7,7 @@ class HeaderSummary extends PureComponent {
     return (
       <header className="header-summary">
         <div>
-          <h1>{bookInfo.title}</h1>
+          <h1 className="hidde-overflow-text">{bookInfo.title}</h1>
           <span>{bookInfo.year}</span>
         </div>
         <h2>Novel by <span>{bookInfo.author}</span></h2>
