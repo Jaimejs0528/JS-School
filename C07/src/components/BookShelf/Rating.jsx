@@ -6,10 +6,11 @@ import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { STARS_ERROR, NOT_STARS } from '../../utils/constants';
 
+// Class that create the rating stars and show them
 class Rating extends PureComponent {
   chargeStars() {
     const { rating, maxNumberStars } = this.props;
-    if(rating === -1 ){
+    if (rating === -1) {
       return (<span>{NOT_STARS}</span>);
     }
     if (rating > maxNumberStars) {
@@ -42,6 +43,7 @@ class Rating extends PureComponent {
   }
 }
 
+// Props Validations
 Rating.propTypes = {
   rating: PropTypes.number.isRequired,
   maxNumberStars: PropTypes.number.isRequired,

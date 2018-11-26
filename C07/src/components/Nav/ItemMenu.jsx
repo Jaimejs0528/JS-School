@@ -14,6 +14,7 @@ const selectIcon = (type) => {
   return optionsIcon[type]; // Return icon by type
 };
 
+// Class that contains all navigation options
 class ItemName extends PureComponent {
   render() {
     const {
@@ -22,22 +23,21 @@ class ItemName extends PureComponent {
       selectedItem,
       changeSelected,
     } = this.props;
-    const style = {
-      background: '#0F0',
-    };
     // Elements to render
     return (
-      <div className={`${(itemName === selectedItem)? "selected" : ""} menu-item`}>
+      <div className={`${(itemName === selectedItem) ? 'selected' : ''} menu-item`}>
         {selectIcon(type)}
-        <button 
-        type="button"
-        onClick={changeSelected.bind(this)}>
+        <button
+          type="button"
+          onClick={changeSelected.bind(this)}
+        >
           {itemName}
         </button>
       </div>);
   }
 }
 
+// Props Validations
 ItemName.propTypes = {
   itemName: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,

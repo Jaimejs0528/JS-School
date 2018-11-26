@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import SearchInput from './searchInput';
+import SearchInput from './SearchInput';
 
+// Header input search container
 class SearchContainer extends PureComponent {
   render() {
     const { title, getInput, onSubmit } = this.props;
@@ -18,6 +19,7 @@ class SearchContainer extends PureComponent {
   }
 }
 
+// Props Validations
 SearchContainer.propTypes = {
   title: PropTypes.string.isRequired,
   getInput: PropTypes.func.isRequired,

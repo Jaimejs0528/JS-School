@@ -11,8 +11,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import './styles/main.scss';
-import Header from './components/Header/header';
-import Main from './components/main';
+import Header from './components/Header/Header';
+import Main from './components/Main';
 
 library.add(faSearch);
 library.add(faAngleDown);
@@ -21,23 +21,24 @@ library.add(faThList);
 library.add(faStar);
 library.add(faStarHalfAlt);
 
+// Main Class Contains all app
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter:'',
+      filter: '',
     };
-    this.getFilter =this.getFilter.bind(this);
+    this.getFilter = this.getFilter.bind(this);
   }
 
-  getFilter(filter){
-    this.setState( {
+  getFilter(filter) {
+    this.setState({
       filter,
     });
   }
 
   render() {
-    const {filter} = this.state;
+    const { filter } = this.state;
     return (
       <div>
         <Header getFilter={this.getFilter} />

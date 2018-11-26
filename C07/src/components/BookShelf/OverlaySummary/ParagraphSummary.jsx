@@ -7,15 +7,14 @@ class ParagraphSummary extends PureComponent {
     return (
       <div className="book-paragraph">
         <span>SUMMARY</span>
-        <p className="summary-paragraph" >{description}</p>
+        <p className="summary-paragraph">{description}</p>
       </div>
     );
   }
-
 }
 
 ParagraphSummary.propTypes = {
   description: PropTypes.string.isRequired,
-}
+};
 
 export default ParagraphSummary;
