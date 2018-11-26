@@ -5,9 +5,10 @@ import ArticleSummary from './ArticleSummary';
 
 class Summary extends PureComponent {
   render() {
-    const { bookInfo } = this.props;
+    const { bookInfo, showLendIcon } = this.props;
     return (
       <div>
+        <button onClick={showLendIcon} className="button-lend">lend</button>
         <ArticleSummary bookInfo={bookInfo} />
       </div>
     );
