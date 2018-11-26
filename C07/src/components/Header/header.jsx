@@ -47,6 +47,8 @@ class Header extends Component {
   }
 
   screenHasChanged() {
+  // Hide all overlay summaries open
+  $('.overlay-summary').removeClass('show-summary').removeClass('change-sense')
     this.setState({
       screenX: window.innerWidth,
     }, this.changeLogoIcon.bind(this));

@@ -7,10 +7,13 @@ class UserInfo extends PureComponent {
   render() {
     const { userName, userIcon } = this.props;
     return (
-      <div className="sidebar header-profile profile">
+      <div className="sidebar header-profile">
+      <div className="vertical-line"></div>
+      <div className="profile">
         <h3>{userName}</h3>
         <FontAwesomeIcon icon="angle-down" />
         <img className="circle-img" src={userIcon} alt={`icon-${userName}`} />
+      </div>
       </div>
     );
   }
