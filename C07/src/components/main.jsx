@@ -1,29 +1,35 @@
 import React, { Component } from 'react';
 
-import NavMenu from './navMenu';
+import NavMenu from './Nav/navMenu';
 import { NAV_MENU, MOST_READ } from '../utils/constants';
-import MostRead from './mostRead';
-import BooksContainer from './booksContainer';
-import Rating from './Rating';
+import MostRead from './Nav/mostRead';
+import BooksContainer from './BookShelf/booksContainer';
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hola: "h",
+      titleBookShelf: "Books",
     };
+    this.getOptionSelected = this.getOptionSelected.bind(this);
+  }
+  
+  getOptionSelected(option){
+    this.setState({
+      titleBookShelf:option,
+    })
   }
 
   render() {
-    const { titles } = this.props;
+    const { filter } = this.props;
+    const { titleBookShelf } = this.state;
     return (
-      <div>
-        <NavMenu menu="Main" items={NAV_MENU} />
-        <BooksContainer title="holas" />
+      <div className="main">
+        <NavMenu menu="Main" items={NAV_MENU} getOptionSelected={this.getOptionSelected} />
+        <BooksContainer title={titleBookShelf} filter={filter} />
         <MostRead title="Most Read Books" items={MOST_READ} />
       </div>);
   }
 }
-
 
 export default Main;

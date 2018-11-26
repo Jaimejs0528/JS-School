@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -10,8 +10,9 @@ import {
   faStarHalfAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
-import HeaderComp from './components/header';
-import MainComp from './components/main';
+import './styles/main.scss';
+import Header from './components/Header/header';
+import Main from './components/main';
 
 library.add(faSearch);
 library.add(faAngleDown);
@@ -20,13 +21,27 @@ library.add(faThList);
 library.add(faStar);
 library.add(faStarHalfAlt);
 
-class App extends PureComponent {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filter:'',
+    };
+    this.getFilter =this.getFilter.bind(this);
+  }
+
+  getFilter(filter){
+    this.setState( {
+      filter,
+    });
+  }
+
   render() {
-    const { title } = this.props;
+    const {filter} = this.state;
     return (
       <div>
-        <HeaderComp />
-        <MainComp />
+        <Header getFilter={this.getFilter} />
+        <Main filter={filter} />
       </div>);
   }
 }

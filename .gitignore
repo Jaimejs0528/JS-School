@@ -7,3 +7,7 @@ C06/BackEnd/.vscode/
 C06/.vscode/
 C07/node_modules/
 C07/.vscode/
+C07/dist/bundle.js
+C07/dist/*.png
+C07/dist/*.otf
+

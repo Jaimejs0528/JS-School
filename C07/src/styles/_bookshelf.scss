@@ -1,0 +1,163 @@
+.books-container {
+  background: $secondary-white;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 72vw;
+
+  @include md-view{
+     width: 100vw;
+  }
+
+  @include xlg-view-min{
+    width: calc(100vw - 190px);
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.bookshelf {
+  @extend  %flex-row;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 0 5rem;
+
+  @include xlg-view{
+    justify-content: space-around;
+  }
+}
+
+.book {
+  @extend %flex-column;
+  cursor: pointer;
+  height: 20rem;
+  justify-content: space-between;
+  margin-bottom: 27%;
+  width: 176px;
+}
+
+.child {
+  @extend  %flex-row;
+  color: $soft-blue;
+  font-size: 1.5rem;
+  height: 19.2%;
+  margin: auto;
+  position: absolute;
+  right: 36%;
+  bottom: 41.6%;
+  width: 17%;
+  width: 27.3%;
+}
+
+.book-options>div>svg {
+  margin: auto;
+}
+
+.user-icons {
+  @extend  %flex-row;
+}
+
+.user-icons>div {
+  margin: 0 .7rem 0 0;
+}
+
+.img-container {
+  @extend %border-overlay;
+  height: 250px;
+  margin-bottom: .5rem;
+  width: 176px;
+
+  &:hover {
+    .overlay-img {
+      @extend %overlay-visible;
+    }
+  }
+}
+
+.lend-book{
+  display: none;
+  position: absolute;
+  right: -10px;
+  top: 30px;
+
+  svg {
+    position: absolute;
+    top: 6px;
+    left: 20px;
+  }
+}
+
+.img-border{
+  @extend %border-overlay;
+}
+
+.book-title {
+  color: $black-medium;
+  font-family: 'PlutoSansCondMedium', 'sans-serif';
+  font-size: .9rem;
+}
+
+.author {
+  color: $secondary-gray;
+  font-family: 'PlutoSansCondLight', 'sans-serif';
+  font-size: .813rem;
+}
+
+.rating {
+  @extend %flex-row;
+  color: $soft-blue;
+  font-size: 12.5px;
+  width: 76px;
+  font-family: 'PlutoSansCondLight', 'sans-serif';
+    letter-spacing: 1.2px;
+    text-transform: capitalize;
+
+  svg {
+    height: 17px;
+    width: 20px;
+  }
+}
+
+.loading{
+  @extend %flex-row;
+
+  h1{
+    text-align: center;
+    width: 100%;
+    padding: 10% 0;
+    font-family: 'PlutoSansMedium', sans-serif;
+    font-size: 3rem;
+    text-transform: capitalize;
+    color: #6ec1e4;
+   
+    @include keyframe(loading ,2.5s linear infinite alternate) {
+      0% {
+        transform: scale(0.95);
+        opacity: 0.6;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0.95);
+        opacity: 0.6;
+      }
+    }
+  }
+}
+
+.error{
+  @extend %flex-row;
+
+  h1{
+    text-align: center;
+    width: 100%;
+    padding: 10% 0;
+    font-family: 'PlutoSansMedium', sans-serif;
+    font-size: 3rem;
+    text-transform: capitalize;
+    color: $error;
+  }
+}
