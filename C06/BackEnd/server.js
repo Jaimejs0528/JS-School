@@ -43,6 +43,14 @@ app.use(bodyParserError.beautify({
 }));
 
 app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, Authorization, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+
+app.use((req, res, next) => {
   if (req.headers && req.headers.authorization
     && req.headers.authorization.split(' ')[0] === constant.TOKEN_TYPE) {
     const token = req.headers.authorization.split(' ')[1];
