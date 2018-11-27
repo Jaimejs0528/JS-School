@@ -59,13 +59,10 @@
   width: 23.8rem;
 
   @include sm-view{
-    top: 37vh;
-    left: -21vw;
+    top: 30vh;
+    left: calc(50% - (80vw/2));
     width: 80vw;
-  }
-
-  @include ssm-view{
-    left: -13vw;
+    z-index: 4;
   }
 }
 
