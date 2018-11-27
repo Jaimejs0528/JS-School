@@ -20,6 +20,7 @@ class BookShelf extends Component {
       error: null,
       books: [],
       query: DEFAULT_HOME,
+      mount: true,
     };
     this.getBooks = this.getBooks.bind(this);
   }
@@ -34,23 +35,30 @@ class BookShelf extends Component {
     this.getBooks(query);
   }
 
+
+  // Validates when the query has changed to get new books
+  componentWillReceiveProps(nextProps){
+    const {query} = this.props;
+    if(query !== nextProps.query){
+      this.setState({
+        isLoading: true,
+        error: null,
+        query: nextProps.query,
+      });
+      this.getBooks(nextProps.query);
+    }
+  }
+
   // Avoid fetch
   componentWillUnmount() {
-    this.setState({ isLoading: false });
+    this.setState({ mount: false });
   }
 
   // Consume the services from server
   getBooks(query) {
-    const { query: queryLocal, isLoading } = this.state;
-    if (query !== queryLocal) {
-      this.setState({
-        isLoading: true,
-        error: null,
-        query,
-      });
-    }
-    if (isLoading) {
-      const urlBase = 'http://localhost:3202/bookshelf/books/';
+    const { mount } = this.state;
+    if(!mount) return undefined;
+    const urlBase = 'http://localhost:3202/bookshelf/books/';
       const consumeService = async (endpoint = '') => {
         const response = await fetch(`${urlBase}${endpoint}`);
         return response.json();
@@ -76,7 +84,6 @@ class BookShelf extends Component {
         });
       } else if (query !== '' && query !== DEFAULT_HOME) {
         consumeService(`cities/${query.toLowerCase()}`).then((response) => {
-          console.log(query, queryLocal);
           if (response.code) {
             this.setState({ error: response.message, isLoading: false  });
           } else {
@@ -100,13 +107,11 @@ class BookShelf extends Component {
           }
         }).catch(() => this.setState({ error: NOT_CONECTION, isLoading: false }));
       }
-    }
   }
 
   render() {
-    const { query, filter } = this.props;
+    const { filter } = this.props;
     const { isLoading, books, error } = this.state;
-    this.getBooks(query);
 
     // Meanwhile is loading data show a message
     if (isLoading) {
