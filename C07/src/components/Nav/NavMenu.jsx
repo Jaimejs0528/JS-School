@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import ItemMenu from './ItemMenu';
+import { DEFAULT_HOME } from '../../utils/constants';
 
 // Contains all navigation options
 class NavMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: '',
+      selected: DEFAULT_HOME,
       open: true,
     };
     this.changeSelected = this.changeSelected.bind(this);

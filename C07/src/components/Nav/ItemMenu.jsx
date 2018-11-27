@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGlobe, faUserTag, faTabletAlt } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faUserTag, faTabletAlt, faHome } from '@fortawesome/free-solid-svg-icons';
 
 // Get Icon to render by type.
 const selectIcon = (type) => {
   // objetc with icons
   const optionsIcon = {
+    home: <FontAwesomeIcon icon={faHome} />,
     city: <FontAwesomeIcon icon={faGlobe} />,
     loans: <FontAwesomeIcon icon={faUserTag} />,
     digital: <FontAwesomeIcon icon={faTabletAlt} />,

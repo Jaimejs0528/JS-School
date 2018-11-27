@@ -32,15 +32,16 @@ class OverlayBookContainer extends Component {
   // }
 
   render() {
-    const { bookInfo } = this.props;
+    const { bookData } = this.props;
     const { openSummary, addLend } = this.state;
     return (
       <div className="overlay-container">
-        <Book bookInfo={bookInfo} showSummary={this.showSummary} addLend={addLend} />
+        <Book bookData={bookData} showSummary={this.showSummary} addLend={addLend} />
         <OverlaySummary
-          ref={bookInfo.isbn}
-          bookInfo={bookInfo}
+          ref={bookData.bookinfo.isbn}
+          bookInfo={bookData.bookinfo}
           show={openSummary}
+          showSummary={this.showSummary}
           showLendIcon={this.showLendIcon}
         />
       </div>
@@ -50,7 +51,7 @@ class OverlayBookContainer extends Component {
 
 // Prop Validations
 OverlayBookContainer.propTypes = {
-  bookInfo: PropTypes.object.isRequired,
+  bookData: PropTypes.object.isRequired,
 };
 
 export default OverlayBookContainer;
