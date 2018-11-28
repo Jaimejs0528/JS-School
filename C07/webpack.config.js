@@ -1,10 +1,8 @@
 const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  devServer: {
-    ContentBase: './dist',
-  },
+  cache: true,
   entry: ['babel-polyfill', './src/index.jsx'],
   output: {
     path: `${__dirname}/dist`,
@@ -14,11 +12,19 @@ module.exports = {
     modules: ['node_modules', 'src'],
     extensions: ['*', '.js', '.jsx'],
   },
+  devServer: {
+    contentBase: `${__dirname}/dist`,
+    compress: true,
+    port: 5600,
+  },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
+        include: [
+          `${__dirname}/src`,
+        ],
         use: {
           loader: 'babel-loader',
         },
@@ -49,7 +55,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new UglifyJSPlugin(),
+    new UglifyJsPlugin(),
   ],
 
 };
