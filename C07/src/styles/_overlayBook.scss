@@ -68,8 +68,8 @@
     z-index: 4;
   }
 
-  @include lg-view{
-    left: calc(62% - (23.8rem/2));
+  @include xlg-view{
+    left: calc(60% - (23.8rem/2));
   }
 }
 
