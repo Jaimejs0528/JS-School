@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import NavMenu from './Nav/NavMenu';
-import { NAV_MENU, MOST_READ } from '../utils/constants';
+import { NAV_MENU, MOST_READ,DEFAULT_HOME } from '../utils/constants';
 import MostRead from './Nav/MostRead';
 import BooksContainer from './BookShelf/BooksContainer';
 
@@ -11,7 +11,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      titleBookShelf: 'Books',
+      titleBookShelf: DEFAULT_HOME,
     };
     this.getOptionSelected = this.getOptionSelected.bind(this);
   }

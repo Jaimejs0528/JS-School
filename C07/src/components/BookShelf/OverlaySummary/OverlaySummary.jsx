@@ -6,10 +6,12 @@ import Summary from './Summary';
 // this is the overlay summary container
 class OverlaySummary extends PureComponent {
   render() {
-    const { bookInfo, show, showLendIcon } = this.props;
+    const { bookInfo, show, showLendIcon, showSummary } = this.props;
     return (
-      <div className={`overlay-summary ${show && 'show-summary'}`}>
-        <div className="arrow" />
+      <div 
+      className={`overlay-summary ${show && 'show-summary'}`}
+      onClick={showSummary}>
+        {/* <div className="arrow" /> */}
         <Summary bookInfo={bookInfo} showLendIcon={showLendIcon} />
       </div>
     );

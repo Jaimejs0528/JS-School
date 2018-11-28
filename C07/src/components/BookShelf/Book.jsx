@@ -8,18 +8,19 @@ import { MAX_NUMB_STARS } from '../../utils/constants';
 // Book information container 
 class Book extends PureComponent {
   render() {
-    const { bookInfo, showSummary, addLend } = this.props;
+    const { bookData: {bookinfo, cities}, showSummary, addLend } = this.props;
     return (
       <div className="book">
         <ImageContainer
-          imgBook={bookInfo.image}
+          imgBook={bookinfo.image}
           addLend={addLend}
-          rating={bookInfo.rating}
+          rating={bookinfo.rating}
           showSummary={showSummary}
         />
-        <span className="book-title hidde-overflow-text">{bookInfo.title}</span>
-        <span className="author hidde-overflow-text">{bookInfo.author}</span>
-        <Rating rating={bookInfo.rating} maxNumberStars={MAX_NUMB_STARS} />
+        <span className="book-title hidde-overflow-text">{bookinfo.title}</span>
+        <span className="author hidde-overflow-text">{bookinfo.author}</span>
+        <span className="cities hidde-overflow-text">{cities.join()}</span>
+        <Rating rating={bookinfo.rating} maxNumberStars={MAX_NUMB_STARS} />
       </div>
     );
   }
@@ -27,7 +28,7 @@ class Book extends PureComponent {
 
 // Props Validations
 Book.propTypes = {
-  bookInfo: PropTypes.object.isRequired,
+  bookData: PropTypes.object.isRequired,
   showSummary: PropTypes.func.isRequired,
   addLend: PropTypes.bool.isRequired,
 };

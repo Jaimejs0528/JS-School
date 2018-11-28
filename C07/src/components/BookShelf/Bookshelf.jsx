@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import OverlayBookContainer from './OverlayBookContainer';
-import { NAV_MENU } from '../../utils/constants';
+import { NAV_MENU, DEFAULT_HOME, NOT_CONECTION } from '../../utils/constants';
 
 
 // filter by book title and author
@@ -19,7 +19,8 @@ class BookShelf extends Component {
       isLoading: true,
       error: null,
       books: [],
-      query: 'Books',
+      query: DEFAULT_HOME,
+      mount: true,
     };
     this.getBooks = this.getBooks.bind(this);
   }
@@ -34,46 +35,57 @@ class BookShelf extends Component {
     this.getBooks(query);
   }
 
+
+  // Validates when the query has changed to get new books
+  componentWillReceiveProps(nextProps){
+    const {query} = this.props;
+    if(query !== nextProps.query){
+      this.setState({
+        isLoading: true,
+        error: null,
+        query: nextProps.query,
+      });
+      this.getBooks(nextProps.query);
+    }
+  }
+
   // Avoid fetch
   componentWillUnmount() {
-    this.setState({ isLoading: false });
+    this.setState({ mount: false });
   }
 
   // Consume the services from server
   getBooks(query) {
-    const { query: queryLocal, isLoading } = this.state;
-    if (query !== queryLocal) {
-      this.setState({
-        isLoading: true,
-        error: null,
-        query,
-      });
-    }
-    if (isLoading) {
-      const urlBase = 'http://localhost:3202/bookshelf/books/';
+    const { mount } = this.state;
+    if(!mount) return undefined;
+    const urlBase = 'http://localhost:3202/bookshelf/books/';
       const consumeService = async (endpoint = '') => {
         const response = await fetch(`${urlBase}${endpoint}`);
         return response.json();
       };
-      if (query === NAV_MENU[3][0]) {
+      if (query === NAV_MENU[4][0]) {
         consumeService('digitals').then((response) => {
-          this.setState({
-            isLoading: false,
-            books: response,
-            query,
-          });
-        }).catch(() => this.setState({ error: 'There isn\'t connection', isLoading: false }));
-      } else if (query === NAV_MENU[4][0]) {
+          if (response.code) {
+            this.setState({ error: response.message, isLoading: false  });
+          } else {
+            this.setState({
+              isLoading: false,
+              books: response,
+              query,
+            });
+          }
+        }).catch(() => this.setState({ error: NOT_CONECTION, isLoading: false }));
+      } else if (query === NAV_MENU[5][0]) {
         this.setState({
           error: 'Comming soon',
           isLoading: false,
           books: [],
           query,
         });
-      } else if (query !== '' && query !== 'Books') {
+      } else if (query !== '' && query !== DEFAULT_HOME) {
         consumeService(`cities/${query.toLowerCase()}`).then((response) => {
           if (response.code) {
-            this.setState({ error: response.message });
+            this.setState({ error: response.message, isLoading: false  });
           } else {
             this.setState({
               isLoading: false,
@@ -81,11 +93,11 @@ class BookShelf extends Component {
               query,
             });
           }
-        }).catch(() => this.setState({ error: 'There isn\'t connection', isLoading: false }));
+        }).catch(() => this.setState({ error: NOT_CONECTION, isLoading: false }));
       } else {
         consumeService().then((response) => {
           if (response.code) {
-            this.setState({ error: true });
+            this.setState({ error: response.message, isLoading: false  });
           } else {
             this.setState({
               isLoading: false,
@@ -93,15 +105,13 @@ class BookShelf extends Component {
               query,
             });
           }
-        }).catch(() => this.setState({ error: 'There isn\'t connection', isLoading: false }));
+        }).catch(() => this.setState({ error: NOT_CONECTION, isLoading: false }));
       }
-    }
   }
 
   render() {
-    const { query, filter } = this.props;
+    const { filter } = this.props;
     const { isLoading, books, error } = this.state;
-    this.getBooks(query);
 
     // Meanwhile is loading data show a message
     if (isLoading) {
@@ -124,7 +134,7 @@ class BookShelf extends Component {
       <div className="bookshelf">
         {books.filter(filterbooks(filter)).map(item => (
           <OverlayBookContainer
-            bookInfo={item.bookinfo}
+            bookData={item}
             key={item.bookinfo.isbn}
           />
         ))}

@@ -6,7 +6,10 @@ export const LG_VIEW = 1024;
 
 // Constants
 export const BOOKSHELF_TITLE = 'Bookshelf';
-export const NAV_MENU = [['Quito', 'city'],
+export const DEFAULT_HOME = 'Home';
+export const NOT_CONECTION = 'There isn\'t connection';
+export const NAV_MENU = [['Home', 'home'],
+  ['Quito', 'city'],
   ['Medellin', 'city'],
   ['Cartagena', 'city'],
   ['Digital', 'digital'],

@@ -31,6 +31,12 @@
   border-radius: 5px;
 }
 
+%bookInfo {
+  font-family: 'PlutoSansCondLight', 'sans-serif';
+  font-size: .813rem;
+  padding: .1rem 0;
+}
+
 @include md-view{
   %center-element {
     padding: 0;
