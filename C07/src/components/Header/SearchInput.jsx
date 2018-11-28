@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+// Input search to filter books
 class SearchInput extends PureComponent {
   render() {
     const { getInput, onSubmit } = this.props;
@@ -13,7 +14,7 @@ class SearchInput extends PureComponent {
     );
   }
 }
-
+// Props Validations
 SearchInput.propTypes = {
   getInput: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,

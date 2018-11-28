@@ -6,6 +6,7 @@ import Rating from './Rating';
 import { MAX_NUMB_STARS } from '../../utils/constants';
 import CircleImg from './CircleImg';
 
+// Image Overlay
 class ImgOverlay extends PureComponent {
   render() {
     const { rating } = this.props;
@@ -19,6 +20,7 @@ class ImgOverlay extends PureComponent {
   }
 }
 
+// Props Validation
 ImgOverlay.propTypes = {
   rating: PropTypes.number.isRequired,
 };

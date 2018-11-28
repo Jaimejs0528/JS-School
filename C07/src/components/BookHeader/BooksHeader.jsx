@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ViewMode from './ViewMode';
 
-
+// Class that compose all book Header viewMode and Title
 class BooksHeader extends PureComponent {
   render() {
     const { title } = this.props;
@@ -14,6 +14,7 @@ class BooksHeader extends PureComponent {
   }
 }
 
+// Props Validations
 BooksHeader.propTypes = {
   title: PropTypes.string.isRequired,
 };

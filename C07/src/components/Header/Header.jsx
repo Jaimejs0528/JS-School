@@ -4,56 +4,57 @@ import PropTypes from 'prop-types';
 import smallLogo from '../../assets/images/favicon.png';
 import bigLogo from '../../assets/images/logo.png';
 import userIcon from '../../assets/images/jakob.png';
-import Logo from './logo';
+import Logo from './Logo';
 import { MD_VIEW, BOOKSHELF_TITLE } from '../../utils/constants';
-import SearchContainer from './searchContainer';
-import UserInfo from './userInfo';
+import SearchContainer from './SearchContainer';
+import UserInfo from './UserInfo';
 
+// Prevent default
+function onSubmit(event) {
+  event.preventDefault();
+  // console.log(event.target.querySelector('input').value);
+}
+
+// Contains all headers elements and their logic
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isSmallLogo: false,
       screenX: window.screen.width,
-      inputValue: '',
     };
     this.screenHasChanged = this.screenHasChanged.bind(this);
     this.changeLogoIcon = this.changeLogoIcon.bind(this);
     this.getInput = this.getInput.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
+  // Remove window events and select the logo
   componentDidMount() {
     window.addEventListener('resize', this.screenHasChanged);
     this.changeLogoIcon();
   }
 
+  // Remove window events
   componentWillUnmount() {
     window.removeEventListener('resize', this.screenHasChanged);
   }
 
-  onSubmit(event) {
-    event.preventDefault();
-    // console.log(event.target.querySelector('input').value);
-  }
-
+  // Get the input into the search Field
   getInput(event) {
     const { getFilter } = this.props;
-    this.setState({
-      inputValue: event.target.value,
-    });
     getFilter(event.target.value);
-
   }
 
+  // Validates whne screen has changed
   screenHasChanged() {
-  // Hide all overlay summaries open
-  $('.overlay-summary').removeClass('show-summary').removeClass('change-sense')
+    // Hide all overlay summaries open
+    $('.overlay-summary').removeClass('show-summary').removeClass('change-sense');
     this.setState({
       screenX: window.innerWidth,
     }, this.changeLogoIcon.bind(this));
   }
 
+  // Change Icon when screen resize
   changeLogoIcon() {
     const { screenX } = this.state;
     if (screenX < MD_VIEW) {
@@ -71,7 +72,7 @@ class Header extends Component {
         <SearchContainer
           title={BOOKSHELF_TITLE}
           getInput={this.getInput}
-          onSubmit={this.onSubmit}
+          onSubmit={onSubmit}
         />
         <UserInfo userName="Jakob Treml" userIcon={userIcon} />
       </div>
@@ -79,8 +80,9 @@ class Header extends Component {
   }
 }
 
-// Header.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
+// Props Validations
+Header.propTypes = {
+  getFilter: PropTypes.func.isRequired,
+};
 
 export default Header;

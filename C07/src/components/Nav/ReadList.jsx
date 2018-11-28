@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+// Class that load all most read books list
 class ReadList extends PureComponent {
   render() {
     const { lectures } = this.props;
@@ -11,6 +12,7 @@ class ReadList extends PureComponent {
   }
 }
 
+// Props Validation
 ReadList.propTypes = {
   lectures: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

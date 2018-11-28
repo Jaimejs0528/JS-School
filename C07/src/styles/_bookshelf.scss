@@ -96,12 +96,19 @@
   color: $black-medium;
   font-family: 'PlutoSansCondMedium', 'sans-serif';
   font-size: .9rem;
+  text-transform: capitalize;
+}
+
+.cities {
+  @extend %bookInfo;
+  color: $gray-base;
+  text-transform: capitalize;
 }
 
 .author {
+  @extend %bookInfo;
   color: $secondary-gray;
-  font-family: 'PlutoSansCondLight', 'sans-serif';
-  font-size: .813rem;
+  text-transform: capitalize;
 }
 
 .rating {

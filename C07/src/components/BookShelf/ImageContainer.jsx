@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import background from '../../assets/images/reservation.png';
 import LendIcon from './LendIcon';
-import ImgOverlay from './imgOverlay';
+import ImgOverlay from './ImgOverlay';
 
+// Class that contains image and its overlay
 class ImageContainer extends PureComponent {
   render() {
     const { imgBook, rating, showSummary, addLend } = this.props;
@@ -18,9 +19,12 @@ class ImageContainer extends PureComponent {
   }
 }
 
+// Props Validations
 ImageContainer.propTypes = {
   imgBook: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
+  showSummary: PropTypes.func.isRequired,
+  addLend: PropTypes.bool.isRequired,
 };
 
 export default ImageContainer;
