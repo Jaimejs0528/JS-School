@@ -19,21 +19,16 @@ First of all, you'll need to run the server [GUIDE](https://github.com/Jaimejs05
 NOTE: Don't modify the defaults ports.
 
 After that you have the server running, you must to run, the next commands:
-> npm install<br>
-> npm run build-prod
+> npm install
 
-Afterward, with mount a server, you can use http-server o live-server.
+All these dependencies are compatibles with node v11.0.0 and npm 6.4.1
+> npm run init-server-dev
 
-I recommend use live-server, you can add in Visual Studio Code as a pluging [Live-Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
+Internally this command runs the webpack-dev-server on port 5600.
 
-Maybe you need to create a file settings.json and add:
+You can access to the webpage using the next URL.
 
->{
->  "liveServer.settings.root": "C07"
->}
-
-When you have the server installed, run it. And go to dist path.(Here is the index.html).
-
+> http://localhost:5600
 
 
 

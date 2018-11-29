@@ -54,15 +54,22 @@
   left: calc(50% - (23.8rem/2));
   opacity: 0;
   position: absolute;
-  top: 22.5%;
+  top: 22.5vh;
   transition: opacity .2s;
   width: 23.8rem;
 
   @include sm-view{
-    top: 30vh;
     left: calc(50% - (80vw/2));
     width: 80vw;
+  }
+
+  @include md-view{
+    top:30vh;
     z-index: 4;
+  }
+
+  @include xlg-view{
+    left: calc(60% - (23.8rem/2));
   }
 }
 
