@@ -136,7 +136,11 @@ exports.lendABook = (req, res) => {
 
 // returns all books
 exports.findAllBooks = (req, res) => {
-  tool.findQuery(res, {}, Book);
+  const filter = req.query.search || '.{1,40}';
+  const regex = new RegExp(filter, 'i');
+  tool.findQuery(req, res, {
+    $or: [{ 'bookinfo.title': regex }, { 'bookinfo.author': regex }],
+  }, Book);
 };
 
 // returns a book by ISBN
@@ -147,17 +151,32 @@ exports.findByISBN = (req, res) => {
 
 // returns all books with a digital copy
 exports.getDigitals = (req, res) => {
-  tool.findQuery(res, { hasDigitalCopy: true }, Book);
+  const filter = req.query.search || '.{1,40}';
+  const regex = new RegExp(filter, 'i');
+  tool.findQuery(req, res, {
+    hasDigitalCopy: true,
+    $or: [{ 'bookinfo.title': regex }, { 'bookinfo.author': regex }],
+  }, Book);
 };
 
 // returns all book if a specific city
 exports.findByCity = (req, res) => {
+  const filter = req.query.search || '.{1,40}';
+  const regex = new RegExp(filter, 'i');
   const { city } = req.params;
-  tool.findQuery(res, { cities: city }, Book);
+  tool.findQuery(req, res, {
+    cities: city,
+    $or: [{ 'bookinfo.title': regex }, { 'bookinfo.author': regex }],
+  }, Book);
 };
 
 // return books loans for a specific user
 exports.findByUserLoans = (req, res) => {
+  const filter = req.query.search || '.{1,40}';
+  const regex = new RegExp(filter, 'i');
   const emailUserLogged = req.user.email;
-  tool.findQuery(res, { 'lends.userEmail': emailUserLogged }, Book);
+  tool.findQuery(req, res, {
+    'lends.userEmail': emailUserLogged,
+    $or: [{ 'bookinfo.title': regex }, { 'bookinfo.author': regex }],
+  }, Book);
 };

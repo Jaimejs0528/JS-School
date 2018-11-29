@@ -15,13 +15,26 @@ const isEmpty = function isEmpty(obj) {
 };
 
 // returns all books with a specific a query
-const findQuery = (res, query, model, limit = PAGE_SIZE, skip = 0) => {
+const findQuery = (req, res, query, model) => {
+  const currentPage = Number(req.query.page) || 0;
+  const skip = currentPage * PAGE_SIZE;
   const processFind = async () => {
-    const books = await model.find(query).limit(limit).skip(skip);
-    return books;
+    const books = await model.find(query).limit(PAGE_SIZE).skip(skip);
+    const amount = await model.find(query).countDocuments();
+    const totalPages = Math.ceil(amount / PAGE_SIZE);
+    return {
+      books,
+      pagination: {
+        totalItems: amount,
+        totalPages,
+        currentPage,
+        pageSize: PAGE_SIZE,
+      },
+    };
   };
   processFind().then((response) => {
     res.status(200);
+    console.log(response);
     if (response.length !== 0) {
       res.send(response);
     } else {
