@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 
 // Local
 const messageGenerator = require('./messageGenerator');
-const { DB_USER_COLLECTION, DB_BOOK_COLLECTION } = require('./constants');
+const { DB_BOOK_COLLECTION, PAGE_SIZE, MAX_DAYS_LEND } = require('./constants');
 
 // Validates if the object is empty
 const isEmpty = function isEmpty(obj) {
@@ -15,7 +15,7 @@ const isEmpty = function isEmpty(obj) {
 };
 
 // returns all books with a specific a query
-const findQuery = (res, query, model, limit = 50, skip = 0) => {
+const findQuery = (res, query, model, limit = PAGE_SIZE, skip = 0) => {
   const processFind = async () => {
     const books = await model.find(query).limit(limit).skip(skip);
     return books;
@@ -54,14 +54,53 @@ const findOneQuery = (res, query, model) => {
   });
 };
 
-// validates if the password has the correct format
-const validatePassword = (password, res) => {
-  if (password) {
+// Validate is it is a VALID DATE
+const dateValidator = (dateInput, res, message, isActual = true) => {
+  const date = new Date(dateInput);
+  if (date) {
+    if (isActual) {
+      const temporal = new Date();
+      const today = new Date(temporal.getFullYear(),
+        temporal.getMonth(), temporal.getDate());
+      if (date.getTime() > today.getTime()) {
+        return true;
+      }
+      const oldDate = messageGenerator
+        .ErrorMessage(messageGenerator.OLD_DATE, DB_BOOK_COLLECTION);
+      res.send(oldDate);
+      return false;
+    }
+    return true;
+  }
+  res.send(message);
+  return false;
+};
+// Validates that the limitDate is major to lendDate
+// and that limitDate not overcomes the MAX_DAYS_LEND
+const validateDateLimit = (lend, limit, res) => {
+  const lendDate = new Date(lend);
+  const limitDate = new Date(limit);
+  const diff = limitDate.getTime() - lendDate.getTime();
+  const days = diff / (24 * 60 * 60 * 1000); // convert milliseconds to days
+  if (diff <= 0 || days === 0) {
+    res.send(messageGenerator
+      .ErrorMessage(messageGenerator.INVALID_LIMIT_DATE, DB_BOOK_COLLECTION));
+    return false;
+  }
+  if (days > MAX_DAYS_LEND) {
+    res.send(messageGenerator
+      .ErrorMessage(messageGenerator.OVERCAME_LIMIT_DATE, DB_BOOK_COLLECTION));
+    return false;
+  }
+  return true;
+};
+
+// Validates that receives the arguments correspondly
+const validateFieldUsingRegexp = (input, regExp, res, message) => {
+  if (input) {
     // password with between 6  to 16 with aleast one digit, lowercase, uppercase and special char.
-    const regExp = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{6,16}$/g;
-    if (!regExp.test(password)) {
-      res.status(400).send(messageGenerator
-        .ErrorMessage(messageGenerator.INVALID_PASSWORD, DB_USER_COLLECTION));
+    if (!regExp.test(input)) {
+      res.status(400).send(message);
       return false;
     }
   } else {
@@ -70,41 +109,30 @@ const validatePassword = (password, res) => {
     return false;
   }
   return true;
+};
+
+// Validates that input has a length limit
+const limitInputLength = (input, limit, res, message) => {
+  const regExp = new RegExp(`.{1,${limit}}`, 'g');
+  return validateFieldUsingRegexp(input, regExp, res, message);
+};
+
+// validates if the password has the correct format
+const validatePassword = (password, res, message) => {
+  const regExp = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{6,16}$/g;
+  return validateFieldUsingRegexp(password, regExp, res, message);
 };
 
 // validates if the email has the correct format
-const checkEmailFormat = (email, res) => {
-  if (email) {
-    const format = /^[a-z].*@\w{3,15}\.[a-z0-9.]{1,10}\w$/ig;
-    if (!format.test(email)) {
-      res.status(400).send(messageGenerator
-        .ErrorMessage(messageGenerator.INVALID_EMAIL, DB_USER_COLLECTION));
-      return false;
-    }
-  } else {
-    res.status(400).send(messageGenerator
-      .ErrorMessage(messageGenerator.INVALID_BODY, messageGenerator.COMMON));
-    return false;
-  }
-  return true;
+const checkEmailFormat = (email, res, message) => {
+  const format = /^[a-z].*@\w{3,15}\.[a-z0-9.]{1,10}\w$/ig;
+  return validateFieldUsingRegexp(email, format, res, message);
 };
 
 // Validates if the text is just a-zA-Z with spaces
-const validateTextField = (text, res) => {
-  if (text) {
-    // Validate if is a word and allows spaces
-    const format = /^[a-z\s]{2,30}$/ig;
-    if (!format.test(text)) {
-      res.status(400).send(messageGenerator
-        .ErrorMessage(messageGenerator.INVALID_BODY, messageGenerator.COMMON));
-      return false;
-    }
-  } else {
-    res.status(400).send(messageGenerator
-      .ErrorMessage(messageGenerator.INVALID_BODY, messageGenerator.COMMON));
-    return false;
-  }
-  return true;
+const validateTextField = (text, res, message) => {
+  const format = /^[a-z\s]{2,30}$/ig;
+  return validateFieldUsingRegexp(text, format, res, message);
 };
 
 // Add new Book from API GOOGLE with a specific ISBN
@@ -177,5 +205,8 @@ exports.isEmpty = isEmpty;
 exports.checkEmailFormat = checkEmailFormat;
 exports.validatePassword = validatePassword;
 exports.validateTextField = validateTextField;
+exports.limitInputLength = limitInputLength;
 exports.findOneQuery = findOneQuery;
 exports.findQuery = findQuery;
+exports.dateValidator = dateValidator;
+exports.validateDateLimit = validateDateLimit;

@@ -23,6 +23,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  icon: {
+    type: String,
+    default: 'https://4.bp.blogspot.com/-CCyY8H1_br0/Tx3wxWoTvmI/AAAAAAAABss/_SquuwCipG8/s1600/anonimo.jpg',
+  },
   created: {
     type: Date,
     default: Date.now,

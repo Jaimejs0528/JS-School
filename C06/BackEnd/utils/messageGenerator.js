@@ -1,6 +1,6 @@
 
 // Local imports
-const { DB_USER_COLLECTION, DB_BOOK_COLLECTION } = require('./constants');
+const { DB_USER_COLLECTION, DB_BOOK_COLLECTION, MAX_DAYS_LEND } = require('./constants');
 const tool = require('./tool');
 
 // OWN ERROR CODES
@@ -16,6 +16,10 @@ const UNAUTHORIZED_ACCESS = 99;
 const INVALID_FIELD = 111;
 const INVALID_CITIES = 122;
 const WITHOUT_CITIES = 133;
+const INVALID_DATE = 144;
+const INVALID_LIMIT_DATE = 155;
+const OLD_DATE = 166;
+const OVERCAME_LIMIT_DATE = 177;
 
 // EXPORTS ERRORS
 exports.NOT_FOUND = NOT_FOUND;
@@ -30,6 +34,10 @@ exports.UNAUTHORIZED_ACCESS = UNAUTHORIZED_ACCESS;
 exports.INVALID_FIELD = INVALID_FIELD;
 exports.INVALID_CITIES = INVALID_CITIES;
 exports.WITHOUT_CITIES = WITHOUT_CITIES;
+exports.INVALID_DATE = INVALID_DATE;
+exports.OLD_DATE = OLD_DATE;
+exports.INVALID_LIMIT_DATE = INVALID_LIMIT_DATE;
+exports.OVERCAME_LIMIT_DATE = OVERCAME_LIMIT_DATE;
 
 // MONGO ERROR CODES
 const EXIST = 11000;
@@ -87,6 +95,22 @@ const ERROR_MESSAGES = {
       code: WITHOUT_CITIES,
       message: 'Add a city',
     },
+    [INVALID_DATE]: {
+      code: INVALID_DATE,
+      message: 'Invalid Date',
+    },
+    [OLD_DATE]: {
+      code: OLD_DATE,
+      message: 'Date before today',
+    },
+    [INVALID_LIMIT_DATE]: {
+      code: INVALID_LIMIT_DATE,
+      message: 'limit date is minor or equal to lend date',
+    },
+    [OVERCAME_LIMIT_DATE]: {
+      code: OVERCAME_LIMIT_DATE,
+      message: `Date Overcome the limit (max ${MAX_DAYS_LEND} days)`,
+    },
   },
   common: {
     [INVALID_BODY]: {
@@ -96,12 +120,12 @@ const ERROR_MESSAGES = {
   },
 };
 
-// return error object that shows the error code and message.
+// Return error object that shows the error code and message.
 exports.ErrorMessage = function ErrorMessage(error, controllerTransmitter) {
-  if (error.code) {
+  if (error && error.code) {
     return ERROR_MESSAGES[controllerTransmitter][error.code];
   }
-  if (error.message) {
+  if (error && error.message) {
     return { code: INVALID_FIELD, message: error.message };
   }
   return ERROR_MESSAGES[controllerTransmitter][error];

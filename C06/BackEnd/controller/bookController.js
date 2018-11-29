@@ -11,11 +11,11 @@ const Book = mongoose.model(DB_BOOK_COLLECTION);
 Book.createIndexes();
 
 // Validates if a user can lend a book
-const validateBooksLoans = (lends, copies, emailUser) => {
+const validateBooksLoans = (lends, copies, emailUser, lendDate, limitDate) => {
   const alreadyLoan = lends.filter(value => value.userEmail === emailUser);
   const arrayTemp = lends.map(item => item.bookCode);
   const availables = copies.filter(value => arrayTemp.indexOf(value) === -1);
-  console.log(availables, arrayTemp, alreadyLoan);
+  // console.log(availables, arrayTemp, alreadyLoan);
   if (alreadyLoan.length > 0) {
     return messageGenerator
       .ErrorMessage(messageGenerator.U_ALREADY_LOAN, DB_USER_COLLECTION);
@@ -27,7 +27,19 @@ const validateBooksLoans = (lends, copies, emailUser) => {
   return {
     userEmail: emailUser,
     bookCode: availables[0],
+    lendDate,
+    limitDate,
   };
+};
+
+// Validates dates for lend
+const validateLendDates = (lendDate, limitDate, res) => {
+  const invalidDateMessage = messageGenerator
+    .ErrorMessage(messageGenerator.INVALID_DATE, DB_BOOK_COLLECTION);
+  if (!tool.dateValidator(lendDate, res, invalidDateMessage)) return false;
+  if (!tool.dateValidator(limitDate, res, invalidDateMessage)) return false;
+  if (!tool.validateDateLimit(lendDate, limitDate, res)) return false;
+  return true;
 };
 
 // Validates if exist an invalid city or array is empty
@@ -89,32 +101,37 @@ exports.addOneBook = (req, res) => {
 
 // Allow to Userr lend a book
 exports.lendABook = (req, res) => {
-  const emailUserLogged = req.user.email;
-  const bookIsbn = req.body.isbn;
-  const getBooks = async () => {
-    const ret = await Promise.all([
-      Book.findOne({ 'bookinfo.isbn': bookIsbn }, { _id: 0, lends: 1 }),
-      Book.findOne({ 'bookinfo.isbn': bookIsbn }, { _id: 0, copies: 1 }),
-    ]);
-    if (ret[0] && ret[1]) {
-      const lendsArray = ret[0].lends;
-      const copiesArray = ret[1].copies;
-      const output = validateBooksLoans(lendsArray, copiesArray, emailUserLogged);
-      if (Object.prototype.hasOwnProperty.call(output, 'code')) {
-        res.status(200).send(output);
+  const { lendDate } = req.body;
+  const { limitDate } = req.body;
+  if (validateLendDates(lendDate, limitDate, res)) {
+    const bookIsbn = req.body.isbn;
+    const getBooks = async () => {
+      const ret = await Promise.all([
+        Book.findOne({ 'bookinfo.isbn': bookIsbn }, { _id: 0, lends: 1 }),
+        Book.findOne({ 'bookinfo.isbn': bookIsbn }, { _id: 0, copies: 1 }),
+      ]);
+      if (ret[0] && ret[1]) {
+        const emailUserLogged = req.user.email;
+        const lendsArray = ret[0].lends;
+        const copiesArray = ret[1].copies;
+        const output = validateBooksLoans(lendsArray, copiesArray,
+          emailUserLogged, lendDate, limitDate);
+        if (Object.prototype.hasOwnProperty.call(output, 'code')) {
+          res.status(200).send(output);
+        } else {
+          lendsArray.push(output);
+          const update = await Book.findOneAndUpdate({ 'bookinfo.isbn': bookIsbn },
+            { $set: { lends: lendsArray } }, { upsert: true, new: true });
+          res.status(200).send(update);
+        }
       } else {
-        lendsArray.push(output);
-        const update = await Book.findOneAndUpdate({ 'bookinfo.isbn': bookIsbn },
-          { $set: { lends: lendsArray } }, { upsert: true, new: true });
-        res.status(200).send(update);
+        res.status(400).send(messageGenerator
+          .ErrorMessage(messageGenerator.NOT_FOUND, DB_BOOK_COLLECTION));
       }
-    } else {
-      res.status(400).send(messageGenerator
-        .ErrorMessage(messageGenerator.NOT_FOUND, DB_BOOK_COLLECTION));
-    }
-  };
-  getBooks().catch(err => res.status(400)
-    .send(messageGenerator.ErrorMessage(err, DB_BOOK_COLLECTION)));
+    };
+    getBooks().catch(err => res.status(400)
+      .send(messageGenerator.ErrorMessage(err, DB_BOOK_COLLECTION)));
+  }
 };
 
 // returns all books
@@ -132,7 +149,6 @@ exports.findByISBN = (req, res) => {
 exports.getDigitals = (req, res) => {
   tool.findQuery(res, { hasDigitalCopy: true }, Book);
 };
-
 
 // returns all book if a specific city
 exports.findByCity = (req, res) => {

@@ -55,6 +55,14 @@ const bookLendSchema = new Schema({
     type: Number,
     required: true,
   },
+  lendDate: {
+    type: Date,
+    required: true,
+  },
+  limitDate: {
+    type: Date,
+    required: true,
+  },
 });
 
 // Schema for book document
