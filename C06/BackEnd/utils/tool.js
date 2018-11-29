@@ -35,7 +35,7 @@ const findQuery = (req, res, query, model) => {
   processFind().then((response) => {
     res.status(200);
     console.log(response);
-    if (response.length !== 0) {
+    if (response.books.length !== 0) {
       res.send(response);
     } else {
       const message = messageGenerator.ErrorMessage(messageGenerator.NOT_FOUND, DB_BOOK_COLLECTION);

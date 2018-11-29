@@ -5,6 +5,12 @@ const mongoose = require('mongoose');
 const { DB_BOOK_COLLECTION, DB_FULL_PATH } = require('./constants');
 require('../db/models/books');
 
+// Decides if has digital copy or not
+const shouldHasDigitalCopy = () => {
+  const randomValue = Math.floor(Math.random() * 100);
+  return randomValue >= 40;
+};
+
 // Select randomly the cities to add to book.
 const selectCities = () => {
   const cities = ['medellin', 'quito', 'cartagena'];
@@ -13,16 +19,10 @@ const selectCities = () => {
   return selected;
 };
 
-// Decides if has digital copy or not
-const shouldHasDigitalCopy = () => {
-  const randomValue = Math.floor(Math.random() * 100);
-  return randomValue >= 40;
-};
-
 // Generate randomly codes for book's copies.
 const generateCopiesCode = () => {
   const copies = [];
-  const amount = Math.floor((Math.random() * 10));
+  const amount = Math.floor((Math.random() * 10) + 3);
   for (let i = 2; i < amount; i += 1) {
     copies.push(Math.floor((Math.random() * 1000) + 100));
   }
@@ -87,7 +87,13 @@ const baseBooks = async () => {
     9780618212903, 9780547928203, 9780345325815, 9780547154114,
     9780812974010, 9781476770390, 9781501173219, 9780804172448,
     9780425274866, 9780060883287, 9780785814535, 9781454921356,
-    9780802123701];
+    9780802123701, 9780451208637, 9780451531391, 9780142437544,
+    9780674504868, 9780545790352, 9780545139700, 9780439139601,
+    9780439064866, 9780439136365, 9781567925968, 9780345360502,
+    9781119049104, 9780123742605, 9780131103627, 9780060652937,
+    9780321928429, 9780132350884, 9780321563842, 9781593276034,
+    9781593275990, 9781491962299, 9780387310732, 9781617294433,
+    9781784393908, 9781979493956, 9781492044635, 9780140268867];
   console.log('Please wait....');
   const promises = arrayBooks
     .map(isbnBook => new Promise(async resolve => resolve(await addBookISBN(isbnBook,
