@@ -144,9 +144,12 @@ cities names: "medellin", "quito", "cartagena".
 If you use it with PATCH method, you must to put into the body, the next json structure.
 
 {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"isbn":"isbn-code"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"isbn":"isbn-code",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"lendDate":1543521531000,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"limitDate":1544732192000<br>
 }<br>
 
+lendDate is the date when the user lends a book and limit date is the date when the user must return the book (max 15 days)
 
 And if you use with this, the GET method, you don't need anything, to except JWT Token.
 
