@@ -5,6 +5,30 @@ const mongoose = require('mongoose');
 const { DB_BOOK_COLLECTION, DB_FULL_PATH } = require('./constants');
 require('../db/models/books');
 
+// Select randomly the cities to add to book.
+const selectCities = () => {
+  const cities = ['medellin', 'quito', 'cartagena'];
+  let selected = cities.filter(city => (Math.floor((Math.random() * 100)) >= 65 && city));
+  selected = (selected.length === 0) ? [cities[Math.floor((Math.random() * 3))]] : selected;
+  return selected;
+};
+
+// Decides if has digital copy or not
+const shouldHasDigitalCopy = () => {
+  const randomValue = Math.floor(Math.random() * 100);
+  return randomValue >= 40;
+};
+
+// Generate randomly codes for book's copies.
+const generateCopiesCode = () => {
+  const copies = [];
+  const amount = Math.floor((Math.random() * 10));
+  for (let i = 2; i < amount; i += 1) {
+    copies.push(Math.floor((Math.random() * 1000) + 100));
+  }
+  return copies;
+};
+
 // Add new Book from API GOOGLE with a specific ISBN
 const addBookISBN = async (isbn, cities, copies) => {
   const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
@@ -41,7 +65,7 @@ const addBookISBN = async (isbn, cities, copies) => {
     bookinfo: newBookInfo,
     cities,
     copies,
-    hasDigitalCopy: true,
+    hasDigitalCopy: shouldHasDigitalCopy(),
   };
   mongoose.Promise = global.Promise;
   // Avoiding deprecation
@@ -55,25 +79,6 @@ const addBookISBN = async (isbn, cities, copies) => {
   const saved = await newBookR.save().catch(err => err);
   con.close();
   return saved;
-};
-
-// Select randomly the cities to add to book.
-const selectCities = () => {
-  const cities = ['medellin', 'quito', 'cartagena'];
-  let selected = cities.filter(city => (Math.floor((Math.random() * 100)) >= 65 && city));
-  selected = (selected.length === 0) ? [cities[Math.floor((Math.random() * 3))]] : selected;
-  return selected;
-};
-
-
-// Generate randomly codes for book's copies.
-const generateCopiesCode = () => {
-  const copies = [];
-  const amount = Math.floor((Math.random() * 10));
-  for (let i = 2; i < amount; i += 1) {
-    copies.push(Math.floor((Math.random() * 1000) + 100));
-  }
-  return copies;
 };
 
 // Create a base of books.
