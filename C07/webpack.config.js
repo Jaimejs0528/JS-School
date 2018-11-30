@@ -22,9 +22,6 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        include: [
-          `${__dirname}/src`,
-        ],
         use: {
           loader: 'babel-loader',
         },
