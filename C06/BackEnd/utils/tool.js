@@ -16,7 +16,8 @@ const isEmpty = function isEmpty(obj) {
 
 // returns all books with a specific a query
 const findQuery = (req, res, query, model) => {
-  const currentPage = Number(req.query.page) || 0;
+  let currentPage = (Number(req.query.page) - 1) || 0;
+  currentPage = (currentPage >= 0) ? currentPage : 0;
   const skip = currentPage * PAGE_SIZE;
   const processFind = async () => {
     const books = await model.find(query).limit(PAGE_SIZE).skip(skip);
@@ -27,14 +28,14 @@ const findQuery = (req, res, query, model) => {
       pagination: {
         totalItems: amount,
         totalPages,
-        currentPage,
+        currentPage: (currentPage + 1),
         pageSize: PAGE_SIZE,
       },
     };
   };
   processFind().then((response) => {
     res.status(200);
-    console.log(response);
+
     if (response.books.length !== 0) {
       res.send(response);
     } else {
@@ -47,7 +48,7 @@ const findQuery = (req, res, query, model) => {
   });
 };
 
-// Returns only one book with a specifict query
+// Returns only one book with a specific query
 const findOneQuery = (res, query, model) => {
   const processFind = async () => {
     const books = await model.findOne(query);
@@ -55,6 +56,7 @@ const findOneQuery = (res, query, model) => {
   };
   processFind().then((response) => {
     res.status(200);
+
     if (response) {
       res.send(response);
     } else {
@@ -70,16 +72,19 @@ const findOneQuery = (res, query, model) => {
 // Validate is it is a VALID DATE
 const dateValidator = (dateInput, res, message, isActual = true) => {
   const date = new Date(dateInput);
+
   if (date) {
     if (isActual) {
       const temporal = new Date();
       const today = new Date(temporal.getFullYear(),
         temporal.getMonth(), temporal.getDate());
+      const oldDate = messageGenerator
+        .ErrorMessage(messageGenerator.OLD_DATE, DB_BOOK_COLLECTION);
+
       if (date.getTime() > today.getTime()) {
         return true;
       }
-      const oldDate = messageGenerator
-        .ErrorMessage(messageGenerator.OLD_DATE, DB_BOOK_COLLECTION);
+
       res.send(oldDate);
       return false;
     }
@@ -108,10 +113,10 @@ const validateDateLimit = (lend, limit, res) => {
   return true;
 };
 
-// Validates that receives the arguments correspondly
+// Validates that receives the arguments correspondent
 const validateFieldUsingRegexp = (input, regExp, res, message) => {
   if (input) {
-    // password with between 6  to 16 with aleast one digit, lowercase, uppercase and special char.
+    // password with between 6  to 16 with least one digit, lowercase, uppercase and special char.
     if (!regExp.test(input)) {
       res.status(400).send(message);
       return false;
@@ -126,7 +131,7 @@ const validateFieldUsingRegexp = (input, regExp, res, message) => {
 
 // Validates that input has a length limit
 const limitInputLength = (input, limit, res, message) => {
-  const regExp = new RegExp(`.{1,${limit}}`, 'g');
+  const regExp = new RegExp(`.{1,${limit}}`, 'i');
   return validateFieldUsingRegexp(input, regExp, res, message);
 };
 
@@ -138,13 +143,13 @@ const validatePassword = (password, res, message) => {
 
 // validates if the email has the correct format
 const checkEmailFormat = (email, res, message) => {
-  const format = /^[a-z].*@\w{3,15}\.[a-z0-9.]{1,10}\w$/ig;
+  const format = /^[a-z].*@\w{3,15}\.[a-z0-9.]{1,10}\w$/i;
   return validateFieldUsingRegexp(email, format, res, message);
 };
 
 // Validates if the text is just a-zA-Z with spaces
 const validateTextField = (text, res, message) => {
-  const format = /^[a-z\s]{2,30}$/ig;
+  const format = /^[a-z\s]{2,40}$/i;
   return validateFieldUsingRegexp(text, format, res, message);
 };
 

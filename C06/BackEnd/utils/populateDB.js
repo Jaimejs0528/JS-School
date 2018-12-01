@@ -35,7 +35,6 @@ const addBookISBN = async (isbn, cities, copies) => {
   const resBook = await fetch(url);
   if (resBook.status === 403) return 'Google book service abuse';
   const jsonBook = await resBook.json();
-  // console.log(jsonBook[0] || 'NOOOOOOO!');
   if (!jsonBook.items[0]) return 'Book not found';
   const information = jsonBook.items[0].volumeInfo;
   const {

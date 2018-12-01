@@ -64,7 +64,7 @@ const citiesValidation = (cities, res) => {
 exports.addOneBook = (req, res) => {
   const newBook = new Book(req.body);
 
-  // Validates cities diferents to quito, medellin and cartagena
+  // Validates cities different to quito, medellin and cartagena
   if (messageGenerator.bodyValidator(req.body, res) && citiesValidation(newBook.cities, res)) {
     // Return a book added to db
     const processAdd = async () => {
@@ -99,7 +99,7 @@ exports.addOneBook = (req, res) => {
   }
 };
 
-// Allow to Userr lend a book
+// Allow to User lend a book
 exports.lendABook = (req, res) => {
   const { lendDate } = req.body;
   const { limitDate } = req.body;
