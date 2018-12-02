@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable import/no-unresolved */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
@@ -18,6 +19,7 @@ class ImageContainer extends PureComponent {
     addLend: PropTypes.bool.isRequired,
   }
 
+  // Jsx for icon
   circleImg = (icon) => {
     return (
       <div className="child circle-img">
@@ -29,7 +31,7 @@ class ImageContainer extends PureComponent {
     const { imgBook, rating, showSummary, addLend } = this.props;
 
     return (
-      <div onClick={showSummary} className="overlay-container img-container">
+      <div onClick={showSummary} className="overlay-container img-container" role="button" tabIndex="0">
         <img className="img-border" src={imgBook} alt="book-img" width="176" height="250" />
         <div className={`lend-book ${addLend && 'show'}`}>
           <img src={background} alt="lend-icon" />

@@ -11,6 +11,7 @@ class UserInfo extends PureComponent {
   };
   render() {
     const { userName, userIcon } = this.props;
+    
     return (
       <div className="sidebar header-profile">
         <div className="vertical-line" />

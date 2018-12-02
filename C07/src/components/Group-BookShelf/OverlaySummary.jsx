@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/forbid-prop-types */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
@@ -13,12 +14,17 @@ class OverlaySummary extends PureComponent {
     showLendIcon: PropTypes.func.isRequired,
     showSummary: PropTypes.func.isRequired,
   }
+
   render() {
     const { bookInfo, show, showLendIcon, showSummary } = this.props;
+    
     return (
       <div 
         className={`overlay-summary ${show && 'show-summary'}`}
-        onClick={showSummary}>
+        onClick={showSummary}
+        role="button"
+        tabIndex="0"
+      >
         {/* <div className="arrow" /> */}
         <div>
           <button type="button" onClick={showLendIcon} className="button-lend">lend</button>

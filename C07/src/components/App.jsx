@@ -11,16 +11,24 @@ class App extends Component {
     this.state = {
       filter: '',
     };
-    this.getFilter = this.getFilter.bind(this);
   }
 
-  getFilter(filter) {
+  // When must re-render
+  shouldComponentUpdate(nextState) {
+    const { filter } = this.state;
+
+    return (filter !== nextState.filter);
+  }
+
+  // Get the filter for books
+  getFilter = (filter) => {
     this.setState({
       filter,
     });
   }
 
   render() {
+    // Get props and state
     const { filter } = this.state;
     
     return (

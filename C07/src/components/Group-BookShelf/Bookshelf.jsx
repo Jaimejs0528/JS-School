@@ -6,12 +6,6 @@ import classNames from 'classnames';
 import { NAV_MENU, DEFAULT_HOME, NOT_CONNECTION } from 'utils/constants';
 import OverlayBookContainer from './OverlayBookContainer';
 
-// filter by book title and author
-function filterbooks(filter) {
-  const expReg = new RegExp(filter, 'i');
-  return items => expReg.test(items.bookinfo.title) || expReg.test(items.bookinfo.author);
-}
-
 // Class that contains all books
 class BookShelf extends Component {
   // Props Validations
@@ -37,9 +31,8 @@ class BookShelf extends Component {
     this.getBooks(query);
   }
 
-
   // Validates when the query has changed to get new books
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     const {query} = this.props;
     if(query !== nextProps.query){
       this.setState({
@@ -50,9 +43,27 @@ class BookShelf extends Component {
     }
   }
 
+  // When must re-render
+  shouldComponentUpdate(nextProps, nextState) {
+    const { query , filter } = this. props;
+    const { isLoading, error, books } = this.state;
+
+    return (query !== nextProps.query) ||
+      (filter !== nextProps.filter) ||
+      (isLoading !== nextState.isLoading) ||
+      (error !== nextState.error) ||
+      (books !== nextState.books);
+  }
+
   // Avoid fetch
   componentWillUnmount() {
     this.setState({ unMount: true });
+  }
+
+  // Filter by book title and author
+  filterbooks = (filter) => {
+    const expReg = new RegExp(filter, 'i');
+    return items => expReg.test(items.bookinfo.title) || expReg.test(items.bookinfo.author);
   }
 
   // Make a request to server
@@ -62,6 +73,8 @@ class BookShelf extends Component {
       const response = await fetch(`${urlBase}${endpointService}`);
       return response.json();
     };
+
+    // Fetch data from server
     consumeService(endpoint).then((response) => {
       if (response.code) {
         this.setState({ error: response.message, isLoading: false  });
@@ -105,7 +118,7 @@ class BookShelf extends Component {
       error: error,
       bookshelf: !isLoading && !error
     });
-    const booksFiltered = books.filter(filterbooks(filter));
+    const booksFiltered = books.filter(this.filterbooks(filter));
 
     return(
       <div className={rightClass}>

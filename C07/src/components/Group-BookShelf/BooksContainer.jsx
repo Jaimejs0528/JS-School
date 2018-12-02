@@ -14,6 +14,7 @@ class BooksContainer extends PureComponent {
   
   render() {
     const { title, filter } = this.props;
+    
     return (
       <main className="books-container">
         <BooksHeader title={title} />

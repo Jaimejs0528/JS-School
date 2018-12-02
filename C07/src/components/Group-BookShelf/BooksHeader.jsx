@@ -9,6 +9,8 @@ class BooksHeader extends PureComponent {
   static propTypes = {
     title: PropTypes.string.isRequired,
   }
+
+  // jsx for view mode icons
   viewMode = () => {
     return (
       <div className="view-books">
@@ -19,6 +21,7 @@ class BooksHeader extends PureComponent {
 
   render() {
     const { title } = this.props;
+    
     return (
       <div className="books-header">
         <h2 className="books-header-title">{title}</h2>

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +15,7 @@ class Rating extends PureComponent {
    maxNumberStars: PropTypes.number.isRequired,
  }
 
- chargeStars() {
+ chargeStars = () => {
    // Defining const to use
    const { rating, maxNumberStars } = this.props;
    const fullStars = Math.floor(rating);
@@ -44,7 +45,7 @@ class Rating extends PureComponent {
  render() {
    return (
      <div className="rating">
-       {this.chargeStars.bind(this)()}
+       {this.chargeStars()}
      </div>
    );
  }

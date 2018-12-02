@@ -21,6 +21,7 @@ class Main extends Component {
     };
   }
 
+  // When must re-render
   shouldComponentUpdate(nextProps, nextState) {
   const { filter } = this.props;
   const { titleBookShelf } = this.state;

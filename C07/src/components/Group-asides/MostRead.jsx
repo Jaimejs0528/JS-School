@@ -10,8 +10,10 @@ class MostRead extends PureComponent {
     title: PropTypes.string.isRequired,
     items: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
+
   render() {
     const { title, items } = this.props;
+    
     return (
       <aside className="sidebar right-side">
         <h4 className="aside-title">{title}</h4>

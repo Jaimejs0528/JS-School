@@ -32,9 +32,11 @@ class Header extends Component {
   }
 
   // Validates when must re-render
-  shouldComponentUpdate(nextState){
+  shouldComponentUpdate(nextProps, nextState){
     const { isSmallLogo } = this.state;
-    return (isSmallLogo !== nextState.isSmallLogo);
+    const { getFilter } = this.props;
+    return (isSmallLogo !== nextState.isSmallLogo) ||
+      (getFilter !== nextProps.getFilter);
   }
 
   // Remove window events

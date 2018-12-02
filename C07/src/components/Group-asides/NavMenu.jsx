@@ -22,7 +22,8 @@ class NavMenu extends Component {
       open: true,
     };
   }
-
+  
+  // When must re-render
   shouldComponentUpdate(nextState) {
     const { selected, open } = this.state;
     
@@ -42,6 +43,7 @@ class NavMenu extends Component {
     this.setState(previous => ({ open: !previous.open }));
   }
 
+  // Open navigation menu using space key
   openMenuKeyBoard = (e) => {
     if(e.which === 32 || e.keyCode === 32) this.setState(previous => ({ open: !previous.open }));
   }
@@ -49,6 +51,7 @@ class NavMenu extends Component {
   render() {
     const { menu, items } = this.props;
     const { selected, open } = this.state;
+    
     return (
       <nav className="sidebar left-side">
         <div

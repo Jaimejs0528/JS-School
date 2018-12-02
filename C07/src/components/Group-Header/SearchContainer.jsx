@@ -10,6 +10,7 @@ class SearchContainer extends PureComponent {
 
   render() {
     const { children } = this.props;
+    
     return (
       <div className="header-search">
         {children}
