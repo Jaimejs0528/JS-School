@@ -4,8 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Contains user icon and name
 class UserInfo extends PureComponent {
+  // Props validations
+  static propTypes = {
+    userName: PropTypes.string.isRequired,
+    userIcon: PropTypes.string.isRequired,
+  };
   render() {
     const { userName, userIcon } = this.props;
+    
     return (
       <div className="sidebar header-profile">
         <div className="vertical-line" />
@@ -18,11 +24,5 @@ class UserInfo extends PureComponent {
     );
   }
 }
-
-// Props validations
-UserInfo.propTypes = {
-  userName: PropTypes.string.isRequired,
-  userIcon: PropTypes.string.isRequired,
-};
 
 export default UserInfo;
