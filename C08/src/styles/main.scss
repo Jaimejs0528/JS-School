@@ -1,0 +1,82 @@
+@import 'variables';
+@import 'fonts';
+@import 'mixins';
+@import 'extends';
+@import 'header';
+@import 'aside';
+@import 'bookShelfHeader';
+@import 'overlayBook';
+@import 'bookshelf';
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.main {
+  display: flex;
+  height: 92vh;
+
+  @include md-view{
+    flex-direction: column;
+  }
+}
+
+.show{
+  display: block;
+
+   &.lend-book{
+    @include keyframe(display-transition, 0.5s ease-out){
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  }
+
+  @include md-view{
+  @include keyframe(display-transition, 0.1s ease){
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  }
+}
+
+.sidebar {
+  flex-basis: 15vw;
+  outline: none;
+
+  @include md-view {
+    &.left-side{
+      flex-basis: auto;
+    }
+  }
+}
+
+.hide-overflow-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.circle-img {
+  background: $base-white;
+  border-radius: 100%;
+}
