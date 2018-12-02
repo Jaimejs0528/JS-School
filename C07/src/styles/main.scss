@@ -61,6 +61,7 @@ body {
 
 .sidebar {
   flex-basis: 15vw;
+  outline: none;
 
   @include md-view {
     &.left-side{
@@ -69,7 +70,7 @@ body {
   }
 }
 
-.hidde-overflow-text {
+.hide-overflow-text {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

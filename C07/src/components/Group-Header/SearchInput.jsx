@@ -4,8 +4,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Input search to filter books
 class SearchInput extends PureComponent {
+  // Props Validations
+  static propTypes = {
+    getInput: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  }
+
   render() {
     const { getInput, onSubmit } = this.props;
+    
     return (
       <form className="input-search" onSubmit={onSubmit}>
         <FontAwesomeIcon icon="search" />
@@ -14,10 +21,5 @@ class SearchInput extends PureComponent {
     );
   }
 }
-// Props Validations
-SearchInput.propTypes = {
-  getInput: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-};
 
 export default SearchInput;

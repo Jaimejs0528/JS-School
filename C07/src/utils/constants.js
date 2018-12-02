@@ -7,13 +7,14 @@ export const LG_VIEW = 1024;
 // Constants
 export const BOOKSHELF_TITLE = 'Bookshelf';
 export const DEFAULT_HOME = 'Home';
-export const NOT_CONECTION = 'There isn\'t connection';
-export const NAV_MENU = [['Home', 'home'],
-  ['Quito', 'city'],
-  ['Medellin', 'city'],
-  ['Cartagena', 'city'],
-  ['Digital', 'digital'],
-  ['Personal loans', 'loans']];
+export const NOT_CONNECTION = 'There isn\'t connection';
+export const NAV_MENU = [
+  { name:'Home', type: 'home'},
+  { name:'Quito', type: 'city'},
+  { name:'Medellin', type: 'city'},
+  { name:'Cartagena', type: 'city'},
+  { name:'Digital', type: 'digital'},
+  { name:'Personal loans', type: 'loans'}];
 
 export const MOST_READ = ['Hooked: How to Build Habit-Forming Products',
   'The Inevitable: Understanding the 12 Technological Forces That Will Shape Our Future',
