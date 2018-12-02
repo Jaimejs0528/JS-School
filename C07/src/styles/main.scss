@@ -61,6 +61,7 @@ body {
 
 .sidebar {
   flex-basis: 15vw;
+  outline: none;
 
   @include md-view {
     &.left-side{

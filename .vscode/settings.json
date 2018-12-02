@@ -1,10 +1,18 @@
 {
   "liveServer.settings.root": "C07",
   "cSpell.words": [
+    "Treml",
+    "Unmount",
     "availables",
     "bookinfo",
     "cartagena",
     "errmsg",
+    "filterbooks",
+    "fontawesome",
+    "fortawesome",
+    "jakob",
+    "polyfill",
+    "uglifyjs",
     "upsert"
   ],
   "files.eol": "\n",

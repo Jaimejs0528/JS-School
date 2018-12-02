@@ -1,11 +1,17 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import BooksHeader from '../BookHeader/BooksHeader';
+import BooksHeader from './BooksHeader';
 import BookShelf from './Bookshelf';
 
 // Container for bookshelf and its header
 class BooksContainer extends PureComponent {
+  // Props Validations
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    filter: PropTypes.string.isRequired,
+  }
+  
   render() {
     const { title, filter } = this.props;
     return (
@@ -15,11 +21,5 @@ class BooksContainer extends PureComponent {
       </main>);
   }
 }
-
-// Props Validations
-BooksContainer.propTypes = {
-  title: PropTypes.string.isRequired,
-  filter: PropTypes.string.isRequired,
-};
 
 export default BooksContainer;

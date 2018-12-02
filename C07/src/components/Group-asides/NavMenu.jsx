@@ -1,31 +1,49 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { DEFAULT_HOME } from 'utils/constants';
 import ItemMenu from './ItemMenu';
-import { DEFAULT_HOME } from '../../utils/constants';
 
 // Contains all navigation options
 class NavMenu extends Component {
+  // Props Validations
+  static propTypes = {
+    menu: PropTypes.string.isRequired,
+    items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    getOptionSelected: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       selected: DEFAULT_HOME,
       open: true,
     };
-    this.changeSelected = this.changeSelected.bind(this);
-    this.openMenu = this.openMenu.bind(this);
+  }
+
+  shouldComponentUpdate(nextState) {
+    const { selected, open } = this.state;
+    
+    return (selected !== nextState.selected) ||
+      (open !== nextState.open);
   }
 
   // Change the navigation option
-  changeSelected(event) {
+  changeSelected = (event) => {
     const { getOptionSelected } = this.props;
     this.setState({ selected: event.target.textContent });
     getOptionSelected(event.target.textContent);
   }
 
   // Open navigation menu
-  openMenu() {
+  openMenu = () => {
     this.setState(previous => ({ open: !previous.open }));
+  }
+
+  openMenuKeyBoard = (e) => {
+    if(e.which === 32 || e.keyCode === 32) this.setState(previous => ({ open: !previous.open }));
   }
 
   render() {
@@ -33,29 +51,28 @@ class NavMenu extends Component {
     const { selected, open } = this.state;
     return (
       <nav className="sidebar left-side">
-        <div onClick={this.openMenu} className="header-menu">
+        <div
+          onClick={this.openMenu}
+          onKeyPress={this.openMenuKeyBoard}
+          className="header-menu"
+          role="button"
+          tabIndex="0"
+        >
           <h4 className="header-title">{menu}</h4>
           <div className={`list-header ${open ? 'show' : ''}`}>
-            {items.map(item => (
+            <For each="item" of={items}>
               <ItemMenu
-                key={item}
-                itemName={item[0]}
-                type={item[1]}
+                key={item.name}
+                itemName={item.name}
+                type={item.type}
                 selectedItem={selected}
                 changeSelected={this.changeSelected}
               />
-            ))}
+            </For>
           </div>
         </div>
       </nav>);
   }
 }
-
-// Props Validations
-NavMenu.propTypes = {
-  menu: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
-  getOptionSelected: PropTypes.func.isRequired,
-};
 
 export default NavMenu;

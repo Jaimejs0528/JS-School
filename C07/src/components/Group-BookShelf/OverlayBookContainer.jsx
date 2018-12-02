@@ -1,11 +1,16 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Book from './Book';
-import OverlaySummary from './OverlaySummary/OverlaySummary';
+import OverlaySummary from './OverlaySummary';
 
 // Class that contains book information and its overlaySummary
 class OverlayBookContainer extends Component {
+  // Prop Validations
+  static propTypes = {
+    bookData: PropTypes.object.isRequired,
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -27,10 +32,6 @@ class OverlayBookContainer extends Component {
     this.setState(previous => ({ addLend: !previous.addLend }));
   }
 
-  // getBoundaries(node){
-  //   console.log(node.getBoundingClientRect());
-  // }
-
   render() {
     const { bookData } = this.props;
     const { openSummary, addLend } = this.state;
@@ -48,10 +49,5 @@ class OverlayBookContainer extends Component {
     );
   }
 }
-
-// Prop Validations
-OverlayBookContainer.propTypes = {
-  bookData: PropTypes.object.isRequired,
-};
 
 export default OverlayBookContainer;

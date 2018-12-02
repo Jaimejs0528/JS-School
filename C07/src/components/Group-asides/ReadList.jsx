@@ -7,7 +7,9 @@ class ReadList extends PureComponent {
     const { lectures } = this.props;
     return (
       <ol className="aside-list">
-        {lectures.map(item => <li className="hidde-overflow-text" key={item}>{item}</li>)}
+        <For each="item" of={lectures}>
+          <li className="hidde-overflow-text" key={item}>{item}</li>
+        </For>
       </ol>);
   }
 }

@@ -2,5 +2,18 @@
   "presets": [
     "@babel/preset-env",
     "@babel/preset-react"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "jsx-control-statements",
+    ["module-resolver", {
+      "root": ["./src/"],
+      "alias": {
+        "components": "./src/components/",
+        "utils": "./src/utils/",
+        "images": "./src/assets/images"
+      }
+    }]
   ]
-}
+ }
+ 
