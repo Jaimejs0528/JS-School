@@ -13,7 +13,7 @@
   z-index: 3;
 
   @include sm-view {
-    height: 4rem;
+    height: 6rem;
     padding: 0 21.8vw;
     flex-wrap: wrap;
   }
@@ -32,6 +32,29 @@
 
   @include sm-view {
     order: 1;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1vh;
+  }
+}
+
+.books-pagination{
+  a{
+    background: $soft-blue;
+    border-radius: 8px; 
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #fff;
+    padding: .1rem .4rem;
+  }
+  span{
+    position:relative;
+    top:-3px;
+    margin: 0 .5rem;
+  }
+
+  @include sm-view {
+    order: 2;
     text-align: center;
     width: 100%;
     margin-bottom: 1vh;

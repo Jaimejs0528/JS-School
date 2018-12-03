@@ -49,7 +49,7 @@ class NavMenu extends Component {
   }
 
   render() {
-    const { menu, items } = this.props;
+    const { menu, items, match } = this.props;
     const { selected, open } = this.state;
     
     return (
@@ -68,6 +68,7 @@ class NavMenu extends Component {
                 key={item.name}
                 itemName={item.name}
                 type={item.type}
+                match={item.path}
                 selectedItem={selected}
                 changeSelected={this.changeSelected}
               />

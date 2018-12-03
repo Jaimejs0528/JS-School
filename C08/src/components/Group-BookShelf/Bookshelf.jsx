@@ -1,17 +1,19 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable import/no-unresolved */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { NAV_MENU, DEFAULT_HOME, NOT_CONNECTION } from 'utils/constants';
+import { NOT_CONNECTION } from 'utils/constants';
 import OverlayBookContainer from './OverlayBookContainer';
 
 // Class that contains all books
 class BookShelf extends Component {
   // Props Validations
   static propTypes = {
-    query: PropTypes.string.isRequired,
+    query: PropTypes.object.isRequired,
     filter: PropTypes.string.isRequired,
+    pagination: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -46,11 +48,9 @@ class BookShelf extends Component {
   // When must re-render
   shouldComponentUpdate(nextProps, nextState) {
     const { query , filter } = this. props;
-    const { isLoading, error, books } = this.state;
-
-    return (query !== nextProps.query) ||
+    const { error, books } = this.state;
+    return (query.url !== nextProps.query.url) ||
       (filter !== nextProps.filter) ||
-      (isLoading !== nextState.isLoading) ||
       (error !== nextState.error) ||
       (books !== nextState.books);
   }
@@ -76,13 +76,14 @@ class BookShelf extends Component {
 
     // Fetch data from server
     consumeService(endpoint).then((response) => {
+      const { pagination } = this.props;
       if (response.code) {
         this.setState({ error: response.message, isLoading: false  });
       } else {
         this.setState({
           isLoading: false,
           books: response.books,
-        });
+        },()=>pagination(response.pagination));
       }
     }).catch(() => this.setState({ error: NOT_CONNECTION, isLoading: false }));
   }
@@ -90,22 +91,17 @@ class BookShelf extends Component {
   // Consume the services from server
   getBooks = (query) => {
     const { unMount } = this.state;
+    const queryD = query.url.split('/')[2];
 
     // If unmount this component
     if(unMount) return undefined;
-      if (query === NAV_MENU[4].name) {
-        this.queryRequest('digitals');
-      } else if (query === NAV_MENU[5].name) {
-        this.setState({
-          error: 'Coming soon',
-          isLoading: false,
-          books: [],
-        });
-      } else if (query !== '' && query !== DEFAULT_HOME) {
-        this.queryRequest(`cities/${query.toLowerCase()}`);
-      } else {
-        this.queryRequest();
-      }
+
+    if(queryD === 'cities'){
+      const city = query.url.split('/')[3];
+      this.queryRequest(`${queryD}/${city.toLowerCase()}`);
+    }else {
+      this.queryRequest(queryD);
+    }   
   }
 
   render() {

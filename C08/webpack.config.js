@@ -7,6 +7,7 @@ module.exports = {
   output: {
     path: `${__dirname}/dist`,
     filename: 'bundle.js',
+    publicPath: '/',
   },
   resolve: {
     modules: ['node_modules', 'src'],
@@ -14,6 +15,7 @@ module.exports = {
   },
   devServer: {
     contentBase: `${__dirname}/dist`,
+    historyApiFallback: true,
     compress: true,
     port: 5600,
   },

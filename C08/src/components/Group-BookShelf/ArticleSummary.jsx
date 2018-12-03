@@ -35,7 +35,6 @@ class ArticleSummary extends Component {
 
   render() {
     const { bookInfo } = this.props;
-    
     return (
       <article className="summary-container">
         <header className="header-summary">
@@ -43,7 +42,12 @@ class ArticleSummary extends Component {
             <h1 className="hide-overflow-text">{bookInfo.title}</h1>
             <span>{bookInfo.year}</span>
           </div>
-          <h2>{`Novel by ${<span>{bookInfo.author}</span>}`}</h2>
+          <h2>
+            Novel by  
+            <span>
+              {bookInfo.author}
+            </span>
+          </h2>
           <p>
             {`${bookInfo.numPages} Pages`}
           </p>

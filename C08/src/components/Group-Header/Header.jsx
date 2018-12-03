@@ -1,10 +1,10 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable import/no-unresolved */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import smallLogo from 'images/favicon.png';
 import bigLogo from 'images/logo.png';
-import userIcon from 'images/jakob.png';
 import { MD_VIEW, BOOKSHELF_TITLE } from 'utils/constants';
 import Logo from './Logo';
 import SearchContainer from './SearchContainer';
@@ -16,6 +16,7 @@ class Header extends Component {
   // Props Validations
   static propTypes = {
     getFilter: PropTypes.func.isRequired,
+    userPayload: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -73,6 +74,7 @@ class Header extends Component {
 
   render() {
     const { isSmallLogo } = this.state;
+    const { userPayload } = this.props;
     return (
       <div className="header-container">
         <Logo logo={isSmallLogo ? smallLogo : bigLogo} />
@@ -83,7 +85,7 @@ class Header extends Component {
             onSubmit={this.onSubmit}
           />
         </SearchContainer>
-        <UserInfo userName="Jakob Treml" userIcon={userIcon} />
+        <UserInfo userName={userPayload.email} userIcon={userPayload.icon} />
       </div>
     );
   }

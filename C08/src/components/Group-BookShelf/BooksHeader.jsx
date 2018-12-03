@@ -1,5 +1,7 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -8,6 +10,7 @@ class BooksHeader extends PureComponent {
   // Props Validations
   static propTypes = {
     title: PropTypes.string.isRequired,
+    pagination: PropTypes.object.isRequired,
   }
 
   // jsx for view mode icons
@@ -20,11 +23,16 @@ class BooksHeader extends PureComponent {
   }
 
   render() {
-    const { title } = this.props;
+    const { title, pagination } = this.props;
     
     return (
       <div className="books-header">
         <h2 className="books-header-title">{title}</h2>
+        <div className="books-pagination">
+          <Link to={{pathname: location.pathname, search:`?page=${pagination.currentPage - 1}`}}>&larr;</Link>
+          <span>{`Page ${pagination.currentPage} of ${pagination.totalPages}`}</span>
+          <Link to={{pathname: location.pathname, search:`?page=${pagination.currentPage + 1}`}}>&rarr;</Link>
+        </div>
         {this.viewMode()}
       </div>);
   }

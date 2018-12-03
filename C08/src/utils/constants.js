@@ -9,12 +9,12 @@ export const BOOKSHELF_TITLE = 'Bookshelf';
 export const DEFAULT_HOME = 'Home';
 export const NOT_CONNECTION = 'There isn\'t connection';
 export const NAV_MENU = [
-  { name:'Home', type: 'home'},
-  { name:'Quito', type: 'city'},
-  { name:'Medellin', type: 'city'},
-  { name:'Cartagena', type: 'city'},
-  { name:'Digital', type: 'digital'},
-  { name:'Personal loans', type: 'loans'}];
+  { name:'Home', type: 'home', path:'/home'},
+  { name:'Quito', type: 'city', path: '/home/cities/Quito'},
+  { name:'Medellin', type: 'city', path: '/home/cities/Medellin'},
+  { name:'Cartagena', type: 'city', path: '/home/cities/Cartagena'},
+  { name:'digitals', type: 'digital', path: '/home/digitals'},
+  { name:'Personal loans', type: 'loans', path: '/home/lends'}];
 
 export const MOST_READ = ['Hooked: How to Build Habit-Forming Products',
   'The Inevitable: Understanding the 12 Technological Forces That Will Shape Our Future',

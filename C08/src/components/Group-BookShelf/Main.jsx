@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable import/no-unresolved */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -12,6 +13,7 @@ class Main extends Component {
   // Props Validation
   static propTypes = {
     filter: PropTypes.string.isRequired,
+    match: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -23,10 +25,11 @@ class Main extends Component {
 
   // When must re-render
   shouldComponentUpdate(nextProps, nextState) {
-  const { filter } = this.props;
+  const { filter, match } = this.props;
   const { titleBookShelf } = this.state;
 
   return (filter !== nextProps.filter) ||
+    (match !== nextProps.match) ||
     (titleBookShelf !== nextState.titleBookShelf);
   }
 
@@ -39,13 +42,13 @@ class Main extends Component {
 
   render() {
     // Get props and state
-    const { filter } = this.props;
+    const { filter, match } = this.props;
     const { titleBookShelf } = this.state;
 
     return (
       <div className="main">
         <NavMenu menu="Main" items={NAV_MENU} getOptionSelected={this.getOptionSelected} />
-        <BooksContainer title={titleBookShelf} filter={filter} />
+        <BooksContainer match={match} title={titleBookShelf} filter={filter} />
         <MostRead title="Most Read Books" items={MOST_READ} />
       </div>);
   }
