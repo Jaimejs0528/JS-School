@@ -22,16 +22,22 @@ class BooksHeader extends PureComponent {
       </div>);
   }
 
+  getPage = (currentPage, totalPages, next = true) => {
+    if(next) {
+      return (currentPage < totalPages) ? currentPage + 1 : totalPages;
+    }
+    return (currentPage > 1) ? currentPage - 1 : currentPage;
+  }
+
   render() {
     const { title, pagination } = this.props;
-    
     return (
       <div className="books-header">
         <h2 className="books-header-title">{title}</h2>
         <div className="books-pagination">
-          <Link to={{pathname: location.pathname, search:`?page=${pagination.currentPage - 1}`}}>&larr;</Link>
+          <Link to={{pathname: location.pathname, search:`?page=${this.getPage(pagination.currentPage,pagination.totalPages, false)}`}}>&larr;</Link>
           <span>{`Page ${pagination.currentPage} of ${pagination.totalPages}`}</span>
-          <Link to={{pathname: location.pathname, search:`?page=${pagination.currentPage + 1}`}}>&rarr;</Link>
+          <Link to={{pathname: location.pathname, search:`?page=${this.getPage(pagination.currentPage,pagination.totalPages)}`}}>&rarr;</Link>
         </div>
         {this.viewMode()}
       </div>);

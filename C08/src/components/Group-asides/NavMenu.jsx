@@ -49,7 +49,7 @@ class NavMenu extends Component {
   }
 
   render() {
-    const { menu, items, match } = this.props;
+    const { menu, items} = this.props;
     const { selected, open } = this.state;
     
     return (

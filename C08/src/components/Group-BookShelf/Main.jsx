@@ -13,7 +13,6 @@ class Main extends Component {
   // Props Validation
   static propTypes = {
     filter: PropTypes.string.isRequired,
-    match: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -25,11 +24,11 @@ class Main extends Component {
 
   // When must re-render
   shouldComponentUpdate(nextProps, nextState) {
-  const { filter, match } = this.props;
+  const { filter, location } = this.props;
   const { titleBookShelf } = this.state;
 
-  return (filter !== nextProps.filter) ||
-    (match !== nextProps.match) ||
+  return (location.search !== nextProps.location.search) ||
+    (filter !== nextProps.filter) ||
     (titleBookShelf !== nextState.titleBookShelf);
   }
 
@@ -42,13 +41,13 @@ class Main extends Component {
 
   render() {
     // Get props and state
-    const { filter, match } = this.props;
+    const { filter } = this.props;
     const { titleBookShelf } = this.state;
 
     return (
       <div className="main">
         <NavMenu menu="Main" items={NAV_MENU} getOptionSelected={this.getOptionSelected} />
-        <BooksContainer match={match} title={titleBookShelf} filter={filter} />
+        <BooksContainer {...this.props} title={titleBookShelf} filter={filter} />
         <MostRead title="Most Read Books" items={MOST_READ} />
       </div>);
   }

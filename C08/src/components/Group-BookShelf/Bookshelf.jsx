@@ -14,6 +14,7 @@ class BookShelf extends Component {
     query: PropTypes.object.isRequired,
     filter: PropTypes.string.isRequired,
     pagination: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -47,9 +48,11 @@ class BookShelf extends Component {
 
   // When must re-render
   shouldComponentUpdate(nextProps, nextState) {
-    const { query , filter } = this. props;
+    const { query , filter, location } = this. props;
     const { error, books } = this.state;
-    return (query.url !== nextProps.query.url) ||
+
+    return (location.search !== nextProps.location.search) ||
+      (query.url !== nextProps.query.url) ||
       (filter !== nextProps.filter) ||
       (error !== nextState.error) ||
       (books !== nextState.books);
@@ -68,22 +71,40 @@ class BookShelf extends Component {
 
   // Make a request to server
   queryRequest = (endpoint = '') => {
-    const urlBase = 'http://localhost:3202/bookshelf/books/';
+    const urlBase = 'https://localhost:4420/bookshelf/books/';
     const consumeService = async (endpointService = '') => {
-      const response = await fetch(`${urlBase}${endpointService}`);
+      console.log(endpointService.split('/')[0]);
+      let response;
+      if (endpointService.split('/')[0] === 'lends') {
+        response = await fetch(`${urlBase}${endpointService}`,
+        {
+          method:'POST',
+          'Content-Type': 'application/json',
+          headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} 
+        });
+      }
+      else {
+        response = await fetch(`${urlBase}${endpointService}`, {
+          method:'GET',
+          'Content-Type': 'application/json',
+          headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} 
+        });
+      }
       return response.json();
     };
 
     // Fetch data from server
     consumeService(endpoint).then((response) => {
-      const { pagination } = this.props;
+      const { pagination, location } = this.props;
+
       if (response.code) {
         this.setState({ error: response.message, isLoading: false  });
       } else {
+        pagination(response.pagination);
         this.setState({
           isLoading: false,
           books: response.books,
-        },()=>pagination(response.pagination));
+        });
       }
     }).catch(() => this.setState({ error: NOT_CONNECTION, isLoading: false }));
   }
@@ -92,15 +113,17 @@ class BookShelf extends Component {
   getBooks = (query) => {
     const { unMount } = this.state;
     const queryD = query.url.split('/')[2];
-
+    const { location : loc, filter } = this.props;
+    
     // If unmount this component
     if(unMount) return undefined;
 
     if(queryD === 'cities'){
       const city = query.url.split('/')[3];
-      this.queryRequest(`${queryD}/${city.toLowerCase()}`);
+      this.queryRequest(`${queryD}/${city.toLowerCase()}/${loc.search}`);
     }else {
-      this.queryRequest(queryD);
+      if(queryD)this.queryRequest(`${queryD}/${loc.search}`);
+      else this.queryRequest(`${loc.search}`);
     }   
   }
 
@@ -115,7 +138,6 @@ class BookShelf extends Component {
       bookshelf: !isLoading && !error
     });
     const booksFiltered = books.filter(this.filterbooks(filter));
-
     return(
       <div className={rightClass}>
       <Choose>

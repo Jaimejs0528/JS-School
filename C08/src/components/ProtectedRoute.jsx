@@ -14,14 +14,14 @@ const redirectComponent = (isAuth, isNotAuthRoute, Component, props) => {
     </Choose>);
 }
 
-const redirect = (isAuth, isAuthRoute, isNotAuthRoute) => {
+const redirect = (isAuth, isAuthRoute, isNotAuthRoute,props) => {
   return (
     <Choose>
       <When condition={!isAuth}>
         <Redirect to={isNotAuthRoute} />
       </When>
       <Otherwise>
-        <Redirect to={isAuthRoute} />
+        <Redirect to={isAuthRoute} {...props} />
       </Otherwise>
     </Choose>);
 }
@@ -38,7 +38,7 @@ const ProtectedRoute = ({ isAuth, component, ...rest }) => {
 }
 
 export const ProtectedRouteRedirect = ({ isAuth, ...rest }) => {
-  const toRender = () => redirect(isAuth,"/home","/login");
+  const toRender = (props) => redirect(isAuth,"/home","/login",props);
   return (
     <Route 
       {...rest}

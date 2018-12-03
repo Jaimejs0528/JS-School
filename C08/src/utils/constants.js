@@ -24,3 +24,5 @@ export const MOST_READ = ['Hooked: How to Build Habit-Forming Products',
 export const STARS_ERROR = 'Ups! your rating is major to maximum stars number';
 export const NOT_STARS = 'Without rating';
 export const MAX_NUMB_STARS = 5;
+export const MAX_DAYS_LEND = 15;
+

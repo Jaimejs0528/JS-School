@@ -12,6 +12,7 @@ class BooksContainer extends Component {
     title: PropTypes.string.isRequired,
     filter: PropTypes.string.isRequired,
     match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
   }
 
   constructor(props){
@@ -19,7 +20,14 @@ class BooksContainer extends Component {
     this.state = {
       pagination: {},
     }
-    this.paginationRef = React.createRef();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { pagination } = this.state;
+    const { match, location } = this.props;
+    return (location.search !== nextProps.location.search) ||
+      (pagination !== nextState.pagination) ||
+      (match.url !== nextProps.match.url)
   }
 
   getRef = (pagination) => {
@@ -29,10 +37,11 @@ class BooksContainer extends Component {
   render() {
     const { title, filter, match } = this.props;
     const { pagination } = this.state;
+
     return (
       <main className="books-container">
         <BooksHeader pagination={pagination} title={title} />
-        <BookShelf pagination={this.getRef} query={match} filter={filter} />
+        <BookShelf {...this.props} location={location} pagination={this.getRef} query={match} filter={filter} />
       </main>);
   }
 }

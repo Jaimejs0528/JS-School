@@ -8,6 +8,7 @@ import { faUserCheck, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import background from 'images/reservation.png';
 import { MAX_NUMB_STARS } from 'utils/constants';
 import Rating from './Rating';
+import { Auth } from 'components/AppRouter';
 
 // Class that contains image and its overlay
 class ImageContainer extends PureComponent {
@@ -17,8 +18,16 @@ class ImageContainer extends PureComponent {
     rating: PropTypes.number.isRequired,
     showSummary: PropTypes.func.isRequired,
     addLend: PropTypes.bool.isRequired,
+    lends: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   }
 
+  lendsByUser = () => {
+    const { lends } = this.props;
+    const userPayload = Auth();
+    const found = lends.filter((item) => item.userEmail ===userPayload.email);
+    return found[0];
+  }
+  
   // Jsx for icon
   circleImg = (icon) => {
     return (
@@ -30,10 +39,11 @@ class ImageContainer extends PureComponent {
   render() {
     const { imgBook, rating, showSummary, addLend } = this.props;
 
+    const found = this.lendsByUser();
     return (
       <div onClick={showSummary} className="overlay-container img-container" role="button" tabIndex="0">
         <img className="img-border" src={imgBook} alt="book-img" width="176" height="250" />
-        <div className={`lend-book ${addLend && 'show'}`}>
+        <div className={`lend-book ${(addLend || found) && 'show'}`}>
           <img src={background} alt="lend-icon" />
           <FontAwesomeIcon icon={faUserCheck} />
         </div>
