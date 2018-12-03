@@ -114,6 +114,16 @@
   }
 }
 
+.datePicker{
+  bottom: 8%;
+  right: 8%;
+  letter-spacing: 2px;
+  opacity: 1;
+  outline: none;
+  position: absolute;
+  z-index: 3;
+}
+
 .summary-container {
   @extend %flex-column;
   bottom: 0;

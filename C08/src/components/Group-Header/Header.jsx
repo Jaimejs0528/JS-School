@@ -23,6 +23,7 @@ class Header extends Component {
     super(props);
     this.state = {
       isSmallLogo: false,
+      filter: '',
     };
   }
 
@@ -34,7 +35,7 @@ class Header extends Component {
 
   // Validates when must re-render
   shouldComponentUpdate(nextProps, nextState){
-    const { isSmallLogo } = this.state;
+    const { isSmallLogo, filter } = this.state;
     const { getFilter } = this.props;
     return (isSmallLogo !== nextState.isSmallLogo) ||
       (getFilter !== nextProps.getFilter);
@@ -47,12 +48,21 @@ class Header extends Component {
 
   // Prevent default
   onSubmit = (event) => {
+    // const { match, location } = this.props;
+    // const { filter } = this.state;
+    // const query = location.search;
+    // const url = (query.includes('?search=') || query.includes('&search=')) ? `${match.url}${filter}` :
+    //   `${match.url}${location.search}/?search=${filter}`
+    // console.log(url);
+
     event.preventDefault();
+    // this.props.history.push(url);
   }
 
   // Get the input into the search Field
   getInput = (event) => {
     const { getFilter } = this.props;
+    this.setState({filter:event.target.value});
     getFilter(event.target.value);
   }
 
@@ -75,6 +85,7 @@ class Header extends Component {
   render() {
     const { isSmallLogo } = this.state;
     const { userPayload } = this.props;
+    
     return (
       <div className="header-container">
         <Logo logo={isSmallLogo ? smallLogo : bigLogo} />

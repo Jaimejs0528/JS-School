@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Login from './Group-Login/Login';
 import Home from 'components/Home';
 import { ProtectedRouteRedirect } from 'components/ProtectedRoute';
+import Login from './Group-Login/Login';
 
 const decodeToken = (token) => {
   if(token){
@@ -18,7 +18,6 @@ const decodeToken = (token) => {
 export const Auth = () => {
   const token  = localStorage.getItem("token");
   const tokenDecoded = decodeToken(token);
-  console.log(tokenDecoded);
   return (tokenDecoded);
 }
 

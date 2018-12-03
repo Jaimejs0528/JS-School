@@ -12,6 +12,7 @@ class ItemName extends PureComponent {
     type: PropTypes.string.isRequired,
     selectedItem: PropTypes.string.isRequired,
     changeSelected: PropTypes.func.isRequired,
+    match: PropTypes.string.isRequired,
   };
 
   // Get Icon to render by type.
@@ -34,21 +35,13 @@ class ItemName extends PureComponent {
       changeSelected,
       match,
     } = this.props;
-    const isCity = type === "city" ? true : false;
-    const isLoans = type === "loans" ? true : false;
     
     // Elements to render
     return (
       <div className={`${(itemName === selectedItem) ? 'selected' : ''} menu-item`}>
         {this.selectIcon(type)}
-        {/* <button
-          type="button"
-          onClick={changeSelected.bind(this)}
-        > 
-        {itemName}
-         </button>*/}
         <Link
-          to={match}
+          to={`${match}/?page=1`}
           className="Link"
           onClick={changeSelected.bind(this)}>
           {itemName}
