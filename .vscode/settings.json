@@ -10,8 +10,11 @@
     "filterbooks",
     "fontawesome",
     "fortawesome",
+    "getvalue",
     "jakob",
+    "larr",
     "polyfill",
+    "rarr",
     "uglifyjs",
     "upsert"
   ],

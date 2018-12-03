@@ -12,4 +12,9 @@ C07/dist/bundle.js
 C07/dist/*.png
 !C07/dist/favicon.png
 C07/dist/*.otf
+C08/node_modules/
+C08/dist/bundle.js
+C08/dist/*.png
+!C08/dist/favicon.png
+C08/dist/*.otf
 .vscode/launch.json
