@@ -30,7 +30,6 @@ class Home extends Component {
 
   // Get the filter for books
   getFilter = (filter) => {
-    location.search = `?search=${filter}`
     this.setState({
       filter,
     });
@@ -39,8 +38,8 @@ class Home extends Component {
   render() {
     // Get props and state
     const { filter } = this.state;
-    const { match } = this.props;
     const userPayload = Auth();
+    
     return (
       <div>
         <Choose>
@@ -48,8 +47,8 @@ class Home extends Component {
             <Redirect to="/" />
           </When>
           <Otherwise>
-            <Header userPayload={userPayload} getFilter={this.getFilter} />
-            <Main match={match} filter={filter} />
+            <Header {...this.props} userPayload={userPayload} getFilter={this.getFilter} />
+            <Main {...this.props} filter={filter} />
           </Otherwise>
         </Choose> 
       </div>);

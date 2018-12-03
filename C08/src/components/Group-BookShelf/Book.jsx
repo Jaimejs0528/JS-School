@@ -26,13 +26,14 @@ class Book extends Component {
   }
   
   render() {
-    const { bookData: {bookinfo, cities}, showSummary, addLend } = this.props;
+    const { bookData: {bookinfo, cities, lends}, showSummary, addLend } = this.props;
 
     return (
       <div className="book">
         <ImageContainer
           imgBook={bookinfo.image}
           addLend={addLend}
+          lends={lends}
           rating={bookinfo.rating}
           showSummary={showSummary}
         />
