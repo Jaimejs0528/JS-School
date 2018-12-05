@@ -28,6 +28,12 @@
   }
 }
 
+@mixin landscape {
+  @media screen and (orientation: landscape ) and (max-height: 480px) {
+    @content
+  }
+}
+
 @mixin xlg-view-min() {
   @media screen and (min-width:769px) and (max-width: 1024px) {
     @content
