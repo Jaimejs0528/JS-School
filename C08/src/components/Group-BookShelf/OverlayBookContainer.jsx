@@ -10,6 +10,7 @@ class OverlayBookContainer extends Component {
   // Prop Validations
   static propTypes = {
     bookData: PropTypes.object.isRequired,
+    lendABook: PropTypes.func.isRequired,
   }
   
   constructor(props) {
@@ -30,6 +31,13 @@ class OverlayBookContainer extends Component {
     this.setState(previous => ({ addLend: !previous.addLend }));
   }
 
+  lendABookDate = (date) => {
+    console.log(date);
+    const { lendABook, bookData } = this.props;
+    lendABook(bookData.bookinfo.isbn, date);
+
+  }
+
   render() {
     const { bookData } = this.props;
     const { openSummary, addLend } = this.state;
@@ -43,6 +51,7 @@ class OverlayBookContainer extends Component {
           show={openSummary}
           showSummary={this.showSummary}
           showLendIcon={this.showLendIcon}
+          lendABook={this.lendABookDate}
         />
       </div>
     );
