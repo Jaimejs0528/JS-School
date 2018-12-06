@@ -35,10 +35,8 @@ class Header extends Component {
 
   // Validates when must re-render
   shouldComponentUpdate(nextProps, nextState){
-    const { isSmallLogo, filter } = this.state;
-    const { getFilter } = this.props;
-    return (isSmallLogo !== nextState.isSmallLogo) ||
-      (getFilter !== nextProps.getFilter);
+    const { isSmallLogo } = this.state;
+    return (isSmallLogo !== nextState.isSmallLogo);
   }
 
   // Remove window events
@@ -46,23 +44,28 @@ class Header extends Component {
     window.removeEventListener('resize', this.screenHasChanged);
   }
 
+  // calculateUr = (query, filter) => {
+  //   const query = location.search;
+  //   const temp=query.contains('page=')
+    
+  // }
+
   // Prevent default
   onSubmit = (event) => {
     // const { match, location } = this.props;
     // const { filter } = this.state;
-    // const query = location.search;
     // const url = (query.includes('?search=') || query.includes('&search=')) ? `${match.url}${filter}` :
     //   `${match.url}${location.search}/?search=${filter}`
     // console.log(url);
 
     event.preventDefault();
-    // this.props.history.push(url);
+    // this.props.history.push('/home/?page=2');
   }
 
   // Get the input into the search Field
   getInput = (event) => {
     const { getFilter } = this.props;
-    this.setState({filter:event.target.value});
+    this.setState({filter: event.target.value});
     getFilter(event.target.value);
   }
 

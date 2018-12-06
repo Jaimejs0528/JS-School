@@ -70,24 +70,28 @@ class BookShelf extends Component {
   }
 
   // Make a request to server
-  queryRequest = (endpoint = '') => {
+  queryRequest = (endpoint = '', data = null) => {
     const urlBase = 'https://localhost:4420/bookshelf/books/';
     const consumeService = async (endpointService = '') => {
-      console.log(endpointService.split('/')[0]);
       let response;
       if (endpointService.split('/')[0] === 'lends') {
         response = await fetch(`${urlBase}${endpointService}`,
         {
-          method:'POST',
-          'Content-Type': 'application/json',
-          headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} 
+          method:`${data ? 'PATCH' : 'POST'}`,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+          },
+          body: `${data ? JSON.stringify(data) : '{}'}`,
         });
       }
       else {
         response = await fetch(`${urlBase}${endpointService}`, {
           method:'GET',
-          'Content-Type': 'application/json',
-          headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} 
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+
+          },
         });
       }
       return response.json();
@@ -96,10 +100,10 @@ class BookShelf extends Component {
     // Fetch data from server
     consumeService(endpoint).then((response) => {
       const { pagination, location } = this.props;
-
+      console.log(response);
       if (response.code) {
         this.setState({ error: response.message, isLoading: false  });
-      } else {
+      } else if(response.books) {
         pagination(response.pagination);
         this.setState({
           isLoading: false,
@@ -127,6 +131,15 @@ class BookShelf extends Component {
     }   
   }
 
+  lendABook = ( isbn,  date) => {
+    const bookToLend = {
+      isbn,
+      lendDate: new Date(),
+      limitDate: date,
+    }
+    this.queryRequest('lends', bookToLend);
+  }
+
   render() {
     const { filter } = this.props;
     const { isLoading, books, error } = this.state;
@@ -152,7 +165,9 @@ class BookShelf extends Component {
         <Otherwise>
           <For each="book" of={booksFiltered}>
             <OverlayBookContainer
+              lendBook={this.lendABook}
               bookData={book}
+              lendABook={this.lendABook}
               key={book.bookinfo.isbn}
             />
           </For>

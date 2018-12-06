@@ -24,7 +24,7 @@ class NavMenu extends Component {
   }
   
   // When must re-render
-  shouldComponentUpdate(nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     const { selected, open } = this.state;
     
     return (selected !== nextState.selected) ||

@@ -24,10 +24,12 @@ class BooksContainer extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     const { pagination } = this.state;
-    const { match, location } = this.props;
+    const { match, location,filter } = this.props;
+    
     return (location.search !== nextProps.location.search) ||
       (pagination !== nextState.pagination) ||
-      (match.url !== nextProps.match.url)
+      (match.url !== nextProps.match.url) || 
+      (filter !== nextProps.filter);
   }
 
   getRef = (pagination) => {

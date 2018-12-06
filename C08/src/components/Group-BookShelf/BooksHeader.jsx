@@ -10,7 +10,17 @@ class BooksHeader extends PureComponent {
   // Props Validations
   static propTypes = {
     title: PropTypes.string.isRequired,
-    pagination: PropTypes.object.isRequired,
+    pagination: PropTypes.object,
+  }
+
+  // when haven't books
+  static defaultProps = {
+    pagination: {
+      totalItems: 0,
+      totalPages: 1,
+      currentPage: 1,
+      pageSize: 15
+    }
   }
 
   // jsx for view mode icons
@@ -22,6 +32,7 @@ class BooksHeader extends PureComponent {
       </div>);
   }
 
+  // get the page for show in header
   getPage = (currentPage, totalPages, next = true) => {
     if(next) {
       return (currentPage < totalPages) ? currentPage + 1 : totalPages;
