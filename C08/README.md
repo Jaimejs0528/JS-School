@@ -36,6 +36,15 @@ You can access to the webpage using the next URL.
 
 > http://localhost:5600
 
+users to test
+
+>user: juanC@gmail.com<br>
+>Password: Root@2134<br><br>
+>user: LauCristinaC@hotmail.com<br>
+>Password: GnuLover@112<br><br>
+>user: LuisAlb@hotmail.es<br>
+>Password: Luis@0585<br>
+
 NOTE: still logout frontEnd button aren't implement, for that to logout input in browser console.
 
 > localstorage.clear();
