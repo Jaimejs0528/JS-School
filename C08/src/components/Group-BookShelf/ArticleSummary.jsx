@@ -35,6 +35,7 @@ class ArticleSummary extends Component {
 
   render() {
     const { bookInfo } = this.props;
+    
     return (
       <article className="summary-container">
         <header className="header-summary">
