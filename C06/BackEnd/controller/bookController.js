@@ -36,6 +36,7 @@ const validateBooksLoans = (lends, copies, emailUser, lendDate, limitDate) => {
 const validateLendDates = (lendDate, limitDate, res) => {
   const invalidDateMessage = messageGenerator
     .ErrorMessage(messageGenerator.INVALID_DATE, DB_BOOK_COLLECTION);
+
   if (!tool.dateValidator(lendDate, res, invalidDateMessage)) return false;
   if (!tool.dateValidator(limitDate, res, invalidDateMessage)) return false;
   if (!tool.validateDateLimit(lendDate, limitDate, res)) return false;
@@ -103,6 +104,7 @@ exports.addOneBook = (req, res) => {
 exports.lendABook = (req, res) => {
   const { lendDate } = req.body;
   const { limitDate } = req.body;
+  
   if (validateLendDates(lendDate, limitDate, res)) {
     const bookIsbn = req.body.isbn;
     const getBooks = async () => {

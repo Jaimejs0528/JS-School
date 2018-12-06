@@ -15,13 +15,13 @@ User.createIndexes();
 // All Validations over User's fields.
 const validationFieldsSignIn = (body, res) => {
   // MESSAGES
-  const emailMesage = messageGenerator
+  const emailMessage = messageGenerator
     .ErrorMessage(messageGenerator.INVALID_EMAIL, DB_USER_COLLECTION);
   const invalidCredentials = messageGenerator
     .ErrorMessage(messageGenerator.INVALID_CREDENTIALS_EXT, DB_USER_COLLECTION);
 
   // VALIDATIONS
-  if (!tool.checkEmailFormat(body.email, res, emailMesage)) return false;
+  if (!tool.checkEmailFormat(body.email, res, emailMessage)) return false;
   if (!tool.limitInputLength(body.password, 16, res, invalidCredentials)) return false;
   return true;
 };

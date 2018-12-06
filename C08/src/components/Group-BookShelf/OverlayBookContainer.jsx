@@ -31,11 +31,10 @@ class OverlayBookContainer extends Component {
     this.setState(previous => ({ addLend: !previous.addLend }));
   }
 
+  //Lend a book
   lendABookDate = (date) => {
-    console.log(date);
     const { lendABook, bookData } = this.props;
     lendABook(bookData.bookinfo.isbn, date);
-
   }
 
   render() {

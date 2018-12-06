@@ -25,28 +25,43 @@ class OverlaySummary extends Component {
       limitDate: null,
      };
    }
+  
+   // When must to render
+   shouldComponentUpdate(nextProps) {
+     const { show } = this.props;
+     
+     return (show !== nextProps.show);
+   }
 
+
+   // Add days to a specific date
   addDays = (date, days) => {
     date.setDate(date.getDate()+days);
     return date;
   }
 
+  // get the limit date to lend the book
   selectLimitDate = (date) => {
     this.setState({limitDate: date});
   }
 
+  // Function that calls lend book service
   lendABookDate = () => {
     const { limitDate} = this.state;
+    const {showSummary, showLendIcon } =this.props;
+
     if (limitDate) {
       const { lendABook } = this.props;
       lendABook(limitDate);
+      showSummary();
+      showLendIcon();
     } else{
       alert('Selecciona una fecha');
     }
   }
 
   render() {
-    const { bookInfo, show, showLendIcon, showSummary } = this.props;
+    const { bookInfo, show } = this.props;
     const { limitDate } = this.state;
     
     return (
@@ -62,7 +77,7 @@ class OverlaySummary extends Component {
           <div className="datePicker">
             <DatePicker
               selected={limitDate}
-              minDate={new Date()}
+              minDate={this.addDays(new Date(), 1)}
               maxDate={this.addDays(new Date(), MAX_DAYS_LEND)}
               onChange={this.selectLimitDate}
             />

@@ -24,7 +24,7 @@ class InputField extends Component {
     }
   }
 
-  shouldComponentUpdate(nextState){
+  shouldComponentUpdate(nextProps, nextState){
     const { error, value } = this.state;
     return (error !== nextState.error) ||
       (value !== nextState.value);

@@ -10,6 +10,7 @@ import { Auth } from 'components/AppRouter';
 class Login extends PureComponent {
   render() {
     const isAuth = Auth();
+    
     return(
       <Choose>
         <When condition={isAuth}>

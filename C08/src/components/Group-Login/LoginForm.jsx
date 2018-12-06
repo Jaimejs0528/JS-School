@@ -21,6 +21,14 @@ class LoginForm extends Component {
     this.password = React.createRef();
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    const { isAuth, errorInputs, errorServer } = this.state;
+
+    return (isAuth !== nextState.isAuth) ||
+      (errorInputs !== errorInputs) ||
+      (errorServer !== errorInputs);
+  }
+
   signIn = async (data) => {
     const baseUrl = "https://localhost:4420/auth/sign_in";
     const request = {
@@ -58,14 +66,6 @@ class LoginForm extends Component {
       const { data, errorInputs } = this.state;
       if (!errorInputs) this.signIn(data)
     });
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    const { isAuth, errorInputs, errorServer } = this.state;
-
-    return (isAuth !== nextState.isAuth) ||
-      (errorInputs !== errorInputs) ||
-      (errorServer !== errorInputs);
   }
 
   render(){

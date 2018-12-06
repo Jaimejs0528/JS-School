@@ -35,19 +35,19 @@ mongoose.connect(constant.DB_FULL_PATH, { useNewUrlParser: true })
   // eslint-disable-next-line no-console
   .catch(error => console.log(error));
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, Authorization, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Headers');
+  next();
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParserError.beautify({
   status: 400,
   res: messageGenerator.ErrorMessage(messageGenerator.INVALID_BODY, messageGenerator.COMMON),
 }));
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Origin, Authorization, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
 
 app.use((req, res, next) => {
