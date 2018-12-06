@@ -151,7 +151,7 @@ If you use it with PATCH method, you must to put into the body, the next json st
 
 lendDate is the date when the user lends a book and limit date is the date when the user must return the book (max 15 days)
 
-And if you use with this, the GET method, you don't need anything, to except JWT Token.
+And if you use with this, the POST method, you don't need anything, to except JWT Token.
 
 For this you need add to header the next line (This applies too with PATCH method).
 
