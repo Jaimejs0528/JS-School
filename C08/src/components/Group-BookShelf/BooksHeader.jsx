@@ -47,7 +47,7 @@ class BooksHeader extends PureComponent {
         <h2 className="books-header-title">{title}</h2>
         <div className="books-pagination">
           <Link to={{pathname: location.pathname, search:`?page=${this.getPage(pagination.currentPage,pagination.totalPages, false)}`}}>&larr;</Link>
-          <span>{`Page ${pagination.currentPage} of ${pagination.totalPages}`}</span>
+          <span>{`Page ${pagination.currentPage? pagination.currentPage : 1} of ${pagination.totalPages ?pagination.totalPages : 1}`}</span>
           <Link to={{pathname: location.pathname, search:`?page=${this.getPage(pagination.currentPage,pagination.totalPages)}`}}>&rarr;</Link>
         </div>
         {this.viewMode()}

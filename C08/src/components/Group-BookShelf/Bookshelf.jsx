@@ -100,7 +100,7 @@ class BookShelf extends Component {
     // Fetch data from server
     consumeService(endpoint).then((response) => {
       const { pagination, location } = this.props;
-      console.log(response);
+      console.log(endpoint, location.search);
       if (response.code) {
         this.setState({ error: response.message, isLoading: false  });
       } else if(response.books) {
@@ -117,7 +117,7 @@ class BookShelf extends Component {
   getBooks = (query) => {
     const { unMount } = this.state;
     const queryD = query.url.split('/')[2];
-    const { location : loc, filter } = this.props;
+    const { location : loc } = this.props;
     
     // If unmount this component
     if(unMount) return undefined;

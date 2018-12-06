@@ -44,22 +44,29 @@ class Header extends Component {
     window.removeEventListener('resize', this.screenHasChanged);
   }
 
-  // calculateUr = (query, filter) => {
-  //   const query = location.search;
-  //   const temp=query.contains('page=')
-    
-  // }
+  // calculate which params put in url
+  calculateParams = (filter) => {
+    const query = location.search;
+    const temp=query.split('&');
+    if(temp.length > 1) {
+      const regEx = /search/i;
+      const withoutFilter = temp.filter((item) => !regEx.test(item));
+      return `${withoutFilter.join('&')}&search=${filter}`;
+    }
+    if(temp[0] !== ''){
+      return `${temp[0]}&search=${filter}`
+    }
+    return `/?search=${filter}`;
+  }
 
   // Prevent default
   onSubmit = (event) => {
-    // const { match, location } = this.props;
-    // const { filter } = this.state;
-    // const url = (query.includes('?search=') || query.includes('&search=')) ? `${match.url}${filter}` :
-    //   `${match.url}${location.search}/?search=${filter}`
-    // console.log(url);
-
     event.preventDefault();
-    // this.props.history.push('/home/?page=2');
+    const { match, history } = this.props;
+    const { filter } = this.state;
+    const params = this.calculateParams(filter);
+    // console.log(`${match.url}${params}`);
+    history.push(`${match.url}${params}`);
   }
 
   // Get the input into the search Field
@@ -88,7 +95,6 @@ class Header extends Component {
   render() {
     const { isSmallLogo } = this.state;
     const { userPayload } = this.props;
-    
     return (
       <div className="header-container">
         <Logo logo={isSmallLogo ? smallLogo : bigLogo} />
@@ -99,7 +105,7 @@ class Header extends Component {
             onSubmit={this.onSubmit}
           />
         </SearchContainer>
-        <UserInfo userName={userPayload.email} userIcon={userPayload.icon} />
+        <UserInfo userName={userPayload.name} userIcon={userPayload.icon} />
       </div>
     );
   }

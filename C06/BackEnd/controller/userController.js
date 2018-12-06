@@ -79,7 +79,7 @@ exports.signIn = (req, res) => {
       }
       return res.json({
         // eslint-disable-next-line no-underscore-dangle
-        token: jwt.sign({ email: user.email, fullName: user.fullName, icon: user.icon },
+        token: jwt.sign({ email: user.email,  name: user.name, icon: user.icon },
           SECRET, { expiresIn: TOKEN_EXPIRE_TIME }),
       });
     });
