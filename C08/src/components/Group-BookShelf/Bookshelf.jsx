@@ -100,7 +100,7 @@ class BookShelf extends Component {
     // Fetch data from server
     consumeService(endpoint).then((response) => {
       const { pagination, location } = this.props;
-      console.log(response);
+      console.log(endpoint, location.search);
       if (response.code) {
         this.setState({ error: response.message, isLoading: false  });
       } else if(response.books) {
