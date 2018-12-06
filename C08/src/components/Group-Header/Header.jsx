@@ -95,7 +95,6 @@ class Header extends Component {
   render() {
     const { isSmallLogo } = this.state;
     const { userPayload } = this.props;
-    
     return (
       <div className="header-container">
         <Logo logo={isSmallLogo ? smallLogo : bigLogo} />
@@ -106,7 +105,7 @@ class Header extends Component {
             onSubmit={this.onSubmit}
           />
         </SearchContainer>
-        <UserInfo userName={userPayload.email} userIcon={userPayload.icon} />
+        <UserInfo userName={userPayload.name} userIcon={userPayload.icon} />
       </div>
     );
   }

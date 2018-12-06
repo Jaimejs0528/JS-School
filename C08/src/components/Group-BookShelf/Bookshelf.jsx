@@ -117,7 +117,7 @@ class BookShelf extends Component {
   getBooks = (query) => {
     const { unMount } = this.state;
     const queryD = query.url.split('/')[2];
-    const { location : loc, filter } = this.props;
+    const { location : loc } = this.props;
     
     // If unmount this component
     if(unMount) return undefined;
