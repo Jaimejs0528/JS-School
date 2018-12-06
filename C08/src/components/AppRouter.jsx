@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 import Home from 'components/Home';
 import { ProtectedRouteRedirect } from 'components/ProtectedRoute';
@@ -23,9 +23,14 @@ export const Auth = () => {
 
 const noFound = () => {
   return (
-    <div>
-      <h1>NOT FOUND</h1>
+    <div className="container">
+      <div className="noFoundContainer">
+        <h1>404</h1>
+        <h2>Page not found</h2>
+        <Link to="/home">Go Back!</Link>
+      </div>
     </div>
+    
   );
 }
 

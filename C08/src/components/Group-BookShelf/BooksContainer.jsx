@@ -22,6 +22,7 @@ class BooksContainer extends Component {
     }
   }
 
+  // When re-render
   shouldComponentUpdate(nextProps, nextState) {
     const { pagination } = this.state;
     const { match, location,filter } = this.props;
@@ -32,6 +33,7 @@ class BooksContainer extends Component {
       (filter !== nextProps.filter);
   }
 
+  // Ref child
   getRef = (pagination) => {
     this.setState({pagination});
   }
