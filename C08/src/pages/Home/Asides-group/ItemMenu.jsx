@@ -35,7 +35,7 @@ class ItemName extends PureComponent {
       changeSelected,
       match,
     } = this.props;
-    
+
     // Elements to render
     return (
       <div className={`${(itemName === selectedItem) ? 'selected' : ''} menu-item`}>

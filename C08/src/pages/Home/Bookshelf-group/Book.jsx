@@ -20,9 +20,9 @@ class Book extends Component {
   shouldComponentUpdate(nextProps) {
     const { bookData, addLend } = this.props;
 
-    return (bookData.bookinfo !== nextProps.bookData.bookinfo) ||
-      (bookData.cities !== nextProps.bookData.cities) ||
-      (addLend !== nextProps.addLend);
+    return (bookData.bookinfo !== nextProps.bookData.bookinfo ||
+      bookData.cities !== nextProps.bookData.cities ||
+      addLend !== nextProps.addLend);
   }
   
   render() {

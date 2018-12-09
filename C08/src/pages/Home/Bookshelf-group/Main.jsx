@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { NAV_MENU, MOST_READ, DEFAULT_HOME } from 'utils/constants';
-import NavMenu from 'components/Group-asides/NavMenu';
-import MostRead from 'components/Group-asides/MostRead';
+import NavMenu from 'pages/Home/Asides-group/NavMenu';
+import MostRead from 'pages/Home/Asides-group/MostRead';
 import BooksContainer from './BooksContainer';
 
 // Main Container bookshelf, nav and aside
@@ -27,9 +27,9 @@ class Main extends Component {
   const { filter, location } = this.props;
   const { titleBookShelf } = this.state;
 
-  return (location.search !== nextProps.location.search) ||
-    (filter !== nextProps.filter) ||
-    (titleBookShelf !== nextState.titleBookShelf);
+  return (location.search !== nextProps.location.search ||
+    filter !== nextProps.filter ||
+    titleBookShelf !== nextState.titleBookShelf);
   }
 
   // Validates which options in nav is selected

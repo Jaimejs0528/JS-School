@@ -1,11 +1,13 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable react/jsx-no-undef */
 import React, { Component } from 'react';
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 
+import { signIn } from 'services/services';
 import InputField from './InputField';
 
 class LoginForm extends Component {
-
   constructor(props){
     super(props);
     this.state = {
@@ -21,41 +23,44 @@ class LoginForm extends Component {
     this.password = React.createRef();
   }
 
+  // When must re-render
   shouldComponentUpdate(nextProps, nextState) {
     const { isAuth, errorInputs, errorServer } = this.state;
 
-    return (isAuth !== nextState.isAuth) ||
-      (errorInputs !== errorInputs) ||
-      (errorServer !== errorInputs);
+    return (isAuth !== nextState.isAuth ||
+      errorInputs !== nextState.errorInputs ||
+      errorServer !== nextState.errorServer);
   }
 
-  signIn = async (data) => {
-    const baseUrl = "https://localhost:4420/auth/sign_in";
-    const request = {
-      method: 'POST',
-      headers:{'Content-Type': 'application/json',},
-      body:JSON.stringify(data),
-    }
-    const result = await fetch(baseUrl,request);
-    const jsonData = await result.json();
-    const token = jsonData.token;
-    if(token) {
-      localStorage.setItem('token',token);
-      this.setState({isAuth: true});
-    }else {
-      this.setState({errorServer: jsonData.message}) 
-    }
+  // Control response
+  validateResponse = (jsonData) => {
+    jsonData.then((response) =>{
+      
+      const token = response.token;
+      if (token) {
+        localStorage.setItem('token',token);
+        this.setState({isAuth: true});
+      }else {
+        this.setState({errorServer: response.message}) 
+      }
+    });
+    
   }
 
+  // Call sign in service
   onSubmit = (e) => {
     e.preventDefault();
     const { value: valueEmail, error: errorEmail } = this.email.current.state;
     const { value: valuePass, error: errorPass } = this.password.current.state;
+    
+    // If all fields are valid
     if( valueEmail === valuePass && valueEmail === '') {
       this.email.current.handleErrors();
       this.password.current.handleErrors();
       return;
     }
+
+    // Update state and call service
     this.setState({
       data: {
         email: valueEmail,
@@ -64,7 +69,7 @@ class LoginForm extends Component {
       errorInputs: (errorEmail || errorPass),
     }, () => {
       const { data, errorInputs } = this.state;
-      if (!errorInputs) this.signIn(data)
+      if (!errorInputs) this.validateResponse(signIn(data))
     });
   }
 

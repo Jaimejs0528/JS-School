@@ -11,9 +11,11 @@
       "alias": {
         "components": "./src/components/",
         "utils": "./src/utils/",
-        "images": "./src/assets/images"
+        "images": "./src/assets/images/",
+        "pages": "./src/pages/",
+        "styles": "./src/styles/",
+        "services": "./src/services/"
       }
     }]
   ]
- }
- 
+}

@@ -1,12 +1,13 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable import/no-unresolved */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import Header from 'components/Group-Header/Header';
-import Main from 'components/Group-BookShelf/Main';
-import { Auth } from 'components/AppRouter';
 import { Redirect } from 'react-router-dom';
+
+import Header from 'pages/Home/Header-group/Header';
+import Main from 'pages/Home/Bookshelf-group/Main';
+import { Auth } from 'utils/tools';
 
 // Main Class Contains all app
 class Home extends Component {
