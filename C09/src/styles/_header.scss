@@ -123,11 +123,10 @@ input[type='search'] {
   height: fit-content;
   justify-content: space-evenly;
   margin: auto 0.7317vw;
-  position: relative;
   width: 100%;
 
   @include sm-view{
-    min-width: 70px;
+   min-width: 70px;
   }
 
   h3 {
@@ -157,33 +156,6 @@ input[type='search'] {
     max-height: $img-profile-size;
     max-width: $img-profile-size;
     margin-left: 0.65vw;
-  }
-}
-
-.dropdown-logout {
-  display: none;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  background: $base-white;
-  left: 5%;
-  position: absolute;
-  top: 100%;
-  width: 100px;
-  z-index: 2;
-  margin: $auto-width;
-
-  a{
-    font-size: .875rem;
-    font-family: 'PlutoSansCondRegular', 'sans-serif';
-    color: $main-black;
-    text-decoration: none;
-  }
-
-  &:hover{
-    background: $soft-blue;
-
-    a{
-      color: $base-white;
-    }
   }
 }
 

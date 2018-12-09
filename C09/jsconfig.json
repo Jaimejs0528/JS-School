@@ -5,10 +5,7 @@
       "*": ["src/*"],
       "components/*": ["components/*"],
       "utils/*": ["utils/*"],
-      "images/*": ["images/*"],
-      "pages/*": ["pages/*"],
-      "styles/*": ["styles/*"],
-      "services/*": ["services/*"],
+      "images/*": ["images/*"]
     }
   }
 }
