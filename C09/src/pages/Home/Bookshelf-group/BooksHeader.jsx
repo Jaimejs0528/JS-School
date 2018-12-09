@@ -13,7 +13,7 @@ class BooksHeader extends PureComponent {
     pagination: PropTypes.object,
   }
 
-  // when haven't books
+  // When haven't books
   static defaultProps = {
     pagination: {
       totalItems: 0,
@@ -23,7 +23,7 @@ class BooksHeader extends PureComponent {
     }
   }
 
-  // jsx for view mode icons
+  // Jsx for view mode icons
   viewMode = () => {
     return (
       <div className="view-books">
@@ -32,7 +32,7 @@ class BooksHeader extends PureComponent {
       </div>);
   }
 
-  // get the page for show in header
+  // Get the page for show in header
   getPage = (currentPage, totalPages, next = true) => {
     if(next) {
       return (currentPage < totalPages) ? currentPage + 1 : totalPages;
@@ -42,6 +42,7 @@ class BooksHeader extends PureComponent {
 
   render() {
     const { title, pagination } = this.props;
+
     return (
       <div className="books-header">
         <h2 className="books-header-title">{title}</h2>

@@ -1,12 +1,13 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable import/no-unresolved */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { regEx,
- IS_EMPTY_ERROR,
- INVALID_EMAIL_FORMAT,
- MAX_LENGTH
+IS_EMPTY_ERROR,
+INVALID_EMAIL_FORMAT,
+MAX_LENGTH
 } from 'utils/tools';
 
 class InputField extends Component {
@@ -26,20 +27,24 @@ class InputField extends Component {
 
   shouldComponentUpdate(nextProps, nextState){
     const { error, value } = this.state;
-    return (error !== nextState.error) ||
-      (value !== nextState.value);
+    return (error !== nextState.error ||
+      value !== nextState.value);
   }
 
+  // Validate fields regex
   validateReGex = (reGEx, value) => {
     return reGEx.test(value);
   }
 
+  // Validates if the field doesn't accomplish some rule
   handleErrors = (e = null) => {
     const { name } = this.props;
+
     if(e && e.target.value){
       const value = e.target.value;
       const errorLengthExceed = (this.validateReGex(regEx.limitOvercame, value)) ? 
       MAX_LENGTH : null;
+
       this.setState({error: errorLengthExceed});
       if (name == 'email'){
         const errorEmail = (!this.validateReGex(regEx.invalidEmail,value)) ?

@@ -27,8 +27,8 @@ class NavMenu extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     const { selected, open } = this.state;
     
-    return (selected !== nextState.selected) ||
-      (open !== nextState.open);
+    return (selected !== nextState.selected ||
+      open !== nextState.open);
   }
 
   // Change the navigation option

@@ -61,17 +61,18 @@ class Header extends Component {
 
   // Prevent default
   onSubmit = (event) => {
-    event.preventDefault();
     const { match, history } = this.props;
     const { filter } = this.state;
     const params = this.calculateParams(filter);
-    // console.log(`${match.url}${params}`);
+
+    event.preventDefault();
     history.push(`${match.url}${params}`);
   }
 
   // Get the input into the search Field
   getInput = (event) => {
     const { getFilter } = this.props;
+
     this.setState({filter: event.target.value});
     getFilter(event.target.value);
   }

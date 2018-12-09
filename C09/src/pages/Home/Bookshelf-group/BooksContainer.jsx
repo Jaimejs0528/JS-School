@@ -27,10 +27,10 @@ class BooksContainer extends Component {
     const { pagination } = this.state;
     const { match, location,filter } = this.props;
     
-    return (location.search !== nextProps.location.search) ||
-      (pagination !== nextState.pagination) ||
-      (match.url !== nextProps.match.url) || 
-      (filter !== nextProps.filter);
+    return (location.search !== nextProps.location.search ||
+      pagination !== nextState.pagination ||
+      match.url !== nextProps.match.url || 
+      filter !== nextProps.filter);
   }
 
   // Ref child

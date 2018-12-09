@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Rating from 'components/Group-BookShelf/Rating';
+import Rating from 'pages/Home/Bookshelf-group/Rating';
 import { MAX_NUMB_STARS } from 'utils/constants';
 
 // Class to show all Book summary
@@ -25,12 +25,12 @@ class ArticleSummary extends Component {
     } } = this.props;
     const { bookInfo : nextInfo } = nextProps;
     
-    return (title !== nextInfo.title) ||
-      (author !== nextInfo.author) ||
-      (numPages !== nextInfo.numPages) ||
-      (description !== nextInfo.description) ||
-      (rating !== nextInfo.rating) ||
-      (year !== nextInfo.year);
+    return (title !== nextInfo.title ||
+      author !== nextInfo.author ||
+      numPages !== nextInfo.numPages ||
+      description !== nextInfo.description ||
+      rating !== nextInfo.rating ||
+      year !== nextInfo.year);
   }
 
   render() {

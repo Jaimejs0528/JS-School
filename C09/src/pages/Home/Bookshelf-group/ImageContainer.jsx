@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCheck, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 
+import { Auth } from 'utils/tools';
 import background from 'images/reservation.png';
 import { MAX_NUMB_STARS } from 'utils/constants';
 import Rating from './Rating';
-import { Auth } from 'components/AppRouter';
 
 // Class that contains image and its overlay
 class ImageContainer extends PureComponent {
@@ -21,6 +21,7 @@ class ImageContainer extends PureComponent {
     lends: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   }
 
+  // add lend icon to loan books
   lendsByUser = () => {
     const { lends } = this.props;
     const userPayload = Auth();

@@ -1,19 +1,20 @@
+/* eslint-disable react/jsx-no-undef */
+/* eslint-disable react/prefer-stateless-function */
 /* eslint-disable import/no-unresolved */
 import React, { PureComponent } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import '../../styles/login.scss'
+import 'styles/login.scss'
 import logoIcon from 'images/logo.png'
-import LoginForm from './LoginForm';
-import { Auth } from 'components/AppRouter';
+import { Auth } from 'utils/tools';
+import LoginForm from 'pages/Login/LoginForm';
 
 class Login extends PureComponent {
   render() {
-    const isAuth = Auth();
     
     return(
       <Choose>
-        <When condition={isAuth}>
+        <When condition={Auth()}>
           <Redirect to="/home" />
         </When>
         <Otherwise>
