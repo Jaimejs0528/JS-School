@@ -4,55 +4,50 @@ import React, { Component } from 'react';
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 
-import { signIn } from 'services/services';
+// import { signIn } from 'services/services';
 import InputField from './InputField';
 
 class LoginForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      errorServer: null,
       data: {
         email: '',
         password: '',
       },
       errorInputs: null,
-      isAuth: false,
     };
     this.email = React.createRef();
     this.password = React.createRef();
   }
 
+  componentWillReceiveProps(nextProps){
+    const { isAuth } = this.props;
+    console.log("hola");
+    console.log(isAuth, nextProps.isAuth);
+    if (isAuth !== nextProps.isAuth) {
+      console.log(isAuth, nextProps.isAuth,2);
+    }
+  }
+
   // When must re-render
   shouldComponentUpdate(nextProps, nextState) {
-    const { isAuth, errorInputs, errorServer } = this.state;
+    const { errorInputs } = this.state;
+    const {isAuth, errorServer } = this.props;
 
-    return (isAuth !== nextState.isAuth ||
+    return (isAuth !== nextProps.isAuth ||
       errorInputs !== nextState.errorInputs ||
-      errorServer !== nextState.errorServer);
+      errorServer !== nextProps.errorServer);
   }
 
-  // Control response
-  validateResponse = (jsonData) => {
-    jsonData.then((response) =>{
-      
-      const token = response.token;
-      if (token) {
-        localStorage.setItem('token',token);
-        this.setState({isAuth: true});
-      }else {
-        this.setState({errorServer: response.message}) 
-      }
-    });
-    
-  }
+  
 
   // Call sign in service
   onSubmit = (e) => {
     e.preventDefault();
     const { value: valueEmail, error: errorEmail } = this.email.current.state;
     const { value: valuePass, error: errorPass } = this.password.current.state;
-    
+    const { signIn, isAuth } = this.props;
     // If all fields are valid
     if( valueEmail === valuePass && valueEmail === '') {
       this.email.current.handleErrors();
@@ -69,13 +64,14 @@ class LoginForm extends Component {
       errorInputs: (errorEmail || errorPass),
     }, () => {
       const { data, errorInputs } = this.state;
-      if (!errorInputs) this.validateResponse(signIn(data))
+      if (!errorInputs) signIn(data);
     });
   }
 
   render(){
-    const { isAuth, errorServer } = this.state;
-
+    const { isAuth } = this.props;
+    const { errorServer } = this.props;
+    // console.log(this.props);
     return (
       <Choose>
         <When condition={isAuth}>

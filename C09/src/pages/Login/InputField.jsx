@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regEx,
 IS_EMPTY_ERROR,
 INVALID_EMAIL_FORMAT,
-MAX_LENGTH
+MAX_LENGTH,
+validateReGex
 } from 'utils/tools';
 
 class InputField extends Component {
@@ -31,23 +32,17 @@ class InputField extends Component {
       value !== nextState.value);
   }
 
-  // Validate fields regex
-  validateReGex = (reGEx, value) => {
-    return reGEx.test(value);
-  }
-
   // Validates if the field doesn't accomplish some rule
   handleErrors = (e = null) => {
     const { name } = this.props;
-
     if(e && e.target.value){
       const value = e.target.value;
-      const errorLengthExceed = (this.validateReGex(regEx.limitOvercame, value)) ? 
+      const errorLengthExceed = (validateReGex(regEx.limitOvercame, value)) ? 
       MAX_LENGTH : null;
 
       this.setState({error: errorLengthExceed});
       if (name == 'email'){
-        const errorEmail = (!this.validateReGex(regEx.invalidEmail,value)) ?
+        const errorEmail = (!validateReGex(regEx.invalidEmail,value)) ?
         INVALID_EMAIL_FORMAT : null;
 
         if(errorEmail) {
@@ -73,8 +68,8 @@ class InputField extends Component {
   }
 
   render() {
-    const {icon, label, ...rest } = this.props;
-    const { error, value } = this.state;
+    const {icon, label, ...rest } = this.props
+    const { value, error } = this.state;
 
     return(
       <div className={`fieldContainer ${error ? 'error': ''}`}>

@@ -6,12 +6,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from 'pages/Home/Home';
 import NotFound from 'pages/NotFound/NotFound';
 import { ProtectedRouteRedirect } from 'components/ProtectedRoute';
+import Login from 'pages/Login/containers/Login';
 import { Auth } from 'utils/tools';
-import Login from 'pages/Login/Login';
 
 // Class that controls all routes
 class App extends PureComponent {
   render(){
+
     return (
       <Router>
         <Switch>

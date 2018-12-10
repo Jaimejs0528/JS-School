@@ -14,7 +14,8 @@
         "images": "./src/assets/images/",
         "pages": "./src/pages/",
         "styles": "./src/styles/",
-        "services": "./src/services/"
+        "services": "./src/services/",
+        "commonStyles": "./src/pages/commonStyles/"
       }
     }]
   ]

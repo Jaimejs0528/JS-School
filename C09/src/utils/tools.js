@@ -4,9 +4,14 @@ export const MAX_LENGTH = 'Max length exceeded';
 
 // has the regEx to validate email and password fields(Login).
 export const regEx = Object.freeze({
- limitOvercame: /.{40,}/,
- invalidEmail: /^[a-z].*@\w{3,15}\.[a-z0-9.]{1,10}\w$/i
+  limitOvercame: /.{40,}/,
+  invalidEmail: /^[a-z].*@\w{3,15}\.[a-z0-9.]{1,10}\w$/i
 });
+
+// Validate fields regex
+export const validateReGex = (reGEx, value) => {
+  return reGEx.test(value);
+}
 
 // Decode the payload from jst token
 const decodeToken = (token) => {
@@ -16,7 +21,6 @@ const decodeToken = (token) => {
     return decode;
   }
   return null;
- 
 }
 
 // Validates if exist an user sign in.

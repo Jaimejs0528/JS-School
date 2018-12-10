@@ -1,18 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import { NOT_CONNECTION } from 'utils/constants';
-import { SERVER_URL, SIGN_IN_PATH, BOOKS_BASE } from './urlConstants';
-
-export const signIn = async (data) => {
-  const request = {
-    method: 'POST',
-    headers:{'Content-Type': 'application/json',},
-    body:JSON.stringify(data),
-  }
-  const result = await fetch(`${SERVER_URL}${SIGN_IN_PATH}`,request);
-  const jsonData = await result.json();
-
-  return jsonData;
-}
+import { SERVER_URL, BOOKS_BASE } from './urlConstants';
 
   // Make a request to server
   export const queryRequest = (endpoint = '', data = null) => {
