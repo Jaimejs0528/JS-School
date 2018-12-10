@@ -7,13 +7,13 @@
   margin: 0;
 }
 
-.container {
-  @extend %flex-row;
-  align-items: center;
-  background: $black-medium;
-  justify-content: center;
-  height: 100vh;
-}
+// .container {
+//   @extend %flex-row;
+//   align-items: center;
+//   background: $black-medium;
+//   justify-content: center;
+//   height: 100vh;
+// }
 
 %flex-row {
   display: -moz-flex;
@@ -35,83 +35,81 @@
   flex-direction: column;
 }
 
-.loginContainer {
-  @extend %flex-column;
-  background: $base-white;
-  border: $gray-base solid 3px;
-  border-radius: 10px;
-  width: 50vw;
-  min-width: 330px;
-  box-shadow: $soft-blue 0 0 20px 1px;
-  padding: 5vh 5vw;
-  transition: all .3s ease-out;
+// .loginContainer {
+//   @extend %flex-column;
+//   background: $base-white;
+//   border: $gray-base solid 3px;
+//   border-radius: 10px;
+//   width: 50vw;
+//   min-width: 330px;
+//   box-shadow: $soft-blue 0 0 20px 1px;
+//   padding: 5vh 5vw;
+//   transition: all .3s ease-out;
 
-  @include md-view{
-    min-width: unset;
-    width: 90vw;
-  }
+//   @include md-view{
+//     min-width: unset;
+//     width: 90vw;
+//   }
 
-  img{
-    margin: 0 auto;
-    margin-bottom: 5vh;
-    width: 178px;
-    height: 47px;
-  }
+//   img{
+//     margin: 0 auto;
+//     margin-bottom: 5vh;
+//     width: 178px;
+//     height: 47px;
+//   }
 
-  @include landscape{
-    height: 90vh;
-    width: 90vw;
+//   @include landscape{
+//     height: 90vh;
+//     width: 90vw;
 
-    img {
-      margin-bottom: 2vh;
-    }
-  }
-}
+//     img {
+//       margin-bottom: 2vh;
+//     }
+//   }
+// }
 
-.noFoundContainer {
-  @extend %flex-column;
-  background: $base-white;
-  font-family: 'PlutoSansCondMedium';
-  border: $gray-base solid 3px;
-  border-radius: 10px;
-  width: 30vw;
-  height: 40vh;
-  min-width: 330px;
-  box-shadow: $soft-blue 0 0 20px 1px;
-  padding: 5vh 5vw;
-  transition: all .3s ease-out;
-  text-align: center;
+// .noFoundContainer {
+//   @extend %flex-column;
+//   background: $base-white;
+//   font-family: 'PlutoSansCondMedium';
+//   border: $gray-base solid 3px;
+//   border-radius: 10px;
+//   width: 30vw;
+//   height: 40vh;
+//   min-width: 330px;
+//   box-shadow: $soft-blue 0 0 20px 1px;
+//   padding: 5vh 5vw;
+//   transition: all .3s ease-out;
+//   text-align: center;
 
-  @include md-view{
-    min-width: unset;
-    width: 90vw;
-  }
+//   @include md-view{
+//     min-width: unset;
+//     width: 90vw;
+//   }
 
-  h1{
-    margin: 0 auto;
-    margin-bottom: 5vh;
-    font-size: 3rem;
-    color: $soft-blue;
-    width: 100%;
-    height: 47px;
-  }
+//   h1{
+//     margin: 0 auto;
+//     margin-bottom: 5vh;
+//     font-size: 3rem;
+//     color: $soft-blue;
+//     width: 100%;
+//     height: 47px;
+//   }
 
-  h2{
-    margin: 0 auto;
-    margin-bottom: 5vh;
-    color: $black-medium;
-    font-size: 2.2rem;
-    width: 100%;
-    height: 47px;
-  } 
+//   h2{
+//     margin: 0 auto;
+//     margin-bottom: 5vh;
+//     color: $black-medium;
+//     font-size: 2.2rem;
+//     width: 100%;
+//     height: 47px;
+//   } 
 
-
-
-  @include landscape{
-    height: 90vh;
-    width: 90vw;
-  }
-}
+//   @include landscape{
+//     height: 90vh;
+//     width: 90vw;
+//   }
+// }
 
 .form {
   @extend %flex-column;

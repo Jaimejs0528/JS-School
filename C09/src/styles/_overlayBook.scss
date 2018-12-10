@@ -44,6 +44,18 @@
   display: block !important;
   opacity: .75 !important;
   z-index: 2;
+
+  > svg {
+    font-size: 1.1rem;
+    position: absolute;
+    right: 12px;
+    top: 6px;
+
+    &:hover{
+      font-size: 1.2rem;
+      color: $soft-blue;
+    }
+  }
 }
 
 .overlay-summary {
