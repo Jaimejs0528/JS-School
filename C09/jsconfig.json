@@ -5,7 +5,11 @@
       "*": ["src/*"],
       "components/*": ["components/*"],
       "utils/*": ["utils/*"],
-      "images/*": ["images/*"]
+      "images/*": ["images/*"],
+      "pages/*": ["pages/*"],
+      "styles/*": ["styles/*"],
+      "services/*": ["services/*"],
+      "commonStyles/*": ["commonStyles/*"],
     }
   }
 }

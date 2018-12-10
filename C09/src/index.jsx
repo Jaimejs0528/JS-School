@@ -10,10 +10,14 @@ import {
   faStar,
   faStarHalfAlt,
 } from '@fortawesome/free-solid-svg-icons';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk'
 
 import './styles/main.scss';
-import App from 'components/App';
-// import Login from 'components/Group-Login/Login';
+import App from './containers/App';
+import reducers from './reducers/loginReducer';
+// import Login from './pages/Login/containers/Login';
 
 library.add(faSearch);
 library.add(faAngleDown);
@@ -22,5 +26,12 @@ library.add(faThList);
 library.add(faStar);
 library.add(faStarHalfAlt);
 
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+
 // Render INTO Browser DOM
-ReactDom.render(<App />, document.querySelector('#root-App'));
+ReactDom.render(
+  <Provider
+    store={createStoreWithMiddleware(reducers)}
+  >
+    <App />
+  </Provider>, document.querySelector('#root-App'));

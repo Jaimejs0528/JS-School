@@ -45,10 +45,7 @@ users to test
 >user: LuisAlb@hotmail.es<br>
 >Password: Luis@0585<br>
 
-NOTE: still logout frontEnd button aren't implement, for that to logout input in browser console.
-
-> localstorage.clear();
-
+NOTE: To logout click over the user information in the header and logout.
 
 
 
