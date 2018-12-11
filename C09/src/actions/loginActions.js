@@ -1,30 +1,30 @@
 /* eslint-disable import/no-unresolved */
 import { SERVER_URL, SIGN_IN_PATH } from 'services/urlConstants';
-import * as Types from './loginTypes';
+import{ REQUEST_LOGIN, SUCCESS_LOGIN, FAIL_LOGIN, LOGOUT } from './actionTypes';
 
 const requestData = () => {
   return {
-    type: Types.REQUEST_LOGIN
+    type: REQUEST_LOGIN
   }
 }
 
 const successfulRequest = (json) => {
   return {
-    type: Types.SUCCESS_LOGIN,
+    type: SUCCESS_LOGIN,
     payload: json
   }
 }
 
 const failedRequest = (error) => {
   return {
-    type: Types.FAIL_LOGIN,
+    type: FAIL_LOGIN,
     payload: error
   }
 }
 
 const logOut = () => {
   return {
-    type: Types.LOGOUT,
+    type: LOGOUT,
   }
 }
 

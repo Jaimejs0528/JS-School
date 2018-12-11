@@ -11,8 +11,9 @@ import { stylesForm } from './styles/Login';
 import InputField from './InputField';
 
 
-const formContainer = ({classes, fieldHandler, data, errorServer, onSubmit}) => {(
-  <form onSubmit={onSubmit} className={classes.form}>
+const formContainer = ({classes, fieldHandler, data, errorServer, onSubmit}) => {
+  return (
+    <form onSubmit={onSubmit} className={classes.form}>
     <div className={classes.inputsContainer}>
       <InputField
         name="email"

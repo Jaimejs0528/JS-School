@@ -1,4 +1,12 @@
-import * as Types from '../actions/loginTypes';
+/* eslint-disable import/no-unresolved */
+import {
+  HANDLE_ERROR,
+  HANDLE_VALUE,
+  REQUEST_LOGIN,
+  SUCCESS_LOGIN,
+  FAIL_LOGIN,
+  LOGOUT,
+} from 'actions/actionTypes';
 
 const initialState = {
   errorServer: null,
@@ -11,23 +19,23 @@ const initialState = {
 
 export default function loginReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case Types.HANDLE_VALUE:
+    case HANDLE_VALUE:
       return {...state,
         data: {...state.data,
           [action.field]:{...state.data[action.field],
             value: action.payload}}}
-    case Types.HANDLE_ERROR:
+    case HANDLE_ERROR:
       return {...state,
         data: {...state.data,
           [action.field]:{...state.data[action.field],
             error: action.payload}}}
-    case Types.REQUEST_LOGIN:
+    case REQUEST_LOGIN:
       return {...state, errorServer: null}
-    case Types.SUCCESS_LOGIN:
+    case SUCCESS_LOGIN:
       return {...state, isAuth: (action.payload) ? true: false, errorServer: null, errorInputs: null}
-    case Types.FAIL_LOGIN:
+    case FAIL_LOGIN:
       return {...state, errorServer: action.payload}
-    case Types.LOGOUT:
+    case LOGOUT:
       return {...state, isAuth: false}
     default:
       return state

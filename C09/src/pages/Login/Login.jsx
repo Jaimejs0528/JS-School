@@ -22,9 +22,8 @@ const container = ({ classes, ...rest }) => (
 const Container = injectSheet(styles)(container);
 
 class Login extends PureComponent {
-
+  
   render() {
-    
     return (
       <Choose>
         <When condition={Auth()}>

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import { validateReGex, INVALID_EMAIL_FORMAT, MAX_LENGTH, IS_EMPTY_ERROR, regEx } from 'utils/tools';
-import { HANDLE_VALUE, HANDLE_ERROR } from './loginTypes';
+import { HANDLE_VALUE, HANDLE_ERROR } from './actionTypes';
 
 const handleValue = (value, field) => ({
   type: HANDLE_VALUE,
