@@ -28,13 +28,6 @@ const logOut = () => {
   }
 }
 
-const addLocalError = (error) => {
-  return {
-    type: Types.LOGOUT,
-    payload: error
-  }
-}
-
 const signIn = (data) => {
   const request = {
     method: 'POST',
