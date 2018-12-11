@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import smallLogo from 'images/favicon.png';
 import bigLogo from 'images/logo.png';
-import { MD_VIEW, BOOKSHELF_TITLE } from 'utils/constants';
+import { BOOKSHELF_TITLE } from 'utils/constants';
 import Logo from './Logo';
 import SearchContainer from './SearchContainer';
 import UserInfo from './UserInfo';
@@ -17,31 +17,36 @@ class Header extends Component {
   static propTypes = {
     getFilter: PropTypes.func.isRequired,
     userPayload: PropTypes.object.isRequired,
+    screenHasChanged: PropTypes.func.isRequired,
+    changeLogo: PropTypes.func.isRequired,
+    isSmallLogo: PropTypes.bool.isRequired,
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      isSmallLogo: false,
       filter: '',
     };
   }
 
   // Remove window events and select the logo
   componentDidMount() {
-    window.addEventListener('resize', this.screenHasChanged);
-    this.changeLogoIcon(window.screen.width);
+    const { screenHasChanged, changeLogo } = this.props;
+    window.addEventListener('resize', screenHasChanged);
+    changeLogo(window.screen.width);
   }
 
   // Validates when must re-render
-  shouldComponentUpdate(nextProps, nextState){
-    const { isSmallLogo } = this.state;
-    return (isSmallLogo !== nextState.isSmallLogo);
+  shouldComponentUpdate(nextProps){
+    const { isSmallLogo, showDropDown } = this.props;
+    return (isSmallLogo !== nextProps.isSmallLogo ||
+      showDropDown !== nextProps.showDropDown);
   }
 
   // Remove window events
   componentWillUnmount() {
-    window.removeEventListener('resize', this.screenHasChanged);
+    const { screenHasChanged } = this.props;
+    window.removeEventListener('resize', screenHasChanged);
   }
 
   // calculate which params put in url
@@ -77,25 +82,9 @@ class Header extends Component {
     getFilter(event.target.value);
   }
 
-  // Validates when screen has changed
-  screenHasChanged = () => {
-    // Hide all overlay summaries open
-    $('.overlay-summary').removeClass('show-summary').removeClass('change-sense');
-    this.changeLogoIcon(window.innerWidth);
-  }
-
-  // Change Icon when screen resize
-  changeLogoIcon = (screenX) => {
-    if (screenX < MD_VIEW) {
-      this.setState({ isSmallLogo: true });
-    } else {
-      this.setState({ isSmallLogo: false });
-    }
-  }
-
   render() {
-    const { isSmallLogo } = this.state;
-    const { userPayload } = this.props;
+    const { userPayload, openDropdown, showDropDown, isSmallLogo } = this.props;
+    // console.log(this.props);
     return (
       <div className="header-container">
         <Logo logo={isSmallLogo ? smallLogo : bigLogo} />
@@ -106,7 +95,12 @@ class Header extends Component {
             onSubmit={this.onSubmit}
           />
         </SearchContainer>
-        <UserInfo userName={userPayload.name} userIcon={userPayload.icon} />
+        <UserInfo
+          showDropDown={showDropDown}
+          openDropdown={openDropdown}
+          userName={userPayload.name}
+          userIcon={userPayload.icon}
+        />
       </div>
     );
   }

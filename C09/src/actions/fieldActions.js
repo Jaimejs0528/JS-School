@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import { validateReGex, INVALID_EMAIL_FORMAT, MAX_LENGTH, IS_EMPTY_ERROR, regEx } from 'utils/tools';
-import { HANDLE_VALUE, HANDLE_ERROR } from './loginTypes';
+import { HANDLE_VALUE, HANDLE_ERROR } from './actionTypes';
 
 const handleValue = (value, field) => ({
   type: HANDLE_VALUE,
@@ -10,29 +10,28 @@ const handleValue = (value, field) => ({
 
 const handleError = (error, field) => ({
   type: HANDLE_ERROR,
-  payload:error,
+  payload: error,
   field,
 });
 
 // Validates if the field doesn't accomplish some rule
-const fieldHandler = (e = null) => {
+const fieldHandler = (e = null, nameIn = '') => {
   return dispatch => {
-    const { name } = e.target;
-
     if(e && e.target.value){
+      const { name } =  e.target;
       const value = e.target.value;
       const errorLengthExceed = (validateReGex(regEx.limitOvercame, value)) ? 
       MAX_LENGTH : null;
 
       dispatch(handleError(errorLengthExceed, name));
-      if (name == 'email'){
+      if (name == 'email') {
         const errorEmail = (!validateReGex(regEx.invalidEmail,value)) ?
         INVALID_EMAIL_FORMAT : null;
         if(errorEmail) {
           dispatch(handleError(errorEmail, name));
         }
         else {
-          dispatch(handleError( errorLengthExceed, name));
+          dispatch(handleError(errorLengthExceed, name));
         }
       }
 
@@ -42,10 +41,12 @@ const fieldHandler = (e = null) => {
       else {
         dispatch(handleValue(value, name));
       }
-    } else {
-      dispatch(handleError(IS_EMPTY_ERROR, name));
-      dispatch(handleValue('', name));
+      return;
     }
+
+    const name = nameIn || e.target.name;
+    dispatch(handleError(IS_EMPTY_ERROR, name));
+    dispatch(handleValue('', name));
   }
 }
 

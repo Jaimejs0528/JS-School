@@ -9,4 +9,6 @@ const { isAuth } = state;
   });
 }
 
+// const map
+
 export default (connect(mapStateToProps)(App));

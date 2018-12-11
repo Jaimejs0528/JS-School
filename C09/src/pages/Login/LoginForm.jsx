@@ -1,109 +1,102 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/jsx-no-undef */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
+import injectSheet from 'react-jss'
 
-// import { signIn } from 'services/services';
+import { stylesForm } from './styles/Login';
 import InputField from './InputField';
 
+
+const formContainer = ({classes, fieldHandler, data, errorServer, onSubmit}) => {
+  return (
+    <form onSubmit={onSubmit} className={classes.form}>
+    <div className={classes.inputsContainer}>
+      <InputField
+        name="email"
+        type="text"
+        placeholder="name@email.com"
+        label="Email"
+        icon={faUser}
+        fieldHandler={fieldHandler}
+        data={data.email}
+      />
+      <InputField
+        name="password"
+        type="password"
+        placeholder="Your password"
+        label="Password"
+        icon={faKey}
+        fieldHandler={fieldHandler}
+        data={data.password}
+      />
+    </div>
+    <div className={`${classes.buttonContainer} ${classes.error}`}>
+      <button className={classes.signInButton} type="submit">Sign In</button>
+      <If condition={errorServer}>
+        <span>{errorServer}</span>
+      </If>
+    </div>
+  </form>
+  )};
+
+const Form = injectSheet(stylesForm)(formContainer);
+
 class LoginForm extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      data: {
-        email: '',
-        password: '',
-      },
-      errorInputs: null,
-    };
-    this.email = React.createRef();
-    this.password = React.createRef();
+  //Props validations
+  static propTypes = {
+    errorServer: PropTypes.string,
+    signIn: PropTypes.func.isRequired,
+    fieldHandler: PropTypes.func.isRequired,
+    isAuth: PropTypes.any.isRequired,
+    data: PropTypes.object.isRequired,
   }
 
-  componentWillReceiveProps(nextProps){
-    const { isAuth } = this.props;
-    console.log("hola");
-    console.log(isAuth, nextProps.isAuth);
-    if (isAuth !== nextProps.isAuth) {
-      console.log(isAuth, nextProps.isAuth,2);
-    }
+  static defaultProps = {
+    errorServer: null,
   }
 
   // When must re-render
-  shouldComponentUpdate(nextProps, nextState) {
-    const { errorInputs } = this.state;
-    const {isAuth, errorServer } = this.props;
+  shouldComponentUpdate(nextProps) {
+    const { errorServer, data } = this.props;
 
-    return (isAuth !== nextProps.isAuth ||
-      errorInputs !== nextState.errorInputs ||
+    return (
+      data !== nextProps.data ||
       errorServer !== nextProps.errorServer);
   }
-
-  
 
   // Call sign in service
   onSubmit = (e) => {
     e.preventDefault();
-    const { value: valueEmail, error: errorEmail } = this.email.current.state;
-    const { value: valuePass, error: errorPass } = this.password.current.state;
-    const { signIn, isAuth } = this.props;
-    // If all fields are valid
-    if( valueEmail === valuePass && valueEmail === '') {
-      this.email.current.handleErrors();
-      this.password.current.handleErrors();
+    const { data: { email, password }, fieldHandler, signIn } = this.props;
+
+    if( email.value === password.value && email.value === '') {
+      fieldHandler(null, 'email');
+      fieldHandler(null, 'password');
       return;
     }
-
-    // Update state and call service
-    this.setState({
-      data: {
-        email: valueEmail,
-        password: valuePass,
-      },
-      errorInputs: (errorEmail || errorPass),
-    }, () => {
-      const { data, errorInputs } = this.state;
-      if (!errorInputs) signIn(data);
-    });
+    // call service
+    if (!(email.error || password.error)) signIn({email: email.value, password: password.value});
   }
 
   render(){
-    const { isAuth } = this.props;
-    const { errorServer } = this.props;
-    // console.log(this.props);
+    const { isAuth, errorServer, fieldHandler, data } = this.props;
+
     return (
       <Choose>
         <When condition={isAuth}>
           <Redirect to="/home" />
         </When>
         <Otherwise>
-          <form onSubmit={this.onSubmit} className="form">
-            <div className="inputsContainer">
-              <InputField
-                name="email"
-                ref={this.email}
-                type="text"
-                placeholder="name@email.com"
-                label="Email"
-                icon={faUser}
-              />
-              <InputField
-                name="password"
-                ref={this.password}
-                type="password"
-                placeholder="Your password"
-                label="Password"
-                icon={faKey}
-              />
-            </div>
-            <div className="buttonContainer error">
-              <button className="signInButton" type="submit">Sign In</button>
-              <If condition={errorServer}>
-                <span>{errorServer}</span>
-              </If>
-            </div>
-          </form>
+          <Form
+            errorServer={errorServer}
+            fieldHandler={fieldHandler}
+            data={data}
+            onSubmit={this.onSubmit}
+          />
         </Otherwise>
       </Choose>
     );

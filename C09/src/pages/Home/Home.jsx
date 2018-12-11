@@ -40,7 +40,7 @@ class Home extends Component {
     // Get props and state
     const { filter } = this.state;
     const userPayload = Auth();
-    console.log(this.props);
+    
     return (
       <div>
         <Choose>

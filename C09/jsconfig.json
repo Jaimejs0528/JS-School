@@ -10,6 +10,7 @@
       "styles/*": ["styles/*"],
       "services/*": ["services/*"],
       "commonStyles/*": ["commonStyles/*"],
+      "actions/*": ["actions/*"],
     }
   }
 }

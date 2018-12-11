@@ -1,95 +1,51 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable import/no-unresolved */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import injectSheet from 'react-jss'
 
-import { regEx,
-IS_EMPTY_ERROR,
-INVALID_EMAIL_FORMAT,
-MAX_LENGTH,
-validateReGex
-} from 'utils/tools';
+import { stylesFields } from './styles/Login';
+
+const field = ({classes, icon, label, value, handleErrors, fieldHandler, ...rest}) => {
+  return (
+    <div className={`${classes.fieldContainer} ${rest.data.error ? classes.error: null}`}>
+      <label htmlFor={label}>
+        {label}
+        <div className={classes.input}>
+          <FontAwesomeIcon icon={icon} />
+          <input
+            id={label}
+            onChange={fieldHandler}
+            onBlur={fieldHandler}
+            value={rest.data.value}
+            {...rest}
+          />
+        </div>
+      </label>
+      <If condition={rest.data.error}>
+        <span>{rest.data.error}</span>
+      </If>
+    </div>
+  )
+};
+
+// Add css to component
+const Field = injectSheet(stylesFields)(field);
 
 class InputField extends Component {
-  static propTypes = {
-    type: PropTypes.string.isRequired,
-    placeholder: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-  }
+  // When must re-render
+  shouldComponentUpdate(nextProps) {
+    const { data: { value, error } } = this.props;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      value: '',
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    const { error, value } = this.state;
-    return (error !== nextState.error ||
-      value !== nextState.value);
-  }
-
-  // Validates if the field doesn't accomplish some rule
-  handleErrors = (e = null) => {
-    const { name } = this.props;
-    if(e && e.target.value){
-      const value = e.target.value;
-      const errorLengthExceed = (validateReGex(regEx.limitOvercame, value)) ? 
-      MAX_LENGTH : null;
-
-      this.setState({error: errorLengthExceed});
-      if (name == 'email'){
-        const errorEmail = (!validateReGex(regEx.invalidEmail,value)) ?
-        INVALID_EMAIL_FORMAT : null;
-
-        if(errorEmail) {
-          this.setState({error: errorEmail});
-        }
-        else {
-          this.setState({error: errorLengthExceed});
-        }
-      }
-
-      if(errorLengthExceed) {
-        this.setState({error: errorLengthExceed});
-      }
-      else {
-        this.setState({value});
-      }
-    } else {
-      this.setState({
-        error: IS_EMPTY_ERROR,
-        value: '',
-      });
-    }
+    return (value !== nextProps.data.value  ||
+      error !== nextProps.data.error);
   }
 
   render() {
-    const {icon, label, ...rest } = this.props
-    const { value, error } = this.state;
-
     return(
-      <div className={`fieldContainer ${error ? 'error': ''}`}>
-        <label htmlFor={label}>
-          {label}
-          <div className="input">
-            <FontAwesomeIcon icon={icon} />
-            <input
-              id={label}
-              onChange={this.handleErrors}
-              onBlur={this.handleErrors}
-              value={value}
-              {...rest}
-            />
-          </div>
-        </label>
-        <If condition={error}>
-          <span>{error}</span>
-        </If>
-      </div>
+      <Fragment>
+        <Field {...this.props} {...this.state} />
+      </Fragment>
     );
   }
 }
