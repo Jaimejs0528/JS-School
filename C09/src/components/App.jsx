@@ -3,11 +3,11 @@
 import React, { PureComponent } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Home from 'pages/Home/Home';
-import NotFound from 'pages/NotFound/NotFound';
-import { ProtectedRouteRedirect } from 'components/ProtectedRoute';
-import Login from 'pages/Login/containers/Login';
 import { Auth } from 'utils/tools';
+import { ProtectedRouteRedirect } from 'components/ProtectedRoute';
+import NotFound from 'pages/NotFound/NotFound';
+import Home from '../containers/Home';
+import Login from '../containers/Login';
 
 // Class that controls all routes
 class App extends PureComponent {

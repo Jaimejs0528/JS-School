@@ -11,19 +11,13 @@ class UserInfo extends Component {
   static propTypes = {
     userName: PropTypes.string.isRequired,
     userIcon: PropTypes.string.isRequired,
+    showDropDown: PropTypes.bool.isRequired,
+    openDropdown: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: false,
-    }
-  }
-
-
-  // open dropdown
-  onClick = () => {
-    this.setState((preState) => ({show: !preState.show}));
+  shouldComponentUpdate(nextProps) {
+    const { showDropDown } = this.props;
+    return ( showDropDown !== nextProps.showDropDown );
   }
 
   // Close the current session
@@ -32,17 +26,16 @@ class UserInfo extends Component {
   }
 
   render() {
-    const { userName, userIcon } = this.props;
-    const { show } = this.state;
-    
+    const { userName, userIcon, openDropdown, showDropDown } = this.props;
+
     return (
       <div className="sidebar header-profile">
         <div className="vertical-line" />
-        <div onClick={this.onClick} className="profile">
+        <div onClick={openDropdown} className="profile">
           <h3 className="hide-overflow-text">{userName}</h3>
           <FontAwesomeIcon icon="angle-down" />
           <img className="circle-img" src={userIcon} alt={`icon-${userName}`} />
-          <div className={`dropdown-logout ${show ? 'show' : ''}`}>
+          <div className={`dropdown-logout ${showDropDown ? 'show' : ''}`}>
             <Link onClick={this.logOut} to="/login">Logout</Link>
           </div>
         </div>
