@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import { SERVER_URL, SIGN_IN_PATH } from 'services/urlConstants';
+import UserServices from 'services/userServices';
 import{ REQUEST_LOGIN, SUCCESS_LOGIN, FAIL_LOGIN, LOGOUT } from './actionTypes';
 
 const requestData = () => {
@@ -29,15 +29,10 @@ const logOut = () => {
 }
 
 const signIn = (data) => {
-  const request = {
-    method: 'POST',
-    headers:{'Content-Type': 'application/json',},
-    body:JSON.stringify(data),
-  }
   return async (dispatch) => {
     try {
       dispatch(requestData());
-      const result = await fetch(`${SERVER_URL}${SIGN_IN_PATH}`, request);
+      const result = await UserServices.signIn(data);
       const jsonData = await result.json();
       if(jsonData.message) {
         dispatch(failedRequest(jsonData.message));

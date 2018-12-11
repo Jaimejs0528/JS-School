@@ -16,7 +16,8 @@
         "styles": "./src/styles/",
         "services": "./src/services/",
         "commonStyles": "./src/pages/commonStyles/",
-        "actions": "./src/actions/"
+        "actions": "./src/actions/",
+        "constants": "./src/constants"
       }
     }]
   ]

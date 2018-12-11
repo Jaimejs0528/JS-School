@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import { NOT_CONNECTION } from 'utils/constants';
-import { SERVER_URL, BOOKS_BASE } from './urlConstants';
+import { SERVER_URL, BOOKS_BASE } from 'constants/index';
 
   // Make a request to server
   export const queryRequest = (endpoint = '', data = null) => {

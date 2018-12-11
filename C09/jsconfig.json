@@ -11,6 +11,7 @@
       "services/*": ["services/*"],
       "commonStyles/*": ["commonStyles/*"],
       "actions/*": ["actions/*"],
+      "constants/*": ["constants/*"],
     }
   }
 }
