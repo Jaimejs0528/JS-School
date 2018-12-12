@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import userReducer from './loginReducer';
-import bookReducer from './bookReducer';
+import userReducer from './modules/Login/reducer';
+import bookReducer from './modules/Books/reducer';
 
 const mainReducer = combineReducers({
   user: userReducer,

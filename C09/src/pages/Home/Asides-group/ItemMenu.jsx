@@ -43,7 +43,8 @@ class ItemName extends PureComponent {
         <Link
           to={`${match}/?page=1`}
           className="Link"
-          onClick={changeSelected.bind(this)}>
+          onClick={changeSelected}
+        >
           {itemName}
         </Link>    
       </div>);

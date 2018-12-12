@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import UserServices from 'services/userServices';
-import{ REQUEST_LOGIN, SUCCESS_LOGIN, FAIL_LOGIN, LOGOUT } from './actionTypes';
+import{ REQUEST_LOGIN, SUCCESS_LOGIN, FAIL_LOGIN, LOGOUT } from 'constants/loginTypes';
 
 const requestData = () => {
   return {

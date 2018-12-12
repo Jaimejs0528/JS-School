@@ -1,4 +1,5 @@
-import { SERVER_URL} from 'constants/index';
+/* eslint-disable import/no-unresolved */
+import { SERVER_URL} from 'constants/urlConstants';
 
 class AbstractService {
 

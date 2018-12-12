@@ -1,5 +1,6 @@
+/* eslint-disable import/no-unresolved */
+import { SIGN_IN_PATH } from 'constants/urlConstants';
 import AbstractService from './abstractService';
-import { SIGN_IN_PATH } from 'constants/index';
 
 
 class UserServices extends AbstractService {

@@ -6,7 +6,7 @@ import {
   SUCCESS_LOGIN,
   FAIL_LOGIN,
   LOGOUT,
-} from 'actions/actionTypes';
+} from 'constants/loginTypes';
 
 const initialState = {
   errorServer: null,

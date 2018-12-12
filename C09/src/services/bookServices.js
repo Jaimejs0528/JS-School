@@ -1,33 +1,32 @@
 import AbstractService from './abstractService';
-import { BOOKS_BASE, CITIES_ENDPOINT, DIGITAL_ENDPOINT, LOANS_ENDPOINT } from 'constants/index';
 
 // Class that collects all the books services
 class BookServices extends AbstractService {
 
   // returns all the books
-  static getAllBooks() {
-    return this.get({endpoint: BOOKS_BASE});
+  static getAllBooks(endpoint) {
+    return this.get({endpoint});
   }
 
   // return all books filter by city
-  static getBooksByCity(city) {
-    const endpoint = `${CITIES_ENDPOINT}${city}`
-    return this.prototype.get({endpoint});
+  static getBooksByCity(endpoint, city) {
+    const finalEndpoint = `${endpoint}/${city}`
+    return this.prototype.get({endpoint: finalEndpoint});
   }
 
   // return all books with digital copy
-  static getDigitalBooks() {
-    return this.prototype.get({endpoint: DIGITAL_ENDPOINT});
+  static getDigitalBooks(endpoint) {
+    return this.prototype.get({endpoint});
   }
 
   // return the books loans for the logged user
-  static getLoansByUser() {
-    return this.prototype.post({endpoint: LOANS_ENDPOINT})
+  static getLoansByUser(endpoint) {
+    return this.prototype.post({endpoint})
   }
 
   // Make a lend
-  static lendABook(data) {
-    return this.prototype.patch({endpoint: LOANS_ENDPOINT, data})
+  static lendABook(endpoint, data) {
+    return this.prototype.patch({endpoint, data})
   }
 }
 

@@ -2,8 +2,8 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import Login from 'pages/Login/Login';
-import signIn from 'actions/loginActions';
-import fieldHandler from 'actions/fieldActions';
+import signIn from 'reduxAlias/modules/Login/loginActions';
+import fieldHandler from 'reduxAlias/modules/Login/fieldActions';
 
 const mapStateToProps =  (state) => {
   const { errorServer, isAuth } = state.user;

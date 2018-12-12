@@ -1,11 +1,11 @@
 /* eslint-disable import/no-unresolved */
 import { NOT_CONNECTION } from 'utils/constants';
-import { SERVER_URL, BOOKS_BASE } from 'constants/index';
+import { SERVER_URL, BOOKS_BASE } from 'constants/urlConstants';
 
   // Make a request to server
   export const queryRequest = (endpoint = '', data = null) => {
     const urlBase = `${SERVER_URL}${BOOKS_BASE}`;
-
+    console.log(urlBase, endpoint);
     const consumeService = async (endpointService = '') => {
       let response;
       // WHEN IS A LOAN
