@@ -1,6 +1,5 @@
 /* eslint-disable import/no-unresolved */
 import { MD_VIEW } from 'utils/constants';
-import { LOANS_ENDPOINT } from 'constants/urlConstants';
 import {
   NAV_ITEM_SELECTED,
   OPEN_NAV,
@@ -12,6 +11,12 @@ import {
   SUCCESS_BOOKS,
   REQUEST_BOOKS
 } from 'constants/bookTypes';
+import {
+  BOOKS_BASE,
+  DIGITAL_ENDPOINT,
+  LOANS_ENDPOINT,
+  CITIES_ENDPOINT
+} from 'constants/urlConstants';
 import BookServices from 'services/bookServices';
 
 const changeSelectedNavItem = (item) =>{
@@ -131,12 +136,35 @@ export const screenHasChanged = () => {
   }
 }
 
+// Consume the services from server
+export const fetchBooksData = (query, location) => {
+  return dispatch =>{
+    const queryD = query.url.split('/')[2];
+    if(queryD === 'cities'){
+      const city = query.url.split('/')[3];
+      dispatch(consumeService(`${CITIES_ENDPOINT}/${city.toLowerCase()}/${location.search}`,'city'));
+      return;
+    }
+    if (queryD === 'lends') { 
+      dispatch(consumeService(`${LOANS_ENDPOINT}/${location.search}`,'get-loans'));
+      return;
+    } 
+    if (queryD === 'digitals') { 
+      dispatch(consumeService(`${DIGITAL_ENDPOINT}/${location.search}`,'digital'));
+      return;
+    }
+    dispatch(consumeService(`${BOOKS_BASE}${location.search}`,'home'));
+    return;  
+  }  
+}
+
+// Select which service call
 const selectService = (endpoint,type, data) => {
   switch(type){
     case 'home':
-      return BookServices.getAll(endpoint);
+      return BookServices.getAllBooks(endpoint);
     case 'city':
-      return BookServices.getBooksByCity(endpoint, data);
+      return BookServices.getBooksByCity(endpoint);
     case 'digital':
       return BookServices.getDigitalBooks(endpoint);
     case 'get-loans':
@@ -148,6 +176,7 @@ const selectService = (endpoint,type, data) => {
   }
 }
 
+// call the service to lend a book
 export const lendABook = ( isbn,  date) => {
   return dispatch =>{
     const bookToLend = {
@@ -160,12 +189,12 @@ export const lendABook = ( isbn,  date) => {
   }
 }
 
-export const consumeService = ({endpoint, type ,data = {}}) => {
+export const consumeService = (endpoint, type ,data = null) => {
   return async (dispatch) => {
     try {
       dispatch(requestData());
       
-      const result = await selectService(endpoint,type, data);
+      const result = await selectService(endpoint, type, data);
       const jsonData = await result.json();
       if(jsonData.message) {
         dispatch(failedRequest(jsonData.message));
@@ -173,7 +202,7 @@ export const consumeService = ({endpoint, type ,data = {}}) => {
         dispatch(successfulRequest(jsonData));
       }
     } catch(e){
-      dispatch(failedRequest(e));
+      dispatch(failedRequest(e.toString()));
     }
   }
 }

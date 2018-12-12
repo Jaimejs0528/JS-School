@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Rating from 'pages/Home/Bookshelf-group/Rating';
+import Rating from 'components/Rating';
 import { MAX_NUMB_STARS } from 'utils/constants';
 
 // Class to show all Book summary

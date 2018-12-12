@@ -8,7 +8,7 @@ import { faUserCheck, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { Auth } from 'utils/tools';
 import background from 'images/reservation.png';
 import { MAX_NUMB_STARS } from 'utils/constants';
-import Rating from './Rating';
+import Rating from 'components/Rating';
 
 // Class that contains image and its overlay
 class ImageContainer extends PureComponent {

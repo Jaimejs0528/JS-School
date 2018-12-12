@@ -4,11 +4,13 @@ import { DEFAULT_HOME } from 'utils/constants';
 
 const initialState = {
   isLoading: true,
-  errorBooks: false,
+  errorBooks: '',
   books: [],
-  pagination: [],
+  pagination: {
+    totalPages: 1,
+    currentPage: 1,
+  },
   menuItemSelected: DEFAULT_HOME,
-  showSummary: false,
   showDropDown: false,
   openNavMenu: false,
   isSmallLogo: false,
@@ -29,6 +31,32 @@ export default function booksReducer (state = initialState, action = {}) {
       return {...state, menuItemSelected: action.payload};
     case types.BOOK_SELECTED:
       return {...state, bookSelected: action.payload};
+    case types.REQUEST_BOOKS:
+      return{
+        ...state,
+        isLoading: true,
+        errorBooks: '',
+        books:[],
+      }
+    case types.SUCCESS_BOOKS:
+      return {
+        ...state,
+        isLoading: false,
+        errorBooks: '',
+        books: action.payload.books,
+        pagination:action.payload.pagination
+      }
+    case types.FAIL_BOOKS:
+      return{
+        ...state,
+        isLoading: false,
+        errorBooks: action.payload,
+        books:[],
+        pagination:{
+          totalPages: 1,
+          currentPage: 1,
+        }
+      }
     default:
       return state;
   }

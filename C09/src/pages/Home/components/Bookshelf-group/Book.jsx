@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { MAX_NUMB_STARS } from 'utils/constants';
 import ImageContainer from './ImageContainer';
-import Rating from './Rating';
+import Rating from 'components/Rating';
 
 // Book information container 
 class Book extends Component {

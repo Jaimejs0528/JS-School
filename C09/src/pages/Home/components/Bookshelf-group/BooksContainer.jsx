@@ -2,50 +2,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import BooksHeader from './BooksHeader';
-import BookShelf from './Bookshelf';
+import BooksHeader from '../../containers/bookHeader';
+import { BookShelfContainer as BookShelf } from '../../containers/Home';
 
 // Container for bookshelf and its header
 class BooksContainer extends Component {
   // Props Validations
   static propTypes = {
-    title: PropTypes.string.isRequired,
     filter: PropTypes.string.isRequired,
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-  }
-
-  constructor(props){
-    super(props)
-    this.state = {
-      pagination: {},
-    }
+    pagination: PropTypes.object.isRequired,
   }
 
   // When re-render
-  shouldComponentUpdate(nextProps, nextState) {
-    const { pagination } = this.state;
+  shouldComponentUpdate(nextProps) {
     const { match, location,filter } = this.props;
-    
     return (location.search !== nextProps.location.search ||
-      pagination !== nextState.pagination ||
       match.url !== nextProps.match.url || 
       filter !== nextProps.filter);
   }
 
-  // Ref child
-  getRef = (pagination) => {
-    this.setState({pagination});
-  }
-
   render() {
-    const { title, filter, match } = this.props;
-    const { pagination } = this.state;
-
+    const {filter, match, location } = this.props;
     return (
       <main className="books-container">
-        <BooksHeader pagination={pagination} title={title} />
-        <BookShelf {...this.props} location={location} pagination={this.getRef} query={match} filter={filter} />
+        <BooksHeader />
+        <BookShelf {...this.props} location={location} query={match} filter={filter} />
       </main>);
   }
 }

@@ -5,13 +5,12 @@ class BookServices extends AbstractService {
 
   // returns all the books
   static getAllBooks(endpoint) {
-    return this.get({endpoint});
+    return this.prototype.get({endpoint});
   }
 
   // return all books filter by city
-  static getBooksByCity(endpoint, city) {
-    const finalEndpoint = `${endpoint}/${city}`
-    return this.prototype.get({endpoint: finalEndpoint});
+  static getBooksByCity(endpoint) {
+    return this.prototype.get({endpoint});
   }
 
   // return all books with digital copy

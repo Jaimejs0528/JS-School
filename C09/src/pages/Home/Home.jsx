@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
-import Header from 'pages/Home/Header-group/Header';
-import Main from 'pages/Home/Bookshelf-group/Main';
+import Header from 'pages/Home/components/Header-group/Header';
+import Main from 'pages/Home/components/Bookshelf-group/Main';
 import { Auth } from 'utils/tools';
 
 // Main Class Contains all app

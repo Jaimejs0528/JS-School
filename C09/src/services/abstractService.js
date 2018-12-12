@@ -10,7 +10,6 @@ class AbstractService {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    data = {},
     baseUrl = SERVER_URL, 
   }) {
     return this.request({
@@ -18,7 +17,6 @@ class AbstractService {
       endpoint,
       method:'GET',
       headers,
-      body: data,
     })
   }
 
@@ -65,12 +63,13 @@ class AbstractService {
     endpoint,
     method,
     headers,
-    body = {},
+    body = null,
   }) {
+    const finalBody = (body) ? `body: ${JSON.stringify(body)}` : '';
     return fetch(`${baseUrl}${endpoint}`,{
       method,
       headers,
-      body: JSON.stringify(body)
+      finalBody
     });
   }
 }
