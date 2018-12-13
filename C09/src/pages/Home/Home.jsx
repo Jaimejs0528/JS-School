@@ -4,10 +4,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import injectSheet from 'react-jss';
 
-import Header from 'pages/Home/components/Header-group/Header';
-import Main from 'pages/Home/components/Bookshelf-group/Main';
+import Header from 'pages/Home/components/Header/Header';
+import Main from 'pages/Home/components/Bookshelf/Main';
 import { Auth } from 'utils/tools';
+import { stylesHeader } from './styles/header';
+
+
+const HeaderContainer = injectSheet(stylesHeader)(Header);
 
 // Main Class Contains all app
 class Home extends Component {
@@ -48,7 +53,7 @@ class Home extends Component {
             <Redirect to="/" />
           </When>
           <Otherwise>
-            <Header {...this.props} userPayload={userPayload} getFilter={this.getFilter} />
+            <HeaderContainer {...this.props} userPayload={userPayload} getFilter={this.getFilter} />
             <Main {...this.props} filter={filter} />
           </Otherwise>
         </Choose> 

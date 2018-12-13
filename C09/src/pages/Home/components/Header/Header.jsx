@@ -17,7 +17,12 @@ class Header extends Component {
   static propTypes = {
     getFilter: PropTypes.func.isRequired,
     userPayload: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
     screenHasChanged: PropTypes.func.isRequired,
+    showDropDown: PropTypes.bool.isRequired,
+    openDropdown: PropTypes.func.isRequired,
     changeLogo: PropTypes.func.isRequired,
     isSmallLogo: PropTypes.bool.isRequired,
   }
@@ -83,25 +88,27 @@ class Header extends Component {
   }
 
   render() {
-    const { userPayload, openDropdown, showDropDown, isSmallLogo } = this.props;
+    const { userPayload, openDropdown, showDropDown, isSmallLogo, classes } = this.props;
     // console.log(this.props);
     return (
-      <div className="header-container">
-        <Logo logo={isSmallLogo ? smallLogo : bigLogo} />
-        <SearchContainer>
-          <h1 className="title">{BOOKSHELF_TITLE}</h1>
+      <header className={classes['header-container']}>
+        <Logo classes={classes} logo={isSmallLogo ? smallLogo : bigLogo} />
+        <SearchContainer classes={classes}>
+          <h1 className={classes.title}>{BOOKSHELF_TITLE}</h1>
           <SearchInput
+            classes={classes}
             getInput={this.getInput}
             onSubmit={this.onSubmit}
           />
         </SearchContainer>
         <UserInfo
+          classes={classes}
           showDropDown={showDropDown}
           openDropdown={openDropdown}
           userName={userPayload.name}
           userIcon={userPayload.icon}
         />
-      </div>
+      </header>
     );
   }
 }

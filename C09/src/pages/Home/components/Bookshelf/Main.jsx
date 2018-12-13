@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { NAV_MENU, MOST_READ } from 'utils/constants';
 import { NavMenuContainer as NavMenu } from 'pages/Home/containers/Home';
-import MostRead from 'pages/Home/components/Asides-group/MostRead';
+import MostRead from 'pages/Home/components/Asides/MostRead';
 import BooksContainer from './BooksContainer';
 
 // Main Container bookshelf, nav and aside

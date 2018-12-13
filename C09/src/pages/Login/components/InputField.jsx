@@ -4,7 +4,7 @@ import React, { Component, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import injectSheet from 'react-jss'
 
-import { stylesFields } from './styles/Login';
+import { stylesFields } from '../styles/login';
 
 const field = ({classes, icon, label, value, handleErrors, fieldHandler, ...rest}) => {
   return (

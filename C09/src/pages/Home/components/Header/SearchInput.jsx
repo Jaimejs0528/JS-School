@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,13 +9,13 @@ class SearchInput extends PureComponent {
   static propTypes = {
     getInput: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired,
   }
 
   render() {
-    const { getInput, onSubmit } = this.props;
-    
+    const { getInput, onSubmit, classes } = this.props;
     return (
-      <form className="input-search" onSubmit={onSubmit}>
+      <form className={classes['input-search']} onSubmit={onSubmit}>
         <FontAwesomeIcon icon="search" />
         <input type="search" name="Search" placeholder="Search..." aria-label="Search" onChange={getInput} />
       </form>

@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Home from 'pages/Home/Home';
-import NavMenu from 'pages/Home/components/Asides-group/NavMenu';
+import NavMenu from 'pages/Home/components/Asides/NavMenu';
 import {
   openDropdown,
   changeLogo,
@@ -12,7 +12,7 @@ import {
   openMenuKeyBoard,
   fetchBooksData,
 } from 'reduxAlias/modules/Books/bookActions';
-import BookShelf from 'pages/Home/components/Bookshelf-group/Bookshelf';
+import BookShelf from 'pages/Home/components/Bookshelf/Bookshelf';
 
 // Create the map from state to props
 const mapStateToProps =  (state) => {
@@ -23,7 +23,6 @@ const mapStateToProps =  (state) => {
     pagination,
     menuItemSelected,
     openNavMenu,
-    showSummary,
     showDropDown,
     isSmallLogo,
     bookSelected
@@ -36,7 +35,6 @@ const mapStateToProps =  (state) => {
   pagination,
   menuItemSelected,
   openNavMenu,
-  showSummary,
   showDropDown,
   isSmallLogo,
   bookSelected,

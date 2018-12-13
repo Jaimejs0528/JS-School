@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import BooksHeader from "../components/Bookshelf-group/BooksHeader";
+import BooksHeader from "../components/Bookshelf/BooksHeader";
 
 // Create the map from state to props
 const mapStateToProps =  (state) => {

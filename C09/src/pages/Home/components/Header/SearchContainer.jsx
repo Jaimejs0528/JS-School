@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
@@ -6,13 +7,14 @@ class SearchContainer extends PureComponent {
   // Props Validations
   static propTypes = {
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
+    classes: PropTypes.object.isRequired,
   }
 
   render() {
-    const { children } = this.props;
+    const { children, classes } = this.props;
     
     return (
-      <div className="header-search">
+      <div className={classes['header-search']}>
         {children}
       </div>
     );

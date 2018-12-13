@@ -12,9 +12,10 @@ const initialState = {
   },
   menuItemSelected: DEFAULT_HOME,
   showDropDown: false,
+  showLendIcon: false,
   openNavMenu: false,
   isSmallLogo: false,
-  bookSelected: '',
+  bookSelected: -1,
 }
 
 export default function booksReducer (state = initialState, action = {}) {
@@ -25,8 +26,8 @@ export default function booksReducer (state = initialState, action = {}) {
       return {...state, showDropDown: !state.showDropDown};
     case types.OPEN_NAV:
       return {...state, openNavMenu: !state.openNavMenu};
-    case types.SHOW_SUMMARY:
-      return {...state, showSummary: !state.showSummary};
+    case types.SHOW_LEND_ICON:
+      return {...state, showLendIcon: !state.showLendIcon};
     case types.NAV_ITEM_SELECTED:
       return {...state, menuItemSelected: action.payload};
     case types.BOOK_SELECTED:

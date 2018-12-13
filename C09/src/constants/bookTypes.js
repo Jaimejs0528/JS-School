@@ -8,6 +8,6 @@ export const ADD_FILTER = 'add-filter';
 export const NAV_ITEM_SELECTED = 'nav-item-selected';
 export const CHANGE_LOGO_ICON = 'change-logo-icon';
 export const BOOK_SELECTED = 'book-selected';
-export const SHOW_SUMMARY = 'show-summary';
+export const SHOW_LEND_ICON = 'show-lend';
 export const SHOW_DROPDOWN = 'show-dropdown';
 export const OPEN_NAV = 'open-nav';

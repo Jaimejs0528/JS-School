@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import Login from 'pages/Login/Login';
+import Login from 'pages/Login/components/Login';
 import signIn from 'reduxAlias/modules/Login/loginActions';
 import fieldHandler from 'reduxAlias/modules/Login/fieldActions';
 

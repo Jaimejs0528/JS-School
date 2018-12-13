@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
@@ -13,6 +14,7 @@ class UserInfo extends Component {
     userIcon: PropTypes.string.isRequired,
     showDropDown: PropTypes.bool.isRequired,
     openDropdown: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -26,16 +28,15 @@ class UserInfo extends Component {
   }
 
   render() {
-    const { userName, userIcon, openDropdown, showDropDown } = this.props;
-
+    const { userName, userIcon, openDropdown, showDropDown, classes } = this.props;
     return (
-      <div className="sidebar header-profile">
-        <div className="vertical-line" />
-        <div onClick={openDropdown} className="profile">
+      <div className={`sidebar ${classes['header-profile']}`}>
+        <div className={classes['vertical-line']} />
+        <div onClick={openDropdown} className={classes.profile}>
           <h3 className="hide-overflow-text">{userName}</h3>
           <FontAwesomeIcon icon="angle-down" />
           <img className="circle-img" src={userIcon} alt={`icon-${userName}`} />
-          <div className={`dropdown-logout ${showDropDown ? 'show' : ''}`}>
+          <div className={`${classes['dropdown-logout']} ${showDropDown ?classes ['show'] : ''}`}>
             <Link onClick={this.logOut} to="/login">Logout</Link>
           </div>
         </div>

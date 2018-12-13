@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { MAX_NUMB_STARS } from 'utils/constants';
-import ImageContainer from './ImageContainer';
 import Rating from 'components/Rating';
+import ImageContainer from './ImageContainer';
 
 // Book information container 
 class Book extends Component {

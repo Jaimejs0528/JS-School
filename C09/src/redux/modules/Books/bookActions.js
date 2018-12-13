@@ -6,7 +6,7 @@ import {
   CHANGE_LOGO_ICON,
   BOOK_SELECTED,
   SHOW_DROPDOWN,
-  SHOW_SUMMARY,
+  SHOW_LEND_ICON,
   FAIL_BOOKS,
   SUCCESS_BOOKS,
   REQUEST_BOOKS
@@ -45,9 +45,9 @@ const showDropdown = () =>{
   }
 }
 
-const showSummary = () =>{
+const showIcon = () =>{
   return {
-    type: SHOW_SUMMARY,
+    type: SHOW_LEND_ICON,
   }
 }
 
@@ -95,9 +95,9 @@ export const openDropdown = () => {
   }
 }
 
-export const openSummary = () => {
+export const showLendIcon = () => {
   return dispatch => {
-    dispatch(showSummary());
+    dispatch(showIcon());
   }
 }
 
@@ -126,13 +126,18 @@ export const changeSelectedBook = (isbn) => {
   }
 }
 
+export const closeSummary = () => {
+  return dispatch => {
+    dispatch(changeBookSelected(-1));
+  }
+}
 // Validates when screen has changed
 export const screenHasChanged = () => {
   return dispatch => {
-    // Hide all overlay summaries open
-  $('.overlay-summary').removeClass('show-summary').removeClass('change-sense');
   // Change Icon when screen resize
   dispatch(changeLogo(window.innerWidth));
+  // close open summary
+  dispatch(closeSummary());
   }
 }
 

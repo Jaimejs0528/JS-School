@@ -7,7 +7,7 @@ import { Auth } from 'utils/tools';
 import { ProtectedRouteRedirect } from 'components/ProtectedRoute';
 import NotFound from 'pages/NotFound/NotFound';
 import Home from '../pages/Home/containers/Home';
-import Login from '../containers/Login';
+import Login from '../pages/Login/containers/Login';
 
 // Class that controls all routes
 class App extends PureComponent {

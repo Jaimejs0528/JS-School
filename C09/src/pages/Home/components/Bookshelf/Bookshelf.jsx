@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import OverlayBookContainer from './OverlayBookContainer';
+import OverlayBookContainer from '../../containers/OverlayContainer';
 
 // Class that contains all books
 class BookShelf extends Component {

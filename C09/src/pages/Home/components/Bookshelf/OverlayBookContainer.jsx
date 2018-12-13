@@ -11,19 +11,25 @@ class OverlayBookContainer extends Component {
   static propTypes = {
     bookData: PropTypes.object.isRequired,
     lendABook: PropTypes.func.isRequired,
+    bookSelected: PropTypes.number.isRequired,
+    changeSelectedBook: PropTypes.func.isRequired,
+
   }
   
   constructor(props) {
     super(props);
     this.state = {
-      openSummary: false,
       addLend: false,
     };
   }
 
-  // Toggle between show or not the overlay summary
-  showSummary = () => {
-    this.setState(previous => ({ openSummary: !previous.openSummary }));
+  showByISBN = () => {
+    const { bookData,changeSelectedBook, bookSelected } = this.props;
+    if(bookSelected === bookData.bookinfo.isbn) {
+      changeSelectedBook(-1);
+    } else {
+      changeSelectedBook(bookData.bookinfo.isbn);
+    }
   }
 
   // Toggle between show or not lend icon
@@ -38,17 +44,21 @@ class OverlayBookContainer extends Component {
   }
 
   render() {
-    const { bookData } = this.props;
-    const { openSummary, addLend } = this.state;
+    const { bookData, closeSummary, bookSelected } = this.props;
+    const {  addLend } = this.state;
+      // console.log(this.props);
 
     return (
       <div className="overlay-container">
-        <Book bookData={bookData} showSummary={this.showSummary} addLend={addLend} />
+        <Book
+          bookData={bookData}
+          showSummary={this.showByISBN}
+          bookSelected={bookSelected}
+          addLend={addLend} />
         <OverlaySummary
-          ref={bookData.bookinfo.isbn}
           bookInfo={bookData.bookinfo}
-          show={openSummary}
-          showSummary={this.showSummary}
+          showByISBN={bookSelected}
+          closeSummary={closeSummary}
           showLendIcon={this.showLendIcon}
           lendABook={this.lendABookDate}
         />

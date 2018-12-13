@@ -7,40 +7,40 @@ import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 import injectSheet from 'react-jss'
 
-import { stylesForm } from './styles/Login';
+import { stylesForm } from '../styles/login';
 import InputField from './InputField';
 
 
 const formContainer = ({classes, fieldHandler, data, errorServer, onSubmit}) => {
   return (
     <form onSubmit={onSubmit} className={classes.form}>
-    <div className={classes.inputsContainer}>
-      <InputField
-        name="email"
-        type="text"
-        placeholder="name@email.com"
-        label="Email"
-        icon={faUser}
-        fieldHandler={fieldHandler}
-        data={data.email}
-      />
-      <InputField
-        name="password"
-        type="password"
-        placeholder="Your password"
-        label="Password"
-        icon={faKey}
-        fieldHandler={fieldHandler}
-        data={data.password}
-      />
-    </div>
-    <div className={`${classes.buttonContainer} ${classes.error}`}>
-      <button className={classes.signInButton} type="submit">Sign In</button>
-      <If condition={errorServer}>
-        <span>{errorServer}</span>
-      </If>
-    </div>
-  </form>
+      <div className={classes.inputsContainer}>
+        <InputField
+          name="email"
+          type="text"
+          placeholder="name@email.com"
+          label="Email"
+          icon={faUser}
+          fieldHandler={fieldHandler}
+          data={data.email}
+        />
+        <InputField
+          name="password"
+          type="password"
+          placeholder="Your password"
+          label="Password"
+          icon={faKey}
+          fieldHandler={fieldHandler}
+          data={data.password}
+        />
+      </div>
+      <div className={`${classes.buttonContainer} ${classes.error}`}>
+        <button className={classes.signInButton} type="submit">Sign In</button>
+        <If condition={errorServer}>
+          <span>{errorServer}</span>
+        </If>
+      </div>
+    </form>
   )};
 
 const Form = injectSheet(stylesForm)(formContainer);

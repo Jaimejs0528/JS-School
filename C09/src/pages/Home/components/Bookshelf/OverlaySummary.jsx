@@ -16,7 +16,7 @@ class OverlaySummary extends Component {
   // Props Validations
   static propTypes = {
     bookInfo: PropTypes.object.isRequired,
-    show: PropTypes.bool.isRequired,
+    showByISBN: PropTypes.number.isRequired,
     showLendIcon: PropTypes.func.isRequired,
     showSummary: PropTypes.func.isRequired,
     lendABook: PropTypes.func.isRequired,
@@ -31,13 +31,12 @@ class OverlaySummary extends Component {
   
   // When must to render
   shouldComponentUpdate(nextProps, nextState) {
-    const { show } = this.props;
+    const { showByISBN } = this.props;
     const { limitDate } = this.state; 
     
-    return (show !== nextProps.show ||
+    return (showByISBN !== nextProps.showByISBN ||
       limitDate !== nextState.limitDate);
   }
-
 
   // Add days to a specific date
   addDays = (date, days) => {
@@ -66,17 +65,15 @@ class OverlaySummary extends Component {
   }
 
   render() {
-    const { bookInfo, show, showSummary } = this.props;
+    const { bookInfo, showByISBN, closeSummary } = this.props;
     const { limitDate } = this.state;
-    
     return (
       <div 
-        className={`overlay-summary ${show && 'show-summary'}`}
+        className={`overlay-summary ${showByISBN === bookInfo.isbn && 'show-summary'}`}
         role="button"
         tabIndex="0"
       >
-        {/* <div className="arrow" /> */}
-        <FontAwesomeIcon onClick={showSummary} icon={faTimes} />
+        <FontAwesomeIcon onClick={closeSummary} icon={faTimes} />
         <button type="button" onClick={this.lendABookDate} className="button-lend">lend</button>
         <div className="datePicker">
           <DatePicker
