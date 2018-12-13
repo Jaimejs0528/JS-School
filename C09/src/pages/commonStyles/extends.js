@@ -20,6 +20,10 @@ export const extendsStyles = {
       {'-ms-flex-direction': 'column'},
     ],
   },
+  'size-left-side': {
+    'min-width': 190,
+    width: '22.5vw',
+  }
 }
 
 export default this;

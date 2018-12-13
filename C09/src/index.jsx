@@ -15,8 +15,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk'
 
 import './styles/main.scss';
+import mainReducer from 'reduxAlias/mainReducer';
 import App from './containers/App';
-import mainReducer from './reducers/mainReducer';
 // import Login from './pages/Login/containers/Login';
 
 library.add(faSearch);

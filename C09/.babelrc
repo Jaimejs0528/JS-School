@@ -16,7 +16,8 @@
         "styles": "./src/styles/",
         "services": "./src/services/",
         "commonStyles": "./src/pages/commonStyles/",
-        "actions": "./src/actions/"
+        "reduxAlias": "./src/redux/",
+        "constants": "./src/constants"
       }
     }]
   ]
