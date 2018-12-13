@@ -10,7 +10,8 @@
       "styles/*": ["styles/*"],
       "services/*": ["services/*"],
       "commonStyles/*": ["commonStyles/*"],
-      "actions/*": ["actions/*"],
+      "reduxAlias/*": ["reduxAlias/*"],
+      "constants/*": ["constants/*"],
     }
   }
 }
