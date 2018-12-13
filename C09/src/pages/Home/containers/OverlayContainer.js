@@ -6,31 +6,36 @@ import {
   closeSummary,
   showLendIcon,
   lendABook,
+  selectLimitDate,
 } from 'reduxAlias/modules/Books/bookActions';
 import OverlayBookContainer from '../components/Bookshelf/OverlayBookContainer';
 
 // Create the map from state to props
 const mapStateToProps =  (state) => {
   const { 
-    showSummary,
+    showLendI,
     showDropDown,
     isSmallLogo,
+    limitDate,
     bookSelected
   } = state.books;
 
   return ({
-  showSummary,
+  showLendI,
   showDropDown,
+  limitDate,
   isSmallLogo,
   bookSelected,
   });
 }
+
 
 // which functions will be exported
 const functionsToExport = {
   changeSelectedBook,
   showLendIcon,
   closeSummary,
+  selectLimitDate,
   lendABook,
 }
 

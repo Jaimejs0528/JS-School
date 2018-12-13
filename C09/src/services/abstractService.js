@@ -41,12 +41,12 @@ class AbstractService {
 
   patch({
     endpoint,
+    data = {},
     headers= {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    data = {},
     baseUrl = SERVER_URL, 
   }) {
     return this.request({
@@ -65,12 +65,19 @@ class AbstractService {
     headers,
     body = null,
   }) {
-    const finalBody = (body) ? `body: ${JSON.stringify(body)}` : '';
-    return fetch(`${baseUrl}${endpoint}`,{
-      method,
-      headers,
-      finalBody
-    });
+    if(body){
+      return fetch(`${baseUrl}${endpoint}`,{
+        method,
+        headers,
+        body: JSON.stringify(body)
+      });
+
+    } else {
+      return fetch(`${baseUrl}${endpoint}`,{
+        method,
+        headers,
+      });
+    }
   }
 }
 

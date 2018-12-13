@@ -37,12 +37,13 @@ class BookShelf extends Component {
 
   // When must re-render
   shouldComponentUpdate(nextProps) {
-    const { query , filter, location, books, errorBooks } = this. props;
+    const { query , filter, location, books, errorBooks, isLoading } = this. props;
     return (location.search !== nextProps.location.search ||
       query.url !== nextProps.query.url ||
       filter !== nextProps.filter ||
       errorBooks !== nextProps.errorBooks ||
-      books !== nextProps.books);
+      books !== nextProps.books ||
+      isLoading !== nextProps.isLoading);
   }
 
   // Avoid fetch
