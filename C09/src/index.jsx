@@ -16,8 +16,7 @@ import thunk from 'redux-thunk'
 
 import './styles/main.scss';
 import mainReducer from 'reduxAlias/mainReducer';
-import App from './containers/App';
-// import Login from './pages/Login/containers/Login';
+import App from './Navigation/containers/App';
 
 library.add(faSearch);
 library.add(faAngleDown);

@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/forbid-prop-types */
@@ -17,25 +18,18 @@ class OverlaySummary extends Component {
   static propTypes = {
     bookInfo: PropTypes.object.isRequired,
     showByISBN: PropTypes.number.isRequired,
-    showLendIcon: PropTypes.func.isRequired,
-    showSummary: PropTypes.func.isRequired,
     lendABook: PropTypes.func.isRequired,
-  }
-
-  constructor(props){
-    super(props);
-    this.state = {
-    limitDate: null,
-    };
+    selectLimitDate: PropTypes.func.isRequired,
+    closeSummary: PropTypes.func.isRequired,
+    limitDate: PropTypes.object,
   }
   
   // When must to render
-  shouldComponentUpdate(nextProps, nextState) {
-    const { showByISBN } = this.props;
-    const { limitDate } = this.state; 
-    
+  shouldComponentUpdate(nextProps) {
+    const { showByISBN, limitDate } = this.props;
+  
     return (showByISBN !== nextProps.showByISBN ||
-      limitDate !== nextState.limitDate);
+      limitDate !== nextProps.limitDate);
   }
 
   // Add days to a specific date
@@ -44,29 +38,14 @@ class OverlaySummary extends Component {
     return date;
   }
 
-  // get the limit date to lend the book
-  selectLimitDate = (date) => {
-    this.setState({limitDate: date});
-  }
-
-  // Function that calls lend book service
-  lendABookDate = () => {
-    const { limitDate } = this.state;
-    const {showSummary, showLendIcon } =this.props;
-
-    if (limitDate) {
-      const { lendABook } = this.props;
-      lendABook(limitDate);
-      showSummary();
-      showLendIcon();
-    } else{
-      alert('Select a date');
-    }
-  }
-
   render() {
-    const { bookInfo, showByISBN, closeSummary } = this.props;
-    const { limitDate } = this.state;
+    const {
+      bookInfo,
+      showByISBN,
+      closeSummary,
+      selectLimitDate,
+      lendABook,
+      limitDate } = this.props;
     return (
       <div 
         className={`overlay-summary ${showByISBN === bookInfo.isbn && 'show-summary'}`}
@@ -74,13 +53,13 @@ class OverlaySummary extends Component {
         tabIndex="0"
       >
         <FontAwesomeIcon onClick={closeSummary} icon={faTimes} />
-        <button type="button" onClick={this.lendABookDate} className="button-lend">lend</button>
+        <button type="button" onClick={lendABook} className="button-lend">lend</button>
         <div className="datePicker">
           <DatePicker
             selected={limitDate}
             minDate={this.addDays(new Date(), 1)}
             maxDate={this.addDays(new Date(), MAX_DAYS_LEND)}
-            onChange={this.selectLimitDate}
+            onChange={selectLimitDate}
           />
         </div>
         <ArticleSummary bookInfo={bookInfo} />
