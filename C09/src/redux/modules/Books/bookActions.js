@@ -7,9 +7,11 @@ import {
   BOOK_SELECTED,
   SHOW_DROPDOWN,
   SHOW_LEND_ICON,
+  SELECT_LIMIT_DATE,
   FAIL_BOOKS,
   SUCCESS_BOOKS,
-  REQUEST_BOOKS
+  REQUEST_BOOKS,
+  SUCCESS_LEND_BOOK
 } from 'constants/bookTypes';
 import {
   BOOKS_BASE,
@@ -71,6 +73,19 @@ const successfulRequest = (json) => {
   }
 }
 
+const successfulLendRequest = () => {
+  return {
+    type: SUCCESS_LEND_BOOK,
+  }
+}
+
+const selectLimDate = (date) => {
+  return {
+    type: SELECT_LIMIT_DATE,
+    payload: date
+  }
+}
+
 const failedRequest = (error) => {
   return {
     type: FAIL_BOOKS,
@@ -95,12 +110,14 @@ export const openDropdown = () => {
   }
 }
 
+// Toggle between show or not lend icon
 export const showLendIcon = () => {
   return dispatch => {
     dispatch(showIcon());
   }
 }
 
+// open nav menu for smalls views
 export const openMenu = () => {
   return dispatch => {
     dispatch(openNav());
@@ -126,11 +143,39 @@ export const changeSelectedBook = (isbn) => {
   }
 }
 
+// close the open summary
 export const closeSummary = () => {
   return dispatch => {
     dispatch(changeBookSelected(-1));
   }
 }
+
+// get the limit date to lend the book
+export const selectLimitDate = (date) => {
+  return dispatch => {
+    dispatch(selectLimDate(date));
+  }
+}
+
+// Function that calls lend book service
+export const lendABook = (isbn, date) => {
+  return dispatch => {
+    if (date) {
+      const bookToLend = {
+        isbn,
+        lendDate: new Date(),
+        limitDate: date,
+      }
+      dispatch(consumeService(LOANS_ENDPOINT, 'loan-one', bookToLend));
+      dispatch(closeSummary());
+      dispatch(showIcon());
+    } else{
+      alert('Select a date');
+    }
+  }
+
+}
+
 // Validates when screen has changed
 export const screenHasChanged = () => {
   return dispatch => {
@@ -181,19 +226,7 @@ const selectService = (endpoint,type, data) => {
   }
 }
 
-// call the service to lend a book
-export const lendABook = ( isbn,  date) => {
-  return dispatch =>{
-    const bookToLend = {
-    isbn,
-    lendDate: new Date(),
-    limitDate: date,
-  }
-
-  dispatch(consumeService(LOANS_ENDPOINT, 'loan-one', bookToLend));
-  }
-}
-
+// call a service from backend
 export const consumeService = (endpoint, type ,data = null) => {
   return async (dispatch) => {
     try {
@@ -204,7 +237,11 @@ export const consumeService = (endpoint, type ,data = null) => {
       if(jsonData.message) {
         dispatch(failedRequest(jsonData.message));
       } else {
-        dispatch(successfulRequest(jsonData));
+        if(type !== 'loan-one'){
+          dispatch(successfulRequest(jsonData));
+        } else {
+          dispatch(successfulLendRequest());
+        }
       }
     } catch(e){
       dispatch(failedRequest(e.toString()));

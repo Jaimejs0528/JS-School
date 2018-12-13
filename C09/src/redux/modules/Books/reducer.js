@@ -10,9 +10,10 @@ const initialState = {
     totalPages: 1,
     currentPage: 1,
   },
+  limitDate: null,
   menuItemSelected: DEFAULT_HOME,
   showDropDown: false,
-  showLendIcon: false,
+  showLendI: false,
   openNavMenu: false,
   isSmallLogo: false,
   bookSelected: -1,
@@ -27,17 +28,18 @@ export default function booksReducer (state = initialState, action = {}) {
     case types.OPEN_NAV:
       return {...state, openNavMenu: !state.openNavMenu};
     case types.SHOW_LEND_ICON:
-      return {...state, showLendIcon: !state.showLendIcon};
+      return {...state, showLendI: !state.showLendI};
     case types.NAV_ITEM_SELECTED:
       return {...state, menuItemSelected: action.payload};
     case types.BOOK_SELECTED:
       return {...state, bookSelected: action.payload};
+    case types.SELECT_LIMIT_DATE:
+      return {...state, limitDate: action.payload};
     case types.REQUEST_BOOKS:
       return{
         ...state,
         isLoading: true,
         errorBooks: '',
-        books:[],
       }
     case types.SUCCESS_BOOKS:
       return {
@@ -46,6 +48,12 @@ export default function booksReducer (state = initialState, action = {}) {
         errorBooks: '',
         books: action.payload.books,
         pagination:action.payload.pagination
+      }
+    case types.SUCCESS_LEND_BOOK:
+      return {
+        ...state,
+        isLoading: false,
+        errorBooks: '',
       }
     case types.FAIL_BOOKS:
       return{

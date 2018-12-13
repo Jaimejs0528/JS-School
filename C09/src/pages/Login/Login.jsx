@@ -8,7 +8,7 @@ import injectSheet from 'react-jss'
 import logoIcon from 'images/logo.png'
 import { Auth } from 'utils/tools';
 import LoginForm from 'pages/Login/components/LoginForm';
-import { styles } from '../styles/login';
+import { styles } from './styles/login';
 
 const container = ({ classes, ...rest }) => (
   <div className={classes.container}>

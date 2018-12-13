@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -12,15 +13,12 @@ class OverlayBookContainer extends Component {
     bookData: PropTypes.object.isRequired,
     lendABook: PropTypes.func.isRequired,
     bookSelected: PropTypes.number.isRequired,
+    limitDate: PropTypes.object,
     changeSelectedBook: PropTypes.func.isRequired,
-
-  }
-  
-  constructor(props) {
-    super(props);
-    this.state = {
-      addLend: false,
-    };
+    closeSummary: PropTypes.func.isRequired,
+    showLendIcon: PropTypes.func.isRequired,
+    selectLimitDate: PropTypes.func.isRequired,
+    showLendI: PropTypes.bool.isRequired,
   }
 
   showByISBN = () => {
@@ -32,35 +30,36 @@ class OverlayBookContainer extends Component {
     }
   }
 
-  // Toggle between show or not lend icon
-  showLendIcon =() => {
-    this.setState(previous => ({ addLend: !previous.addLend }));
-  }
-
   //Lend a book
-  lendABookDate = (date) => {
-    const { lendABook, bookData } = this.props;
-    lendABook(bookData.bookinfo.isbn, date);
+  lendABookDate = () => {
+    const { lendABook, bookData,limitDate } = this.props;
+    lendABook(bookData.bookinfo.isbn, limitDate);
   }
 
   render() {
-    const { bookData, closeSummary, bookSelected } = this.props;
-    const {  addLend } = this.state;
-      // console.log(this.props);
-
+    const { bookData,
+      closeSummary,
+      bookSelected,
+      showLendIcon,
+      showLendI,
+      selectLimitDate,
+      limitDate } = this.props;
     return (
       <div className="overlay-container">
         <Book
           bookData={bookData}
           showSummary={this.showByISBN}
           bookSelected={bookSelected}
-          addLend={addLend} />
+          addLend={showLendI}
+        />
         <OverlaySummary
           bookInfo={bookData.bookinfo}
           showByISBN={bookSelected}
           closeSummary={closeSummary}
-          showLendIcon={this.showLendIcon}
+          showLendIcon={showLendIcon}
           lendABook={this.lendABookDate}
+          selectLimitDate={selectLimitDate}
+          limitDate={limitDate}
         />
       </div>
     );
