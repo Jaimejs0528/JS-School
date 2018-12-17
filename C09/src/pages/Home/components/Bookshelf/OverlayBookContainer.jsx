@@ -14,16 +14,17 @@ class OverlayBookContainer extends Component {
     lendABook: PropTypes.func.isRequired,
     bookSelected: PropTypes.number.isRequired,
     limitDate: PropTypes.object,
+    classes: PropTypes.object.isRequired,
     changeSelectedBook: PropTypes.func.isRequired,
     closeSummary: PropTypes.func.isRequired,
-    showLendIcon: PropTypes.func.isRequired,
     selectLimitDate: PropTypes.func.isRequired,
-    showLendI: PropTypes.bool.isRequired,
+    position: PropTypes.number.isRequired,
   }
 
   showByISBN = () => {
     const { bookData,changeSelectedBook, bookSelected } = this.props;
-    if(bookSelected === bookData.bookinfo.isbn) {
+
+    if (bookSelected === bookData.bookinfo.isbn) {
       changeSelectedBook(-1);
     } else {
       changeSelectedBook(bookData.bookinfo.isbn);
@@ -32,34 +33,34 @@ class OverlayBookContainer extends Component {
 
   //Lend a book
   lendABookDate = () => {
-    const { lendABook, bookData,limitDate } = this.props;
-    lendABook(bookData.bookinfo.isbn, limitDate);
+    const { lendABook, bookData,limitDate, position } = this.props;
+    lendABook(bookData.bookinfo.isbn, limitDate, position);
   }
 
   render() {
     const { bookData,
       closeSummary,
       bookSelected,
-      showLendIcon,
-      showLendI,
       selectLimitDate,
+      classes,
       limitDate } = this.props;
+
     return (
       <div className="overlay-container">
         <Book
           bookData={bookData}
           showSummary={this.showByISBN}
           bookSelected={bookSelected}
-          addLend={showLendI}
+          classes={classes}
         />
         <OverlaySummary
           bookInfo={bookData.bookinfo}
           showByISBN={bookSelected}
           closeSummary={closeSummary}
-          showLendIcon={showLendIcon}
           lendABook={this.lendABookDate}
           selectLimitDate={selectLimitDate}
           limitDate={limitDate}
+          classes={classes}
         />
       </div>
     );

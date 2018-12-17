@@ -13,34 +13,32 @@ class Book extends Component {
   static propTypes = {
     bookData: PropTypes.object.isRequired,
     showSummary: PropTypes.func.isRequired,
-    addLend: PropTypes.bool.isRequired,
+    classes: PropTypes.object.isRequired,
   }
 
   // When must re-render
   shouldComponentUpdate(nextProps) {
-    const { bookData, addLend } = this.props;
-
+    const { bookData } = this.props;
     return (bookData.bookinfo !== nextProps.bookData.bookinfo ||
-      bookData.cities !== nextProps.bookData.cities ||
-      addLend !== nextProps.addLend);
+      bookData.cities !== nextProps.bookData.cities);
   }
   
   render() {
-    const { bookData: {bookinfo, cities, lends}, showSummary, addLend } = this.props;
+    const { bookData: {bookinfo, cities, lends}, showSummary, classes } = this.props;
 
     return (
-      <div className="book">
+      <div className={classes.book}>
         <ImageContainer
           imgBook={bookinfo.image}
-          addLend={addLend}
           lends={lends}
           rating={bookinfo.rating}
           showSummary={showSummary}
+          classes={classes}
         />
-        <span className="book-title hide-overflow-text">{bookinfo.title}</span>
-        <span className="author hide-overflow-text">{bookinfo.author}</span>
-        <span className="cities hide-overflow-text">{cities.join(', ')}</span>
-        <Rating rating={bookinfo.rating} maxNumberStars={MAX_NUMB_STARS} />
+        <span className={`${classes['book-title']} hide-overflow-text`}>{bookinfo.title}</span>
+        <span className={`${classes.author} hide-overflow-text`}>{bookinfo.author}</span>
+        <span className={`${classes.cities} hide-overflow-text`}>{cities.join(', ')}</span>
+        <Rating classes={classes} rating={bookinfo.rating} maxNumberStars={MAX_NUMB_STARS} />
       </div>
     );
   }

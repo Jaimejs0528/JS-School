@@ -3,8 +3,6 @@
 @import 'mixins';
 @import 'extends';
 @import 'header';
-@import 'aside';
-@import 'bookShelfHeader';
 @import 'overlayBook';
 @import 'bookshelf';
 
@@ -30,8 +28,7 @@ body {
 
 .show{
   display: block;
-
-   &.lend-book{
+  &.lend-book{
     @include keyframe(display-transition, 0.5s ease-out){
       from {
         transform: translateY(-100%);
@@ -44,7 +41,7 @@ body {
     }
   }
 
-  @include md-view{
+  @include md-view {
   @include keyframe(display-transition, 0.1s ease){
     from {
       transform: translateX(100%);
@@ -61,12 +58,6 @@ body {
 .sidebar {
   flex-basis: 15vw;
   outline: none;
-
-  @include md-view {
-    &.left-side{
-      flex-basis: auto;
-    }
-  }
 }
 
 .hide-overflow-text {

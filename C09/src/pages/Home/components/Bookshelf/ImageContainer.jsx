@@ -17,7 +17,7 @@ class ImageContainer extends PureComponent {
     imgBook: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     showSummary: PropTypes.func.isRequired,
-    addLend: PropTypes.bool.isRequired,
+    classes: PropTypes.object.isRequired,
     lends: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   }
 
@@ -25,33 +25,34 @@ class ImageContainer extends PureComponent {
   lendsByUser = () => {
     const { lends } = this.props;
     const userPayload = Auth();
-    const found = lends.filter((item) => item.userEmail ===userPayload.email);
+    const found = lends.filter((item) => item.userEmail === userPayload.email);
     return found[0];
   }
   
   // Jsx for icon
-  circleImg = (icon) => {
+  circleImg = (icon, classes) => {
     return (
-      <div className="child circle-img">
+      <div className={`${classes.child} circle-img`}>
         <FontAwesomeIcon icon={icon} />
       </div>);
   }
 
   render() {
-    const { imgBook, rating, showSummary, addLend } = this.props;
+    const { imgBook, rating, showSummary, classes } = this.props;
+    console.log(this.props);
 
     const found = this.lendsByUser();
     return (
-      <div onClick={showSummary} className="overlay-container img-container" role="button" tabIndex="0">
-        <img className="img-border" src={imgBook} alt="book-img" width="176" height="250" />
-        <div className={`lend-book ${(addLend || found) && 'show'}`}>
+      <div onClick={showSummary} className={`overlay-container ${classes['img-container']}`} role="button" tabIndex="0">
+        <img className={classes['img-border']} src={imgBook} alt="book-img" width="176" height="250" />
+        <div className={`${classes['lend-book']} ${(found) && 'show'}`}>
           <img src={background} alt="lend-icon" />
           <FontAwesomeIcon icon={faUserCheck} />
         </div>
-        <div className="overlay-img book-options">
-          {this.circleImg(faBookOpen)}
+        <div className={`overlay-img ${classes['book-options']}`}>
+          {this.circleImg(faBookOpen, classes)}
           <span>RATE THIS BOOK</span>
-          <Rating rating={rating} maxNumberStars={MAX_NUMB_STARS} />
+          <Rating classes={classes} rating={rating} maxNumberStars={MAX_NUMB_STARS} />
         </div>
       </div>
     );

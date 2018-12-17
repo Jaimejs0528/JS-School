@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { colors } from 'commonStyles/colors';
 import { extendsStyles } from 'commonStyles/extends';
 // import { fonts } from 'commonStyles/fonts';

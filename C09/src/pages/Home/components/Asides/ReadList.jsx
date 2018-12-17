@@ -9,10 +9,10 @@ class ReadList extends PureComponent {
   };
 
   render() {
-    const { lectures } = this.props;
+    const { lectures, classes } = this.props;
     
     return (
-      <ol className="aside-list">
+      <ol className={classes['aside-list']}>
         <For each="item" of={lectures}>
           <li className="hide-overflow-text" key={item}>{item}</li>
         </For>

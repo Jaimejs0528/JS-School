@@ -1,37 +1,35 @@
 /* eslint-disable import/no-unresolved */
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Home from 'pages/Home/Home';
-import {
-  openDropdown,
-  changeLogo,
-  screenHasChanged,
-} from 'reduxAlias/modules/Books/bookActions';
+import injectSheet from 'react-jss';
 
-// Create the map from state to props
+import {
+  changeSelectedOption,
+  openMenu,
+  openMenuKeyBoard,
+} from 'reduxAlias/modules/Books/bookActions';
+import NavMenu from 'pages/Home/components/Asides/NavMenu';
+import { stylesNavMenu } from '../styles/asides';
+
 const mapStateToProps =  (state) => {
   const { 
     menuItemSelected,
-    showDropDown,
-    isSmallLogo,
-    bookSelected
+    openNavMenu,
   } = state.books;
 
   return ({
     menuItemSelected,
-    showDropDown,
-    isSmallLogo,
-    bookSelected,
+    openNavMenu,
   });
 }
 
-// which functions will be exported
 const functionsToExport = {
-  screenHasChanged,
-  changeLogo,
-  openDropdown,
+  changeSelectedOption,
+  openMenu,
+  openMenuKeyBoard,
 }
 
 const mapDispatchToProps = dispatch => (bindActionCreators(functionsToExport, dispatch));
+const NavMenuComp = injectSheet(stylesNavMenu)(NavMenu);
 
-export default (connect(mapStateToProps, mapDispatchToProps)(Home));
+export default (connect(mapStateToProps, mapDispatchToProps)(NavMenuComp));

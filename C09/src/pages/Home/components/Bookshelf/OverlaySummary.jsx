@@ -20,6 +20,7 @@ class OverlaySummary extends Component {
     showByISBN: PropTypes.number.isRequired,
     lendABook: PropTypes.func.isRequired,
     selectLimitDate: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired,
     closeSummary: PropTypes.func.isRequired,
     limitDate: PropTypes.object,
   }
@@ -45,6 +46,7 @@ class OverlaySummary extends Component {
       closeSummary,
       selectLimitDate,
       lendABook,
+      classes,
       limitDate } = this.props;
     return (
       <div 
@@ -62,7 +64,7 @@ class OverlaySummary extends Component {
             onChange={selectLimitDate}
           />
         </div>
-        <ArticleSummary bookInfo={bookInfo} />
+        <ArticleSummary classes={classes} bookInfo={bookInfo} />
       </div>
     );
   }

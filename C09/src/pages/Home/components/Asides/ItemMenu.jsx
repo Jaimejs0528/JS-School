@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +14,7 @@ class ItemName extends PureComponent {
     selectedItem: PropTypes.string.isRequired,
     changeSelected: PropTypes.func.isRequired,
     match: PropTypes.string.isRequired,
+    classes: PropTypes.object.isRequired,
   };
 
   // Get Icon to render by type.
@@ -34,15 +36,16 @@ class ItemName extends PureComponent {
       selectedItem,
       changeSelected,
       match,
+      classes,
     } = this.props;
 
     // Elements to render
     return (
-      <div className={`${(itemName === selectedItem) ? 'selected' : ''} menu-item`}>
+      <div className={`${(itemName === selectedItem) ? classes.selected : ''} ${classes['menu-item']}`}>
         {this.selectIcon(type)}
         <Link
           to={`${match}/?page=1`}
-          className="Link"
+          className={classes.Link}
           onClick={changeSelected}
         >
           {itemName}

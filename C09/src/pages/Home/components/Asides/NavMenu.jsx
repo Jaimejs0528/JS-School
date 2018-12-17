@@ -17,6 +17,7 @@ class NavMenu extends Component {
     openMenu: PropTypes.func.isRequired,
     menuItemSelected: PropTypes.string.isRequired,
     openNavMenu: PropTypes.bool.isRequired,
+    classes: PropTypes.object.isRequired,
   }
 
   // When must re-render
@@ -36,19 +37,20 @@ class NavMenu extends Component {
       openMenu,
       openMenuKeyBoard,
       openNavMenu,
+      classes
     } = this.props;
 
     return (
-      <nav className="sidebar left-side">
+      <nav className={`sidebar ${classes['left-side']}`}>
         <div
           onClick={openMenu}
           onKeyPress={openMenuKeyBoard}
-          className="header-menu"
+          className={classes['header-menu']}
           role="button"
           tabIndex="0"
         >
-          <h4 className="header-title">{menu}</h4>
-          <div className={`list-header ${openNavMenu ? 'show' : ''}`}>
+          <h4 className={classes['header-title']}>{menu}</h4>
+          <div className={`${classes['list-header']} ${openNavMenu ? classes.show : ''}`}>
             <For each="item" of={items}>
               <ItemMenu
                 key={item.name}
@@ -57,6 +59,7 @@ class NavMenu extends Component {
                 match={item.path}
                 selectedItem={menuItemSelected}
                 changeSelected={changeSelectedOption}
+                classes={classes}
               />
             </For>
           </div>

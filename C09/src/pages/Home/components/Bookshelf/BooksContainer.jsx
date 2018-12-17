@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import BooksHeader from '../../containers/bookHeader';
-import { BookShelfContainer as BookShelf } from '../../containers/Home';
+import BookShelf  from '../../containers/bookShelfContainer';
 
 // Container for bookshelf and its header
 class BooksContainer extends Component {
@@ -12,7 +12,6 @@ class BooksContainer extends Component {
     filter: PropTypes.string.isRequired,
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    pagination: PropTypes.object.isRequired,
   }
 
   // When re-render

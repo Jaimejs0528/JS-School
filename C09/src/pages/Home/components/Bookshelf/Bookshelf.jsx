@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import OverlayBookContainer from '../../containers/OverlayContainer';
+import OverlayBookContainer from '../../containers/overlayContainer';
 
 // Class that contains all books
 class BookShelf extends Component {
@@ -14,6 +14,7 @@ class BookShelf extends Component {
     query: PropTypes.object.isRequired,
     books: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
     location: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
     filter: PropTypes.string.isRequired,
     errorBooks: PropTypes.string.isRequired,
     isLoading: PropTypes.bool.isRequired,
@@ -57,7 +58,7 @@ class BookShelf extends Component {
   }
 
   render() {
-    const { filter, books, errorBooks, isLoading } = this.props;
+    const { filter, books, errorBooks, isLoading, classes } = this.props;
 
     // Selecting class main Div
     const rightClass = classNames({
@@ -68,7 +69,7 @@ class BookShelf extends Component {
     const booksFiltered = books.filter(this.filterbooks(filter));
 
     return(
-      <div className={rightClass}>
+      <div className={classes[rightClass]}>
         <Choose>
           {/* // Meanwhile is loading data show a message */}
           <When condition={isLoading}>
@@ -79,11 +80,13 @@ class BookShelf extends Component {
             <h1>{errorBooks.toString()}</h1>
           </When>
           <Otherwise>
-            <For each="book" of={booksFiltered}>
+            <For each="book" index="index" of={booksFiltered}>
               <OverlayBookContainer
                 lendBook={this.lendABook}
                 bookData={book}
+                position={index}
                 key={book.bookinfo.isbn}
+                classes={classes}
               />
             </For>
           </Otherwise>

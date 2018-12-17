@@ -13,6 +13,7 @@ class Rating extends PureComponent {
   static propTypes = {
     rating: PropTypes.number.isRequired,
     maxNumberStars: PropTypes.number.isRequired,
+    classes: PropTypes.object.isRequired,
   }
 
   chargeStars = () => {
@@ -43,8 +44,10 @@ class Rating extends PureComponent {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
-      <div className="rating">
+      <div className={classes.rating}>
         {this.chargeStars()}
       </div>
     );

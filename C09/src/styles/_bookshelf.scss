@@ -5,7 +5,7 @@
   width: 72vw;
 
   @include md-view{
-     width: 100vw;
+    width: 100vw;
   }
 
   @include xlg-view-min{
@@ -15,26 +15,6 @@
   &::-webkit-scrollbar {
     display: none;
   }
-}
-
-.bookshelf {
-  @extend  %flex-row;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  padding: 0 5rem;
-
-  @include xlg-view{
-    justify-content: space-around;
-  }
-}
-
-.book {
-  @extend %flex-column;
-  cursor: pointer;
-  height: 20rem;
-  justify-content: space-between;
-  margin-bottom: 27%;
-  width: 176px;
 }
 
 .child {
@@ -99,18 +79,6 @@
   text-transform: capitalize;
 }
 
-.cities {
-  @extend %bookInfo;
-  color: $gray-base;
-  text-transform: capitalize;
-}
-
-.author {
-  @extend %bookInfo;
-  color: $secondary-gray;
-  text-transform: capitalize;
-}
-
 .rating {
   @extend %flex-row;
   color: $soft-blue;
@@ -137,7 +105,7 @@
     font-size: 3rem;
     text-transform: capitalize;
     color: #6ec1e4;
-   
+  
     @include keyframe(loading ,2.5s linear infinite alternate) {
       0% {
         transform: scale(0.95);
@@ -152,19 +120,5 @@
         opacity: 0.6;
       }
     }
-  }
-}
-
-.error{
-  @extend %flex-row;
-
-  h1{
-    text-align: center;
-    width: 100%;
-    padding: 10% 0;
-    font-family: 'PlutoSansMedium', sans-serif;
-    font-size: 3rem;
-    text-transform: capitalize;
-    color: $error;
   }
 }

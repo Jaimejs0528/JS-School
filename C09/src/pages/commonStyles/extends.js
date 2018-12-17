@@ -1,3 +1,5 @@
+import { colors } from "./colors";
+
 export const extendsStyles = {
   'flex-row': {
     display: 'flex',
@@ -21,8 +23,28 @@ export const extendsStyles = {
     ],
   },
   'size-left-side': {
-    'min-width': 190,
+    minWidth: 190,
     width: '22.5vw',
+  },
+  'border-overlay': {
+    backgroundColor: colors['main-black'],
+    border: [1, 'solid', colors['main-black']],
+    borderRadius: 5,
+  },
+  'overlay-visible': {
+    display: 'block',
+    opacity: .75,
+    zIndex: 2,
+  },
+  'bookInfo': {
+    fontFamily: ['PlutoSansCondLight', 'sans-serif'],
+    fontSize: '.813rem',
+    padding: ['.1rem', 0],
+  },
+  'center-element': {
+    padding: 0,
+    margin: 'auto',
+    textAlign: 'center',
   }
 }
 

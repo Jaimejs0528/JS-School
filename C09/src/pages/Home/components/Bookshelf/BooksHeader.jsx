@@ -11,6 +11,7 @@ class BooksHeader extends Component {
   static propTypes = {
     menuItemSelected: PropTypes.string.isRequired,
     pagination: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
   }
   
   // When must re-render
@@ -22,9 +23,9 @@ class BooksHeader extends Component {
   }
 
   // Jsx for view mode icons
-  viewMode = () => {
+  viewMode = ({ classes }) => {
     return (
-      <div className="view-books">
+      <div className={classes['view-books']}>
         <FontAwesomeIcon icon="th-large" />
         <FontAwesomeIcon icon="th-list" />
       </div>);
@@ -39,16 +40,16 @@ class BooksHeader extends Component {
   }
 
   render() {
-    const { menuItemSelected, pagination } = this.props;
+    const { menuItemSelected, pagination, classes } = this.props;
     return (
-      <div className="books-header">
-        <h2 className="books-header-title">{menuItemSelected}</h2>
-        <div className="books-pagination">
+      <div className={classes['books-header']}>
+        <h2 className={classes['books-header-title']}>{menuItemSelected}</h2>
+        <div className={classes['books-pagination']}>
           <Link to={{pathname: location.pathname, search:`?page=${this.getPage(pagination.currentPage,pagination.totalPages, false)}`}}>&larr;</Link>
           <span>{`Page ${pagination.currentPage? pagination.currentPage : 1} of ${pagination.totalPages ?pagination.totalPages : 1}`}</span>
           <Link to={{pathname: location.pathname, search:`?page=${this.getPage(pagination.currentPage,pagination.totalPages)}`}}>&rarr;</Link>
         </div>
-        {this.viewMode()}
+        {this.viewMode({ classes })}
       </div>);
   }
 }

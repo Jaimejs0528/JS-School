@@ -34,7 +34,7 @@ class ArticleSummary extends Component {
   }
 
   render() {
-    const { bookInfo } = this.props;
+    const { bookInfo, classes } = this.props;
     
     return (
       <article className="summary-container">
@@ -59,7 +59,7 @@ class ArticleSummary extends Component {
         </div>
         <div className="book-summary-rating">
           <span>RATING</span>
-          <Rating rating={bookInfo.rating} maxNumberStars={MAX_NUMB_STARS} />
+          <Rating classes={classes} rating={bookInfo.rating} maxNumberStars={MAX_NUMB_STARS} />
         </div>
       </article>
     );

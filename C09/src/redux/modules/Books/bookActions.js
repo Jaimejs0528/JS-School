@@ -6,12 +6,11 @@ import {
   CHANGE_LOGO_ICON,
   BOOK_SELECTED,
   SHOW_DROPDOWN,
-  SHOW_LEND_ICON,
   SELECT_LIMIT_DATE,
   FAIL_BOOKS,
   SUCCESS_BOOKS,
   REQUEST_BOOKS,
-  SUCCESS_LEND_BOOK
+  SUCCESS_LEND_BOOK,
 } from 'constants/bookTypes';
 import {
   BOOKS_BASE,
@@ -47,12 +46,6 @@ const showDropdown = () =>{
   }
 }
 
-const showIcon = () =>{
-  return {
-    type: SHOW_LEND_ICON,
-  }
-}
-
 const changeBookSelected = (isbn) =>{
   return {
     type: BOOK_SELECTED,
@@ -69,13 +62,15 @@ const requestData = () => {
 const successfulRequest = (json) => {
   return {
     type: SUCCESS_BOOKS,
-    payload: json
+    payload: json,
   }
 }
 
-const successfulLendRequest = () => {
+const successfulLendRequest = (jsonBook, position) => {
   return {
     type: SUCCESS_LEND_BOOK,
+    payload: jsonBook,
+    position
   }
 }
 
@@ -93,7 +88,6 @@ const failedRequest = (error) => {
   }
 }
 
-
 export const changeLogo = (screenX) => {
   return dispatch => {
     if (screenX < MD_VIEW) {
@@ -107,13 +101,6 @@ export const changeLogo = (screenX) => {
 export const openDropdown = () => {
   return dispatch => {
     dispatch(showDropdown());
-  }
-}
-
-// Toggle between show or not lend icon
-export const showLendIcon = () => {
-  return dispatch => {
-    dispatch(showIcon());
   }
 }
 
@@ -158,17 +145,18 @@ export const selectLimitDate = (date) => {
 }
 
 // Function that calls lend book service
-export const lendABook = (isbn, date) => {
+export const lendABook = (isbn, date, position) => {
   return dispatch => {
+    // eslint-disable-next-line no-console
+    console.log(position);
     if (date) {
       const bookToLend = {
         isbn,
         lendDate: new Date(),
         limitDate: date,
       }
-      dispatch(consumeService(LOANS_ENDPOINT, 'loan-one', bookToLend));
+      dispatch(consumeService(LOANS_ENDPOINT, 'loan-one', bookToLend, position));
       dispatch(closeSummary());
-      dispatch(showIcon());
     } else{
       alert('Select a date');
     }
@@ -227,7 +215,7 @@ const selectService = (endpoint,type, data) => {
 }
 
 // call a service from backend
-export const consumeService = (endpoint, type ,data = null) => {
+export const consumeService = (endpoint, type ,data = null, position = -1) => {
   return async (dispatch) => {
     try {
       dispatch(requestData());
@@ -237,10 +225,10 @@ export const consumeService = (endpoint, type ,data = null) => {
       if(jsonData.message) {
         dispatch(failedRequest(jsonData.message));
       } else {
-        if(type !== 'loan-one'){
+        if (type !== 'loan-one') {
           dispatch(successfulRequest(jsonData));
         } else {
-          dispatch(successfulLendRequest());
+          dispatch(successfulLendRequest(jsonData, position));
         }
       }
     } catch(e){

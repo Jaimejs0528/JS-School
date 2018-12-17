@@ -13,7 +13,6 @@ const initialState = {
   limitDate: null,
   menuItemSelected: DEFAULT_HOME,
   showDropDown: false,
-  showLendI: false,
   openNavMenu: false,
   isSmallLogo: false,
   bookSelected: -1,
@@ -53,6 +52,8 @@ export default function booksReducer (state = initialState, action = {}) {
       return {
         ...state,
         isLoading: false,
+        books: state.books.map((item,index) => (index===action.position)? action.payload || item : item),
+        limitDate: null,
         errorBooks: '',
       }
     case types.FAIL_BOOKS:

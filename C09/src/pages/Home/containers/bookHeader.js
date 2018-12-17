@@ -1,6 +1,8 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import injectSheet from 'react-jss';
 
 import BooksHeader from "../components/Bookshelf/BooksHeader";
+import { stylesBookShelfHeader } from '../styles/bookShelfHeader';
 
 // Create the map from state to props
 const mapStateToProps =  (state) => {
@@ -15,4 +17,6 @@ const mapStateToProps =  (state) => {
   });
 }
 
-export default (connect(mapStateToProps)(BooksHeader));
+const BooksHeaderComp = injectSheet(stylesBookShelfHeader)(BooksHeader);
+
+export default (connect(mapStateToProps)(BooksHeaderComp));

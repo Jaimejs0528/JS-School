@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Auth } from 'utils/tools';
 import { ProtectedRouteRedirect } from 'components/ProtectedRoute';
 import NotFound from 'pages/NotFound/NotFound';
-import Home from 'pages/Home/containers/Home';
+import Home from 'pages/Home/containers/home';
 import Login from 'pages/Login/containers/Login';
 
 // Class that controls all routes
